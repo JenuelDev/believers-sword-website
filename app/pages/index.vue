@@ -1,610 +1,249 @@
 <script setup lang="ts">
-const { data } = await useFetch(
-    "https://api.github.com/repos/Bible-Projects/believers-sword-next/releases/latest"
-);
+interface GithubAsset {
+    name: string;
+    browser_download_url: string;
+}
 
-const installerAsset = (data.value as any).assets[0];
-const portableVersion = (data.value as any).assets[2];
-const tagName = (data.value as any).tag_name;
+interface GithubRelease {
+    tag_name: string;
+    assets: GithubAsset[];
+}
+
+const latestReleaseUrl =
+    "https://api.github.com/repos/Bible-Projects/believers-sword-next/releases/latest";
+
+const { data: release } = await useFetch<GithubRelease>(latestReleaseUrl, {
+    default: () => ({
+        tag_name: "latest",
+        assets: [],
+    }),
+});
+
+const assets = computed(() => release.value?.assets ?? []);
+const tagName = computed(() => release.value?.tag_name || "latest");
+
+const installerAsset = computed(() => {
+    return (
+        assets.value.find((asset) => {
+            const name = asset.name.toLowerCase();
+            return (
+                !name.includes("portable") &&
+                (name.includes("setup") ||
+                    name.includes("installer") ||
+                    name.endsWith(".exe"))
+            );
+        }) || assets.value[0]
+    );
+});
+
+const portableAsset = computed(() => {
+    return assets.value.find((asset) => {
+        const name = asset.name.toLowerCase();
+        return (
+            name.includes("portable") ||
+            name.includes("noinstall") ||
+            name.endsWith(".zip")
+        );
+    });
+});
 
 useSeoMeta({
     title: "Believers Sword",
     description:
-        "Believers Sword is a modern design software  for reading and studying the bible.",
+        "Believers Sword is a modern app for reading and studying the Bible with clarity and focus.",
 });
 
 defineOgImageComponent("BelieverSwordOg");
 </script>
+
 <template>
-    <main class="main relative">
-        <!-- Hero section -->
-        <section
-            id="home"
-            class="relative overflow-hidden bg-orange-500 !text-orange-500-color pt-[50px]"
-        >
-            <div class="container">
-                <div class="-mx-5 flex flex-wrap items-center">
-                    <div class="w-full px-5">
-                        <div
-                            class="scroll-revealed mx-auto max-w-[780px] text-center"
-                        >
-                            <h1
-                                class="mb-6 text-3xl font-bold leading-snug !text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-tight"
-                            >
-                                Believers Sword
-                            </h1>
+    <main class="home-shell relative overflow-hidden bg-[#fff8ef] text-[#3a2213]">
+        <div
+            class="pointer-events-none absolute -left-40 -top-20 h-96 w-96 rounded-full bg-[#ffb86c]/30 blur-3xl"
+        ></div>
+        <div
+            class="pointer-events-none absolute -right-28 top-64 h-96 w-96 rounded-full bg-[#ff8a4c]/20 blur-3xl"
+        ></div>
 
-                            <p
-                                class="mx-auto mb-9 max-w-[600px] text-base !text-white sm:text-lg sm:leading-normal"
-                            >
-                                Welcome to Believers Sword — a powerful yet
-                                simple Bible study app designed to deepen your
-                                walk with Christ. Whether you're just
-                                discovering it or have been using it for a
-                                while, Believers Sword equips you with intuitive
-                                tools and thoughtful features to help you engage
-                                with God’s Word more meaningfully.
-                            </p>
-
-                            <ul
-                                class="mb-10 flex flex-wrap items-center justify-center gap-4 md:gap-5"
-                            >
-                                <li>
-                                    <a
-                                        v-if="installerAsset"
-                                        :href="
-                                            installerAsset.browser_download_url
-                                        "
-                                        class="video-popup flex items-center gap-4 rounded-md bg-primary-color/[0.15] px-5 py-3 text-base font-medium text-white hover:bg-primary-color !hover:text-orange-500 md:px-7 md:py-[14px]"
-                                        role="button"
-                                    >
-                                        <Icon
-                                            name="ic:baseline-cloud-download"
-                                            size="30"
-                                        />
-                                        Installer ({{ tagName }})
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a
-                                        v-if="portableVersion"
-                                        :href="
-                                            portableVersion.browser_download_url
-                                        "
-                                        class="video-popup flex items-center gap-4 rounded-md bg-primary-color/[0.15] px-5 py-3 text-base font-medium text-white hover:bg-primary-color !hover:text-orange-500 md:px-7 md:py-[14px]"
-                                        role="button"
-                                    >
-                                        <Icon
-                                            name="material-symbols:app-badging"
-                                            size="30"
-                                        />
-                                        Portable ({{ tagName }})
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <div class="max-w-[300px] mx-auto text-white">
-                                <small>
-                                    This is only available for
-                                    <b>Windows OS</b>, Coming soon for MAC and
-                                    Linux.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full px-5">
-                        <div
-                            class="scroll-revealed relative z-10 mx-auto max-w-[845px]"
-                        >
-                            <figure class="mt-16">
-                                <img
-                                    src="@/assets/img/hero.png"
-                                    alt="Hero image"
-                                    class="mx-auto max-w-full rounded-t-l rounded-tr-md rounded-lt-md"
-                                />
-                            </figure>
-
-                            <div class="absolute -left-9 bottom-0 z-[-1]">
-                                <img
-                                    src="@/assets/img/dots.svg"
-                                    class="w-[120px] opacity-75"
-                                />
-                            </div>
-
-                            <div class="absolute -right-6 -top-6 z-[-1]">
-                                <img
-                                    src="@/assets/img/dots.svg"
-                                    class="w-[120px] opacity-75"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About section -->
-        <section id="about" class="section-area">
-            <div class="container">
-                <div class="grid grid-cols-1 gap-14 lg:grid-cols-2">
-                    <div class="w-full">
-                        <figure class="scroll-revealed max-w-[480px] mx-auto">
-                            <NuxtImg
-                                format="webp"
-                                src="https://i.imgur.com/yIajRNN.jpeg"
-                                alt="About image"
-                                quality="80"
-                                class="rounded-xl"
-                            />
-                        </figure>
-                    </div>
-
-                    <div class="w-full">
-                        <div class="scroll-revealed">
-                            <h6
-                                class="mb-2 block text-lg font-semibold !text-orange-500"
-                            >
-                                About Us
-                            </h6>
-                            <h2 class="mb-6">Why I Created Believers Sword</h2>
-                        </div>
-
-                        <div class="tabs scroll-revealed">
-                            <div
-                                class="tabs-content mt-4"
-                                id="tabs-panel-profile"
-                                tabindex="-1"
-                                role="tabpanel"
-                                aria-labelledby="tabs-list-profile"
-                            >
-                                <p></p>
-                                <p>
-                                    What started as a simple personal project
-                                    for my portfolio eventually became something
-                                    more meaningful. I initially built the app
-                                    to showcase my development skills, gradually
-                                    improving it over time by adding features
-                                    like highlighting, dictionary support, and
-                                    search functionality.
-                                </p>
-                            </div>
-
-                            <div
-                                class="tabs-content mt-4"
-                                id="tabs-panel-vision"
-                                tabindex="-1"
-                                role="tabpanel"
-                                aria-labelledby="tabs-list-vision"
-                            >
-                                <p>
-                                    As I was preparing to include it in my
-                                    portfolio, a small group of users began to
-                                    discover and use the app. While the number
-                                    wasn't large, their presence encouraged me
-                                    to keep improving it. Their interest showed
-                                    me that even a small tool could make a
-                                    difference.
-                                </p>
-                                <p>
-                                    Today, Believers Sword is not just a
-                                    project—it's something I use personally to
-                                    study the Bible. And as I grow in both faith
-                                    and skill, I continue to develop the app,
-                                    little by little, with the hope that it can
-                                    help others too.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Intro video section -->
-        <section id="intro" class="section-area" v-if="false">
-            <div class="container">
-                <div
-                    class="scroll-revealed text-center max-w-[550px] mx-auto mb-12"
-                >
-                    <h6
-                        class="mb-2 block text-lg font-semibold !text-orange-500"
+        <section id="home" class="relative px-6 pb-18 pt-16 sm:pt-24">
+            <div class="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-2">
+                <div class="scroll-revealed">
+                    <p
+                        class="mb-4 inline-flex items-center rounded-full border border-[#f7c99c] bg-white/70 px-4 py-1 text-sm font-semibold text-[#b86129]"
+                        style="font-family: 'Sora', sans-serif"
                     >
-                        Intro Video
-                    </h6>
-                    <h2 class="mb-6">Watch Our Intro Video</h2>
-                    <p>
-                        There are many variations of passages of Lorem Ipsum
-                        available but the majority have suffered alteration in
-                        some form.
+                        Built for focused Bible study
+                    </p>
+
+                    <h1
+                        class="mb-5 text-4xl leading-tight sm:text-5xl lg:text-6xl"
+                        style="font-family: 'Space Grotesk', sans-serif"
+                    >
+                        Believers Sword
+                        <span class="block text-[#cc5f24]">Simple. Powerful. Christ-centered.</span>
+                    </h1>
+
+                    <p
+                        class="mb-9 max-w-xl text-base leading-relaxed text-[#6b4430] sm:text-lg"
+                        style="font-family: 'Sora', sans-serif"
+                    >
+                        Go deeper in God&apos;s Word with a clean reading experience, fast search,
+                        highlights, and practical study tools designed for everyday discipleship.
+                    </p>
+
+                    <div class="mb-6 flex flex-wrap gap-3">
+                        <a
+                            v-if="installerAsset"
+                            :href="installerAsset.browser_download_url"
+                            class="inline-flex items-center gap-3 rounded-xl bg-[#cc5f24] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#cc5f24]/25 transition hover:-translate-y-0.5 hover:bg-[#b9531d] hover:text-white"
+                            style="font-family: 'Sora', sans-serif"
+                        >
+                            <Icon name="ic:baseline-cloud-download" size="22" />
+                            Download Installer ({{ tagName }})
+                        </a>
+
+                        <a
+                            v-if="portableAsset"
+                            :href="portableAsset.browser_download_url"
+                            class="inline-flex items-center gap-3 rounded-xl border border-[#e6b68d] bg-white px-6 py-3 text-sm font-semibold text-[#8b471f] transition hover:-translate-y-0.5 hover:border-[#cc5f24] hover:text-[#8b471f]"
+                            style="font-family: 'Sora', sans-serif"
+                        >
+                            <Icon name="material-symbols:app-badging" size="22" />
+                            Portable Version
+                        </a>
+                    </div>
+
+                    <p class="text-sm text-[#7f5a46]" style="font-family: 'Sora', sans-serif">
+                        Currently available on <strong>Windows</strong>. macOS and Linux support is
+                        planned.
                     </p>
                 </div>
 
-                <div class="scroll-revealed relative max-w-[900px] mx-auto">
-                    <img
-                        src="@/assets/img/intro-video.jpg"
-                        alt="Intro video"
-                        class="w-full h-full aspect-video rounded-xl object-cover"
-                    />
-                    <a
-                        href="javascript:void(0)"
-                        class="video-popup w-[80px] h-[80px] rounded-full inline-flex items-center justify-center bg-primary !text-orange-500-color text-[1.875rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md hover:bg-primary-color hover:text-primary hover:shadow-xl focus:bg-primary-color focus:text-primary focus:shadow-xl"
+                <div class="scroll-revealed">
+                    <div
+                        class="relative rounded-3xl border border-[#f1c9a5] bg-white/85 p-4 shadow-2xl shadow-[#f0a66b]/20"
                     >
-                        <Icon name="ic:baseline-play-circle-filled" />
+                        <img
+                            src="@/assets/img/hero.png"
+                            alt="Believers Sword app preview"
+                            class="w-full rounded-2xl"
+                        />
+                        <div
+                            class="absolute -bottom-4 -left-4 rounded-xl border border-[#f5c8a3] bg-[#fff5ea] px-3 py-2 text-xs font-semibold text-[#ad5926]"
+                            style="font-family: 'Sora', sans-serif"
+                        >
+                            Real desktop UI preview
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 pb-6">
+            <div class="mx-auto grid w-full max-w-6xl gap-4 md:grid-cols-3">
+                <article class="scroll-revealed rounded-2xl border border-[#f1cfb0] bg-white/80 p-5">
+                    <h3 class="mb-2 text-lg font-semibold" style="font-family: 'Space Grotesk', sans-serif">
+                        Distraction-Free Reading
+                    </h3>
+                    <p class="text-sm text-[#714a35]" style="font-family: 'Sora', sans-serif">
+                        A calm interface that keeps Scripture front and center.
+                    </p>
+                </article>
+
+                <article class="scroll-revealed rounded-2xl border border-[#f1cfb0] bg-white/80 p-5">
+                    <h3 class="mb-2 text-lg font-semibold" style="font-family: 'Space Grotesk', sans-serif">
+                        Fast Word Lookup
+                    </h3>
+                    <p class="text-sm text-[#714a35]" style="font-family: 'Sora', sans-serif">
+                        Quickly search verses, keywords, and references while studying.
+                    </p>
+                </article>
+
+                <article class="scroll-revealed rounded-2xl border border-[#f1cfb0] bg-white/80 p-5">
+                    <h3 class="mb-2 text-lg font-semibold" style="font-family: 'Space Grotesk', sans-serif">
+                        Highlight and Revisit
+                    </h3>
+                    <p class="text-sm text-[#714a35]" style="font-family: 'Sora', sans-serif">
+                        Mark meaningful passages and return to them with ease.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section id="about" class="px-6 py-16 sm:py-20">
+            <div class="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-2">
+                <figure class="scroll-revealed">
+                    <NuxtImg
+                        format="webp"
+                        src="https://i.imgur.com/yIajRNN.jpeg"
+                        alt="Creator of Believers Sword"
+                        quality="80"
+                        class="w-full rounded-3xl border border-[#f1c9a5]"
+                    />
+                </figure>
+
+                <div class="scroll-revealed">
+                    <p
+                        class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#bf5d24]"
+                        style="font-family: 'Sora', sans-serif"
+                    >
+                        Why I Built It
+                    </p>
+                    <h2
+                        class="mb-5 text-3xl leading-tight sm:text-4xl"
+                        style="font-family: 'Space Grotesk', sans-serif"
+                    >
+                        From portfolio experiment to personal ministry tool.
+                    </h2>
+
+                    <div class="space-y-4 text-[#6e4733]" style="font-family: 'Sora', sans-serif">
+                        <p>
+                            Believers Sword started as a simple portfolio project. As I kept improving
+                            it with search, highlights, and dictionary support, people began using it
+                            in their own study routines.
+                        </p>
+                        <p>
+                            Today, it is something I rely on personally. I continue building it step by
+                            step, praying it helps others read, understand, and love Scripture more.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 pb-20">
+            <div
+                class="scroll-revealed mx-auto w-full max-w-6xl rounded-3xl border border-[#edbf97] bg-gradient-to-r from-[#ffe8d2] via-[#ffdcb6] to-[#ffcfa0] p-8 sm:p-10"
+            >
+                <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h3 class="mb-2 text-2xl font-semibold" style="font-family: 'Space Grotesk', sans-serif">
+                            Ready to study with more clarity?
+                        </h3>
+                        <p class="text-[#7a4d35]" style="font-family: 'Sora', sans-serif">
+                            Download the latest release and start your next reading session.
+                        </p>
+                    </div>
+
+                    <a
+                        v-if="installerAsset"
+                        :href="installerAsset.browser_download_url"
+                        class="inline-flex items-center justify-center gap-3 rounded-xl bg-[#7f3717] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#692c12] hover:text-white"
+                        style="font-family: 'Sora', sans-serif"
+                    >
+                        <Icon name="ic:baseline-cloud-download" size="20" />
+                        Get Believers Sword {{ tagName }}
                     </a>
                 </div>
             </div>
         </section>
-
-        <!-- Portfolio section -->
-        <section id="portfolio" class="section-area" v-if="false">
-            <div class="container">
-                <div
-                    class="scroll-revealed text-center max-w-[550px] mx-auto mb-12"
-                >
-                    <h6
-                        class="mb-2 block text-lg font-semibold !text-orange-500"
-                    >
-                        Features
-                    </h6>
-                    <h2 class="mb-6">What The App Can Do</h2>
-                    <p>
-                        There are many variations of passages of Lorem Ipsum
-                        available but the majority have suffered alteration in
-                        some form.
-                    </p>
-                </div>
-
-                <div class="scroll-revealed portfolio-grid row">
-                    <div class="portfolio col-12 sm:col-6 lg:col-4">
-                        <article class="group" data-filter="branding">
-                            <div
-                                class="relative overflow-hidden w-full aspect-[4/3] rounded-xl"
-                            >
-                                <img
-                                    src="@/assets/img/portfolio/portfolio-1.jpg"
-                                    alt="Graphics Design"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="pt-4">
-                                <h4 class="mb-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="text-[1.5rem] leading-tight text-inherit"
-                                        >Graphics Design</a
-                                    >
-                                </h4>
-                                <p>
-                                    Short description for the ones who look for
-                                    something new. Awesome!
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="portfolio col-12 sm:col-6 lg:col-4">
-                        <article class="group" data-filter="research">
-                            <div
-                                class="relative overflow-hidden w-full aspect-[4/3] rounded-xl"
-                            >
-                                <img
-                                    src="@/assets/img/portfolio/portfolio-2.jpg"
-                                    alt="Web Development"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="pt-4">
-                                <h4 class="mb-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="text-[1.5rem] leading-tight text-inherit"
-                                        >Web Development</a
-                                    >
-                                </h4>
-                                <p>
-                                    Short description for the ones who look for
-                                    something new. Awesome!
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="portfolio col-12 sm:col-6 lg:col-4">
-                        <article class="group" data-filter="marketing">
-                            <div
-                                class="relative overflow-hidden w-full aspect-[4/3] rounded-xl"
-                            >
-                                <img
-                                    src="@/assets/img/portfolio/portfolio-3.jpg"
-                                    alt="App Development"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="pt-4">
-                                <h4 class="mb-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="text-[1.5rem] leading-tight text-inherit"
-                                        >App Development</a
-                                    >
-                                </h4>
-                                <p>
-                                    Short description for the ones who look for
-                                    something new. Awesome!
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="portfolio col-12 sm:col-6 lg:col-4">
-                        <article class="group" data-filter="planning">
-                            <div
-                                class="relative overflow-hidden w-full aspect-[4/3] rounded-xl"
-                            >
-                                <img
-                                    src="@/assets/img/portfolio/portfolio-4.jpg"
-                                    alt="Digital Marketing"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="pt-4">
-                                <h4 class="mb-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="text-[1.5rem] leading-tight text-inherit"
-                                        >Digital Marketing</a
-                                    >
-                                </h4>
-                                <p>
-                                    Short description for the ones who look for
-                                    something new. Awesome!
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="portfolio col-12 sm:col-6 lg:col-4">
-                        <article class="group" data-filter="branding">
-                            <div
-                                class="relative overflow-hidden w-full aspect-[4/3] rounded-xl"
-                            >
-                                <img
-                                    src="@/assets/img/portfolio/portfolio-5.jpg"
-                                    alt="SEO Services"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="pt-4">
-                                <h4 class="mb-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="text-[1.5rem] leading-tight text-inherit"
-                                        >SEO Services</a
-                                    >
-                                </h4>
-                                <p>
-                                    Short description for the ones who look for
-                                    something new. Awesome!
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="portfolio col-12 sm:col-6 lg:col-4">
-                        <article class="group" data-filter="marketing">
-                            <div
-                                class="relative overflow-hidden w-full aspect-[4/3] rounded-xl"
-                            >
-                                <img
-                                    src="@/assets/img/portfolio/portfolio-6.jpg"
-                                    alt="Product Design"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div class="pt-4">
-                                <h4 class="mb-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="text-[1.5rem] leading-tight text-inherit"
-                                        >Product Design</a
-                                    >
-                                </h4>
-                                <p>
-                                    Short description for the ones who look for
-                                    something new. Awesome!
-                                </p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog section -->
-        <section id="blog" class="section-area" v-if="false">
-            <div class="container">
-                <div
-                    class="scroll-revealed text-center max-w-[550px] mx-auto mb-12"
-                >
-                    <h6
-                        class="mb-2 block text-lg font-semibold !text-orange-500"
-                    >
-                        Blog
-                    </h6>
-                    <h2 class="mb-6">Latest Sermons & Blog</h2>
-                    <p>
-                        There are many variations of passages of Lorem Ipsum
-                        available but the majority have suffered alteration in
-                        some form.
-                    </p>
-                </div>
-
-                <div class="row">
-                    <div class="scroll-revealed col-12 sm:col-6 lg:col-4">
-                        <article class="group">
-                            <div class="relative">
-                                <a
-                                    href="javascript:void(0)"
-                                    class="w-full aspect-[3/2] rounded-xl overflow-hidden block"
-                                >
-                                    <img
-                                        src="@/assets/img/thumbnail/thumbnail-1.jpg"
-                                        alt="Thumbnail"
-                                        class="w-full h-full object-cover group-hover:scale-[1.05] group-hover:rotate-[2deg]"
-                                    />
-                                </a>
-                            </div>
-                            <span
-                                class="block mt-6 w-full text-sm text-body-light-10 dark:text-body-dark-10"
-                                >Joe Russell - 17 Agt 2024</span
-                            >
-                            <h4 class="mb-6 mt-3 font-semibold text-[1.5rem]">
-                                <a
-                                    href="javascript:void(0)"
-                                    class="text-body-light-12 dark:text-body-dark-12"
-                                    >Make your team a Design driven company</a
-                                >
-                            </h4>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="scroll-revealed col-12 sm:col-6 lg:col-4">
-                        <article class="group">
-                            <div class="relative">
-                                <a
-                                    href="javascript:void(0)"
-                                    class="w-full aspect-[3/2] rounded-xl overflow-hidden block"
-                                >
-                                    <img
-                                        src="@/assets/img/thumbnail/thumbnail-2.jpg"
-                                        alt="Thumbnail"
-                                        class="w-full h-full object-cover group-hover:scale-[1.05] group-hover:rotate-[2deg]"
-                                    />
-                                </a>
-                            </div>
-                            <span
-                                class="block mt-6 w-full text-sm text-body-light-10 dark:text-body-dark-10"
-                                >Joe Russell - 17 Agt 2024</span
-                            >
-                            <h4 class="mb-6 mt-3 font-semibold text-[1.5rem]">
-                                <a
-                                    href="javascript:void(0)"
-                                    class="text-body-light-12 dark:text-body-dark-12"
-                                    >The newest web framework that changed the
-                                    world</a
-                                >
-                            </h4>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard.
-                            </p>
-                        </article>
-                    </div>
-
-                    <div class="scroll-revealed col-12 sm:col-6 lg:col-4">
-                        <article class="group">
-                            <div class="relative">
-                                <a
-                                    href="javascript:void(0)"
-                                    class="w-full aspect-[3/2] rounded-xl overflow-hidden block"
-                                >
-                                    <img
-                                        src="@/assets/img/thumbnail/thumbnail-3.jpg"
-                                        alt="Thumbnail"
-                                        class="w-full h-full object-cover group-hover:scale-[1.05] group-hover:rotate-[2deg]"
-                                    />
-                                </a>
-                            </div>
-                            <span
-                                class="block mt-6 w-full text-sm text-body-light-10 dark:text-body-dark-10"
-                                >Joe Russell - 17 Agt 2024</span
-                            >
-                            <h4 class="mb-6 mt-3 font-semibold text-[1.5rem]">
-                                <a
-                                    href="javascript:void(0)"
-                                    class="text-body-light-12 dark:text-body-dark-12"
-                                    >5 ways to improve user retention for your
-                                    startup</a
-                                >
-                            </h4>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard.
-                            </p>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Clients section -->
-        <!-- <section id="clients" class="section-area">
-                <div class="container">
-                    <div class="scroll-revealed text-center max-w-[550px] mx-auto mb-12">
-                        <h6 class="mb-2 block text-lg font-semibold !text-orange-500">
-                            Sponsors
-                        </h6>
-                        <h2 class="mb-6">Our Awesome Sponsor</h2>
-                        <p>
-                            There are many variations of passages of Lorem Ipsum available but
-                            the majority have suffered alteration in some form.
-                        </p>
-                    </div>
-
-                    <div class="">
-                        <div class="row">
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/airbnb.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/coca-cola.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/facebook.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/mandiri.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/shopware.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/spotify.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/tunnel-id.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                            <div class="scroll-revealed text-center p-4 col-12 sm:col-6 md:col-4 lg:col-3">
-                                <img src="@/assets/img/brand/walmart.svg" alt="Brand Logo Image"
-                                    class="h-[40px] inline-block grayscale dark:invert hover:grayscale-0 hover:invert-0" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> -->
     </main>
 
-    <!-- Footer -->
     <SiteFooter />
 
     <button
         type="button"
-        class="inline-flex w-12 h-12 rounded-md items-center justify-center text-lg/none bg-primary !text-orange-500-color hover:bg-primary-light-10 dark:hover:bg-primary-dark-10 focus:bg-primary-light-10 dark:focus:bg-primary-dark-10 fixed bottom-[117px] right-[20px] hover:-translate-y-1 opacity-100 visible z-50 is-hided"
+        class="fixed bottom-[117px] right-[20px] z-50 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#cc5f24] text-lg/none text-white opacity-100 shadow-lg shadow-[#cc5f24]/25 transition hover:-translate-y-1 hover:bg-[#b9531d] visible is-hided"
         data-web-trigger="scroll-top"
         aria-label="Scroll to top"
     >
