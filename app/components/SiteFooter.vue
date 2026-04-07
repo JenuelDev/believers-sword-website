@@ -35,6 +35,9 @@
                     <nav class="flex flex-col gap-2 text-sm" style="font-family: 'Sora', sans-serif">
                         <a href="/#home" class="text-[#ffe1cb] transition hover:text-white">Home</a>
                         <a href="/#about" class="text-[#ffe1cb] transition hover:text-white">About</a>
+                        <a href="/delete-account" class="text-[#ffe1cb] transition hover:text-white">
+                            Delete Account
+                        </a>
                         <a href="/privacy-policy" class="text-[#ffe1cb] transition hover:text-white">
                             Privacy Policy
                         </a>
