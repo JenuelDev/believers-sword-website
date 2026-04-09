@@ -123,16 +123,21 @@ const primaryDownload = computed(() => {
     );
 });
 
-const desktopScreenshots = [
-    "/screenshots/desktop/desktop-hero-01.png",
-    "/screenshots/desktop/desktop-preview-01.png",
-    "/screenshots/desktop/desktop-preview-02.png",
-];
+const secondaryDownloads = computed(() => {
+    return platformDownloads.value.filter(
+        (download) => download.key !== primaryDownload.value?.key
+    );
+});
 
-const mobileScreenshots = [
-    "/screenshots/mobile/mobile-preview-01.jpg",
-    "/screenshots/mobile/mobile-preview-02.jpg",
-];
+const desktopScreenshots = Array.from(
+    { length: 7 },
+    (_, index) => `/screenshots/desktop/desktop-${String(index + 1).padStart(2, "0")}.png`
+);
+
+const mobileScreenshots = Array.from(
+    { length: 6 },
+    (_, index) => `/screenshots/mobile/mobile-${String(index + 1).padStart(2, "0")}.jpg`
+);
 
 const showScrollTop = ref(false);
 
@@ -224,6 +229,7 @@ defineOgImageComponent("BelieverSwordOg");
                     <nav class="hero-nav-pill" aria-label="Primary">
                         <a href="#features" class="hero-nav-link">Features</a>
                         <a href="#preview" class="hero-nav-link">Preview</a>
+                        <a href="/screenshots" class="hero-nav-link">Screenshots</a>
                         <a href="#testimonials" class="hero-nav-link">Use Cases</a>
                         <a href="#download" class="hero-nav-link">Download</a>
                     </nav>
@@ -268,6 +274,19 @@ defineOgImageComponent("BelieverSwordOg");
                             Explore Features
                         </a>
                     </div>
+
+                    <div v-if="secondaryDownloads.length" class="hero-other-downloads">
+                        <a
+                            v-for="download in secondaryDownloads"
+                            :key="`hero-secondary-${download.key}`"
+                            :href="download.asset?.browser_download_url"
+                            class="hero-download-chip"
+                        >
+                            <Icon :name="download.icon" size="16" />
+                            {{ download.label }}
+                        </a>
+                    </div>
+
                     <div class="hero-meta">
                         <span>Version {{ tagName }}</span>
                         <span v-if="platformDownloads.length">
@@ -335,8 +354,8 @@ defineOgImageComponent("BelieverSwordOg");
         </section>
 
         <section id="preview" class="section-frame dark-frame">
-            <div class="container-grid preview-grid">
-                <div data-reveal data-delay="0" class="preview-copy">
+            <div class="container-grid preview-flow">
+                <div data-reveal data-delay="0" class="preview-copy preview-copy-wide">
                     <p class="section-kicker">App Preview</p>
                     <h2 class="section-title text-light">
                         A premium reading environment with minimal distractions.
@@ -350,16 +369,24 @@ defineOgImageComponent("BelieverSwordOg");
                         <li>Quick-access panels for notes and references.</li>
                         <li>Responsive layouts for focused study across screens.</li>
                     </ul>
+
+                    <div class="preview-action-row">
+                        <a href="/screenshots" class="btn-secondary">
+                            <Icon name="material-symbols:image-search-rounded" size="20" />
+                            View Full Screenshot Gallery
+                        </a>
+                    </div>
                 </div>
 
-                <div data-reveal data-delay="120" class="preview-image-wrap" data-parallax="-0.06">
-                    <div class="glass-card dark-card preview-showcase">
+                <div data-reveal data-delay="120" class="preview-stage" data-parallax="-0.03">
+                    <div class="glass-card dark-card preview-showcase preview-stage-card">
                         <img
                             :src="desktopScreenshots[1]"
                             alt="Believers Sword desktop Bible study view"
                             class="preview-image"
                             loading="lazy"
                         />
+                        <div class="preview-toolbar">Desktop study workspace</div>
                         <div class="mobile-shot-card" data-parallax="0.03">
                             <img
                                 :src="mobileScreenshots[0]"
@@ -369,6 +396,21 @@ defineOgImageComponent("BelieverSwordOg");
                             />
                         </div>
                     </div>
+                </div>
+
+                <div data-reveal data-delay="180" class="preview-thumb-row">
+                    <article
+                        v-for="(shot, index) in desktopScreenshots.slice(0, 4)"
+                        :key="`thumb-${shot}`"
+                        class="preview-thumb-card"
+                    >
+                        <img
+                            :src="shot"
+                            :alt="`Believers Sword desktop screenshot ${index + 1}`"
+                            class="preview-thumb-image"
+                            loading="lazy"
+                        />
+                    </article>
                 </div>
             </div>
         </section>
@@ -409,36 +451,54 @@ defineOgImageComponent("BelieverSwordOg");
         <section id="download" class="section-frame cta-frame">
             <div data-reveal data-delay="0" class="container-grid">
                 <div class="cta-panel glass-card">
-                    <div>
+                    <div class="cta-content">
                         <p class="section-kicker">Start Today</p>
-                        <h2 class="section-title">Download Believers Sword and begin your next study session.</h2>
+                        <h2 class="section-title cta-title">
+                            Download Believers Sword and begin your next study session.
+                        </h2>
                         <p class="cta-copy">
                             Downloads are automatically pulled from the latest GitHub release for
                             Windows, macOS, Linux, and Windows Portable builds.
                         </p>
+
+                        <div class="cta-meta-row">
+                            <span class="cta-version-pill">Latest {{ tagName }}</span>
+                            <a
+                                :href="releasesPageUrl"
+                                class="cta-meta-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View full release notes
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="cta-actions">
-                        <a
-                            v-for="download in platformDownloads"
-                            :key="`cta-${download.key}`"
-                            :href="download.asset?.browser_download_url"
-                            :class="download.key === 'windows' ? 'btn-primary' : 'btn-secondary'"
-                        >
-                            <Icon :name="download.icon" size="20" />
-                            {{ download.label }} ({{ tagName }})
-                        </a>
+                    <div class="cta-actions-wrap">
+                        <p class="cta-actions-label">Choose your platform</p>
 
-                        <a
-                            v-if="platformDownloads.length === 0"
-                            :href="releasesPageUrl"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn-primary"
-                        >
-                            <Icon name="ic:baseline-cloud-download" size="20" />
-                            Open Releases Page
-                        </a>
+                        <div class="cta-actions">
+                            <a
+                                v-for="download in platformDownloads"
+                                :key="`cta-${download.key}`"
+                                :href="download.asset?.browser_download_url"
+                                :class="download.key === 'windows' ? 'btn-primary' : 'btn-secondary'"
+                            >
+                                <Icon :name="download.icon" size="20" />
+                                {{ download.label }} ({{ tagName }})
+                            </a>
+
+                            <a
+                                v-if="platformDownloads.length === 0"
+                                :href="releasesPageUrl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-primary"
+                            >
+                                <Icon name="ic:baseline-cloud-download" size="20" />
+                                Open Releases Page
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

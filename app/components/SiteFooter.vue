@@ -36,6 +36,9 @@
                         <a href="/#home" class="text-[#dcc5b0] transition hover:text-white">Home</a>
                         <a href="/#features" class="text-[#dcc5b0] transition hover:text-white">Features</a>
                         <a href="/#preview" class="text-[#dcc5b0] transition hover:text-white">App Preview</a>
+                        <a href="/screenshots" class="text-[#dcc5b0] transition hover:text-white">
+                            Screenshots
+                        </a>
                         <a href="/#download" class="text-[#dcc5b0] transition hover:text-white">Download</a>
                         <a href="/delete-account" class="text-[#ffe1cb] transition hover:text-white">
                             Delete Account
