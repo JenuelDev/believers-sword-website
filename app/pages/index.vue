@@ -140,11 +140,13 @@ const mobileScreenshots = Array.from(
 );
 
 const showScrollTop = ref(false);
+const isHeroNavSticky = ref(false);
 
 let removeScrollHandler: (() => void) | null = null;
 
 const onWindowScroll = () => {
     showScrollTop.value = window.scrollY > 420;
+    isHeroNavSticky.value = window.scrollY > 90;
 };
 
 const scrollToTop = () => {
@@ -215,6 +217,25 @@ defineOgImageComponent("BelieverSwordOg");
 </script>
 
 <template>
+    <header
+        :class="['floating-nav', { 'is-visible': isHeroNavSticky }]"
+        aria-label="Sticky primary navigation"
+    >
+        <div class="hero-topbar glass-card floating-nav-inner">
+            <a href="#home" class="hero-brand" style="font-family: 'Space Grotesk', sans-serif">
+                Believers Sword
+            </a>
+            <nav class="hero-nav-pill" aria-label="Primary">
+                <a href="#features" class="hero-nav-link">Features</a>
+                <a href="#preview" class="hero-nav-link">Preview</a>
+                <a href="/screenshots" class="hero-nav-link">Screenshots</a>
+                <a href="#testimonials" class="hero-nav-link">Use Cases</a>
+                <a href="#download" class="hero-nav-link">Download</a>
+            </nav>
+            <a href="#download" class="hero-top-action">Get App</a>
+        </div>
+    </header>
+
     <main class="landing-shell">
         <div class="ambient-orb ambient-orb-left" data-parallax="0.05"></div>
         <div class="ambient-orb ambient-orb-right" data-parallax="0.08"></div>
@@ -222,7 +243,8 @@ defineOgImageComponent("BelieverSwordOg");
 
         <section id="home" class="section-frame hero-frame">
             <div class="container-grid hero-grid">
-                <div data-reveal data-delay="0" class="hero-topbar glass-card">
+                <div data-reveal data-delay="0" class="hero-topbar-shell">
+                    <div class="hero-topbar glass-card">
                     <a href="#home" class="hero-brand" style="font-family: 'Space Grotesk', sans-serif">
                         Believers Sword
                     </a>
@@ -234,6 +256,7 @@ defineOgImageComponent("BelieverSwordOg");
                         <a href="#download" class="hero-nav-link">Download</a>
                     </nav>
                     <a href="#download" class="hero-top-action">Get App</a>
+                    </div>
                 </div>
 
                 <div data-reveal data-delay="100" class="hero-content">
@@ -378,7 +401,7 @@ defineOgImageComponent("BelieverSwordOg");
                     </div>
                 </div>
 
-                <div data-reveal data-delay="120" class="preview-stage" data-parallax="-0.03">
+                <div data-reveal data-delay="120" class="preview-stage">
                     <div class="glass-card dark-card preview-showcase preview-stage-card">
                         <img
                             :src="desktopScreenshots[1]"

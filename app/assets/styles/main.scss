@@ -108,6 +108,41 @@ body {
     padding: 0.6rem;
     border-radius: 999px;
     background: rgba(255, 251, 246, 0.78);
+    transition: box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
+}
+
+.hero-topbar-shell {
+    position: relative;
+    min-height: 4.1rem;
+    z-index: 35;
+}
+
+.floating-nav {
+    position: fixed;
+    top: 0.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100% - 1.2rem), 72rem);
+    z-index: 120;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -14px) scale(0.985);
+    transition: opacity 220ms ease, transform 280ms cubic-bezier(0.22, 0.7, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.floating-nav.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+    pointer-events: auto;
+}
+
+.floating-nav-inner {
+    background: rgba(255, 250, 244, 0.68);
+    border-color: rgba(127, 90, 62, 0.26);
+    box-shadow: 0 18px 40px rgba(54, 34, 23, 0.18);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
 }
 
 .hero-brand {
@@ -365,6 +400,8 @@ body {
 
 .preview-copy-wide {
     max-width: 56rem;
+    position: relative;
+    z-index: 3;
 }
 
 .dark-copy {
@@ -419,6 +456,8 @@ body {
 
 .preview-stage {
     position: relative;
+    z-index: 1;
+    margin-top: 0.5rem;
 }
 
 .preview-stage-card {
@@ -626,6 +665,20 @@ body {
     box-shadow: var(--shadow-soft);
 }
 
+.floating-nav .floating-nav-inner.glass-card {
+    background: rgba(255, 250, 244, 0.58);
+    border-color: rgba(127, 90, 62, 0.3);
+    box-shadow: 0 18px 40px rgba(54, 34, 23, 0.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.15);
+    backdrop-filter: blur(24px) saturate(1.15);
+}
+
+.floating-nav .hero-nav-pill {
+    background: rgba(255, 255, 255, 0.46);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
 [data-reveal] {
     opacity: 0;
     transform: translateY(26px);
@@ -729,6 +782,11 @@ a:focus-visible {
         border-radius: 1.1rem;
     }
 
+    .floating-nav {
+        width: calc(100% - 1rem);
+        top: 0.5rem;
+    }
+
     .hero-nav-pill {
         display: none;
     }
@@ -765,6 +823,10 @@ a:focus-visible {
     .scroll-top-btn,
     .feature-card,
     .testimony-card {
+        transition: none;
+    }
+
+    .floating-nav {
         transition: none;
     }
 }
