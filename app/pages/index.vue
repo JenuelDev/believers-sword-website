@@ -13,6 +13,7 @@ const latestReleaseUrl =
     "https://api.github.com/repos/JenuelDev/Believers-Sword/releases/latest";
 
 const releasesPageUrl = "https://github.com/JenuelDev/Believers-Sword/releases";
+const microsoftStoreUrl = "https://apps.microsoft.com/detail/9PFN10LVMBV4";
 
 const { data: release } = await useFetch<GithubRelease>(latestReleaseUrl, {
     default: () => ({
@@ -296,6 +297,16 @@ defineOgImageComponent("BelieverSwordOg");
                             <Icon name="material-symbols:arrow-downward-rounded" size="20" />
                             Explore Features
                         </a>
+
+                        <a
+                            :href="microsoftStoreUrl"
+                            class="btn-secondary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="simple-icons:microsoftstore" size="20" />
+                            Download on Microsoft Store
+                        </a>
                     </div>
 
                     <div v-if="secondaryDownloads.length" class="hero-other-downloads">
@@ -481,7 +492,8 @@ defineOgImageComponent("BelieverSwordOg");
                         </h2>
                         <p class="cta-copy">
                             Downloads are automatically pulled from the latest GitHub release for
-                            Windows, macOS, Linux, and Windows Portable builds.
+                            Windows, macOS, Linux, and Windows Portable builds. The Windows app is
+                            also available through Microsoft Store.
                         </p>
 
                         <div class="cta-meta-row">
@@ -509,6 +521,16 @@ defineOgImageComponent("BelieverSwordOg");
                             >
                                 <Icon :name="download.icon" size="20" />
                                 {{ download.label }} ({{ tagName }})
+                            </a>
+
+                            <a
+                                :href="microsoftStoreUrl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-secondary"
+                            >
+                                <Icon name="simple-icons:microsoftstore" size="20" />
+                                Microsoft Store
                             </a>
 
                             <a
