@@ -31,7 +31,7 @@ useSeoMeta({
                         <Icon name="material-symbols:arrow-back-rounded" size="20" />
                         Back to Home Preview
                     </a>
-                    <a href="/#download" class="btn-primary">
+                    <a href="/downloads" class="btn-primary">
                         <Icon name="ic:baseline-cloud-download" size="20" />
                         Go to Downloads
                     </a>
