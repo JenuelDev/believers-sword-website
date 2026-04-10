@@ -1,133 +1,76 @@
 <script setup lang="ts">
-interface GithubAsset {
-    name: string;
-    browser_download_url: string;
-}
+const {
+    tagName,
+    platformDownloads,
+    detectedPlatform,
+    detectedPlatformLabel,
+    releasesPageUrl,
+    microsoftStoreUrl,
+    microsoftStoreProtocolUrl,
+} = await useReleaseDownloads();
 
-interface GithubRelease {
-    tag_name: string;
-    assets: GithubAsset[];
-}
+const windowsDownload = computed(() =>
+    platformDownloads.value.find((download) => download.key === "windows")
+);
 
-const latestReleaseUrl =
-    "https://api.github.com/repos/JenuelDev/Believers-Sword/releases/latest";
-
-const releasesPageUrl = "https://github.com/JenuelDev/Believers-Sword/releases";
-const microsoftStoreUrl = "https://apps.microsoft.com/detail/9PFN10LVMBV4";
-
-const { data: release } = await useFetch<GithubRelease>(latestReleaseUrl, {
-    default: () => ({
-        tag_name: "latest",
-        assets: [],
-    }),
-});
-
-const assets = computed(() => release.value?.assets ?? []);
-const tagName = computed(() => release.value?.tag_name || "latest");
-
-type DownloadKey = "windows" | "macos" | "linux" | "windows-portable";
-
-interface DownloadOption {
-    key: DownloadKey;
-    label: string;
-    icon: string;
-    asset?: GithubAsset;
-}
-
-const downloadOptions: Array<Omit<DownloadOption, "asset">> = [
-    {
-        key: "windows",
-        label: "Windows",
-        icon: "simple-icons:windows11",
-    },
-    {
-        key: "macos",
-        label: "macOS",
-        icon: "simple-icons:apple",
-    },
-    {
-        key: "linux",
-        label: "Linux",
-        icon: "simple-icons:linux",
-    },
-    {
-        key: "windows-portable",
-        label: "Windows Portable",
-        icon: "simple-icons:windows11",
-    },
-];
-
-const detectDownloadKey = (assetName: string): DownloadKey | null => {
-    const name = assetName.toLowerCase();
-
-    const hasAny = (tokens: string[]) => tokens.some((token) => name.includes(token));
-
-    const isPortable = hasAny(["portable", "noinstall", "standalone"]);
-    const isWindows =
-        hasAny(["windows", "win32", "win64", "setup", "installer"]) ||
-        name.endsWith(".exe") ||
-        name.endsWith(".msi");
-    const isMac =
-        hasAny(["mac", "macos", "darwin", "osx"]) ||
-        name.endsWith(".dmg") ||
-        name.endsWith(".pkg");
-    const isLinux =
-        hasAny(["linux", "appimage", "deb", "rpm", "snap"]) ||
-        name.endsWith(".appimage") ||
-        name.endsWith(".deb") ||
-        name.endsWith(".rpm") ||
-        name.endsWith(".tar.gz") ||
-        name.endsWith(".tar.xz");
-
-    if (isPortable && (isWindows || (!isMac && !isLinux))) {
-        return "windows-portable";
-    }
-
-    if (isWindows) {
-        return "windows";
-    }
-
-    if (isMac) {
-        return "macos";
-    }
-
-    if (isLinux) {
-        return "linux";
+const detectedPlatformDownload = computed(() => {
+    if (
+        detectedPlatform.value === "windows" ||
+        detectedPlatform.value === "macos" ||
+        detectedPlatform.value === "linux"
+    ) {
+        return platformDownloads.value.find(
+            (download) => download.key === detectedPlatform.value
+        );
     }
 
     return null;
-};
-
-const platformDownloads = computed<DownloadOption[]>(() => {
-    const matched = new Map<DownloadKey, GithubAsset>();
-
-    for (const asset of assets.value) {
-        const key = detectDownloadKey(asset.name);
-        if (!key || matched.has(key)) {
-            continue;
-        }
-        matched.set(key, asset);
-    }
-
-    return downloadOptions
-        .map((option) => ({
-            ...option,
-            asset: matched.get(option.key),
-        }))
-        .filter((option) => Boolean(option.asset));
 });
 
 const primaryDownload = computed(() => {
-    return (
-        platformDownloads.value.find((download) => download.key === "windows") ||
-        platformDownloads.value[0]
-    );
+    return detectedPlatformDownload.value || windowsDownload.value || platformDownloads.value[0];
 });
 
-const secondaryDownloads = computed(() => {
-    return platformDownloads.value.filter(
-        (download) => download.key !== primaryDownload.value?.key
-    );
+const isWindowsDetected = computed(() => detectedPlatform.value === "windows");
+
+const microsoftStoreHref = computed(() =>
+    isWindowsDetected.value ? microsoftStoreProtocolUrl : microsoftStoreUrl
+);
+
+const microsoftStoreTarget = computed(() =>
+    isWindowsDetected.value ? undefined : "_blank"
+);
+
+const microsoftStoreRel = computed(() =>
+    isWindowsDetected.value ? undefined : "noopener noreferrer"
+);
+
+const downloadPanelLabel = computed(() => {
+    if (
+        detectedPlatform.value === "windows" ||
+        detectedPlatform.value === "macos" ||
+        detectedPlatform.value === "linux"
+    ) {
+        return `Recommended for ${detectedPlatformLabel.value}`;
+    }
+
+    return "Choose your platform";
+});
+
+const downloadPanelCopy = computed(() => {
+    if (detectedPlatform.value === "windows") {
+        return "We detected Windows, so the fastest options are the direct installer or Microsoft Store.";
+    }
+
+    if (detectedPlatform.value === "macos") {
+        return "We detected macOS, so the direct macOS build is ready first, with the full downloads page available if you need another package.";
+    }
+
+    if (detectedPlatform.value === "linux") {
+        return "We detected Linux, so the Linux build is front and center, with more packages available on the downloads page.";
+    }
+
+    return "Downloads are pulled from the latest GitHub release, and the full downloads page lists every available option in one place.";
 });
 
 const desktopScreenshots = Array.from(
@@ -275,7 +218,7 @@ defineOgImageComponent("BelieverSwordOg");
                     <div class="hero-actions-center">
                         <a
                             v-if="primaryDownload"
-                            :href="primaryDownload.asset?.browser_download_url"
+                            :href="primaryDownload.href"
                             class="btn-primary"
                         >
                             <Icon :name="primaryDownload.icon" size="20" />
@@ -293,31 +236,23 @@ defineOgImageComponent("BelieverSwordOg");
                             View Latest Release
                         </a>
 
-                        <a href="#features" class="btn-secondary">
-                            <Icon name="material-symbols:arrow-downward-rounded" size="20" />
-                            Explore Features
-                        </a>
-
                         <a
-                            :href="microsoftStoreUrl"
+                            v-if="isWindowsDetected"
+                            :href="microsoftStoreHref"
                             class="btn-secondary"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            :target="microsoftStoreTarget"
+                            :rel="microsoftStoreRel"
                         >
                             <Icon name="simple-icons:microsoftstore" size="20" />
                             Download on Microsoft Store
                         </a>
-                    </div>
 
-                    <div v-if="secondaryDownloads.length" class="hero-other-downloads">
                         <a
-                            v-for="download in secondaryDownloads"
-                            :key="`hero-secondary-${download.key}`"
-                            :href="download.asset?.browser_download_url"
-                            class="hero-download-chip"
+                            href="/downloads"
+                            class="btn-secondary"
                         >
-                            <Icon :name="download.icon" size="16" />
-                            {{ download.label }}
+                            <Icon name="material-symbols:apps-rounded" size="20" />
+                            More Download Options
                         </a>
                     </div>
 
@@ -325,6 +260,9 @@ defineOgImageComponent("BelieverSwordOg");
                         <span>Version {{ tagName }}</span>
                         <span v-if="platformDownloads.length">
                             Available for {{ platformDownloads.map((item) => item.label).join(" • ") }}
+                        </span>
+                        <span>
+                            Suggested for {{ detectedPlatformLabel }}
                         </span>
                     </div>
                 </div>
@@ -491,9 +429,7 @@ defineOgImageComponent("BelieverSwordOg");
                             Download Believers Sword and begin your next study session.
                         </h2>
                         <p class="cta-copy">
-                            Downloads are automatically pulled from the latest GitHub release for
-                            Windows, macOS, Linux, and Windows Portable builds. The Windows app is
-                            also available through Microsoft Store.
+                            {{ downloadPanelCopy }}
                         </p>
 
                         <div class="cta-meta-row">
@@ -510,27 +446,33 @@ defineOgImageComponent("BelieverSwordOg");
                     </div>
 
                     <div class="cta-actions-wrap">
-                        <p class="cta-actions-label">Choose your platform</p>
+                        <p class="cta-actions-label">{{ downloadPanelLabel }}</p>
 
                         <div class="cta-actions">
-                            <a
-                                v-for="download in platformDownloads"
-                                :key="`cta-${download.key}`"
-                                :href="download.asset?.browser_download_url"
-                                :class="download.key === 'windows' ? 'btn-primary' : 'btn-secondary'"
-                            >
-                                <Icon :name="download.icon" size="20" />
-                                {{ download.label }} ({{ tagName }})
-                            </a>
+                            <template v-if="primaryDownload">
+                                <a :href="primaryDownload.href" class="btn-primary">
+                                    <Icon :name="primaryDownload.icon" size="20" />
+                                    {{ primaryDownload.label }} ({{ tagName }})
+                                </a>
+
+                                <a
+                                    v-if="isWindowsDetected"
+                                    :href="microsoftStoreHref"
+                                    :target="microsoftStoreTarget"
+                                    :rel="microsoftStoreRel"
+                                    class="btn-secondary"
+                                >
+                                    <Icon name="simple-icons:microsoftstore" size="20" />
+                                    Microsoft Store
+                                </a>
+                            </template>
 
                             <a
-                                :href="microsoftStoreUrl"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="/downloads"
                                 class="btn-secondary"
                             >
-                                <Icon name="simple-icons:microsoftstore" size="20" />
-                                Microsoft Store
+                                <Icon name="material-symbols:apps-rounded" size="20" />
+                                More Download Options
                             </a>
 
                             <a
