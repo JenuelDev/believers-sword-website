@@ -10,9 +10,16 @@ const mobileShots = Array.from(
 );
 
 useSeoMeta({
-    title: "Believers Sword Screenshots",
+    title: "Screenshots — Believers Sword Bible Study App",
     description:
-        "Explore desktop and mobile screenshots of Believers Sword Bible study app features and interface.",
+        "See desktop and mobile screenshots of Believers Sword showing the Bible reader, notes editor, highlights, prayer lists, and more.",
+});
+
+defineOgImage({
+    component: "BelieverSwordOg",
+    headline: "Believers Sword",
+    title: "Screenshots",
+    description: "Desktop and mobile screenshots of the Bible study app.",
 });
 </script>
 

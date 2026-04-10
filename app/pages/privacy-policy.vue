@@ -1,3 +1,18 @@
+<script setup lang="ts">
+useSeoMeta({
+    title: "Privacy Policy | Believers Sword",
+    description:
+        "Read the Believers Sword privacy policy to understand how we collect, use, and protect your personal data.",
+});
+
+defineOgImage({
+    component: "BelieverSwordOg",
+    headline: "Believers Sword",
+    title: "Privacy Policy",
+    description: "How we collect, use, and protect your data.",
+});
+</script>
+
 <template>
     <main class="policy-page">
         <div class="policy-shell">

@@ -152,12 +152,48 @@ onBeforeUnmount(() => {
 });
 
 useSeoMeta({
-    title: "Believers Sword",
+    title: "Believers Sword — Bible Study App for Desktop & Mobile",
     description:
-        "Believers Sword is a modern app for reading and studying the Bible with clarity and focus.",
+        "Believers Sword is a free Bible study app with 17+ translations, rich-text notes, highlights, prayer lists, daily devotionals, and offline access. Available on Windows, macOS, Linux, Android, and iOS.",
+    ogTitle: "Believers Sword — Bible Study App",
+    ogDescription:
+        "Read, study, and meditate on Scripture with rich-text notes, multiple translations, highlights, prayer lists, and daily devotionals. Free and offline-ready.",
 });
 
-defineOgImageComponent("BelieverSwordOg");
+defineOgImage({
+    component: "BelieverSwordOg",
+    headline: "Bible Study App",
+    title: "Believers Sword",
+    description: "Read, study, and meditate on Scripture with clarity and focus.",
+});
+
+useHead({
+    script: [
+        {
+            type: "application/ld+json",
+            innerHTML: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                name: "Believers Sword",
+                description:
+                    "A free Bible study app with multiple translations, rich-text notes, highlights, prayer lists, daily devotionals, and offline access.",
+                applicationCategory: "ReligiousApplication",
+                operatingSystem: "Windows, macOS, Linux, Android, iOS",
+                offers: {
+                    "@type": "Offer",
+                    price: "0",
+                    priceCurrency: "USD",
+                },
+                author: {
+                    "@type": "Person",
+                    name: "Jenuel Oras Ganawed",
+                    url: "https://jenuel.dev",
+                },
+                url: "https://www.believersword.com",
+            }),
+        },
+    ],
+});
 </script>
 
 <template>
@@ -212,8 +248,8 @@ defineOgImageComponent("BelieverSwordOg");
                         God&apos;s Word.
                     </h1>
                     <p class="hero-subtitle">
-                        A calm Bible study workspace with intelligent notes, quick references, and
-                        beautifully organized highlights designed for clarity and devotion.
+                        A calm Bible study workspace with rich-text notes, multiple translations,
+                        and color-coded highlights designed for clarity and devotion.
                     </p>
                     <div class="hero-actions-center">
                         <a
@@ -251,7 +287,7 @@ defineOgImageComponent("BelieverSwordOg");
                             href="/downloads"
                             class="btn-secondary"
                         >
-                            <Icon name="material-symbols:apps-rounded" size="20" />
+                            <Icon name="material-symbols:grid-view-rounded" size="20" />
                             More Download Options
                         </a>
                     </div>
@@ -291,34 +327,67 @@ defineOgImageComponent("BelieverSwordOg");
 
                 <div class="feature-grid">
                     <article data-reveal data-delay="40" class="glass-card feature-card">
-                        <Icon class="feature-icon" name="material-symbols:edit-note-rounded" size="25" />
-                        <h3>Structured Notes</h3>
+                        <Icon class="feature-icon" name="material-symbols:translate-rounded" size="25" />
+                        <h3>Multiple Translations</h3>
                         <p>
-                            Capture insights verse-by-verse and keep your study thoughts searchable in
-                            one place.
+                            Read from 17+ Bible versions including KJV, ESV, NIV, NASB, and more.
+                            Download additional translations as you need them.
                         </p>
                     </article>
                     <article data-reveal data-delay="100" class="glass-card feature-card">
-                        <Icon class="feature-icon" name="material-symbols:bookmark-heart-rounded" size="25" />
-                        <h3>Smart Bookmarks</h3>
+                        <Icon class="feature-icon" name="material-symbols:edit-note-rounded" size="25" />
+                        <h3>Rich-Text Notes</h3>
                         <p>
-                            Return instantly to key passages and reading plans without losing context.
+                            Write study notes with full formatting support and keep them linked to the
+                            chapters and verses you're reading.
                         </p>
                     </article>
                     <article data-reveal data-delay="160" class="glass-card feature-card">
                         <Icon class="feature-icon" name="material-symbols:ink-highlighter-rounded" size="25" />
-                        <h3>Highlights that Stick</h3>
+                        <h3>Highlights &amp; Clip Notes</h3>
                         <p>
-                            Highlight themes and moments of conviction with a clean, readable color
-                            system.
+                            Color-code verses that stand out and attach quick clip notes for thoughts
+                            you want to remember later.
                         </p>
                     </article>
                     <article data-reveal data-delay="220" class="glass-card feature-card">
-                        <Icon class="feature-icon" name="material-symbols:offline-bolt-rounded" size="25" />
-                        <h3>Offline Access</h3>
+                        <Icon class="feature-icon" name="material-symbols:bookmark-heart-rounded" size="25" />
+                        <h3>Bookmarks</h3>
                         <p>
-                            Keep studying in low-connectivity settings with your resources ready
-                            anytime.
+                            Save your favorite passages and return to them instantly without losing
+                            your place.
+                        </p>
+                    </article>
+                    <article data-reveal data-delay="280" class="glass-card feature-card">
+                        <Icon class="feature-icon" name="material-symbols:menu-book-rounded" size="25" />
+                        <h3>Daily Devotionals</h3>
+                        <p>
+                            Follow a guided 5-step devotional format — Pause, Listen, Think, Pray,
+                            Go — with content for every day of the year.
+                        </p>
+                    </article>
+                    <article data-reveal data-delay="340" class="glass-card feature-card">
+                        <Icon class="feature-icon" name="material-symbols:prayer-times-rounded" size="25" />
+                        <h3>Prayer Lists</h3>
+                        <p>
+                            Track your prayer requests, mark them as answered, and organize them into
+                            groups for ongoing intercession.
+                        </p>
+                    </article>
+                    <article data-reveal data-delay="400" class="glass-card feature-card">
+                        <Icon class="feature-icon" name="material-symbols:search-rounded" size="25" />
+                        <h3>Search &amp; Compare</h3>
+                        <p>
+                            Search across your installed Bible translations and compare the same verse
+                            side-by-side in different versions.
+                        </p>
+                    </article>
+                    <article data-reveal data-delay="460" class="glass-card feature-card">
+                        <Icon class="feature-icon" name="material-symbols:offline-bolt-rounded" size="25" />
+                        <h3>Offline &amp; Cross-Platform</h3>
+                        <p>
+                            All Bible data is stored locally — no internet required. Available on
+                            Windows, macOS, Linux, Android, and iOS.
                         </p>
                     </article>
                 </div>
@@ -397,22 +466,22 @@ defineOgImageComponent("BelieverSwordOg");
                 <div class="testimonial-grid">
                     <article data-reveal data-delay="40" class="glass-card testimony-card">
                         <p>
-                            I prep Bible study sessions faster now. Notes, references, and highlights
-                            all stay together and easy to revisit.
+                            Prepare study sessions with notes, highlights, and verse comparison all in
+                            one workspace. Everything stays organized and easy to revisit.
                         </p>
                         <span>For Small Group Leaders</span>
                     </article>
                     <article data-reveal data-delay="110" class="glass-card testimony-card">
                         <p>
-                            It feels like reading in a quiet study room. Nothing noisy, just the tools
-                            I need to remain attentive.
+                            A focused reading environment with built-in daily devotionals, prayer
+                            lists, and distraction-free design for consistent quiet time.
                         </p>
                         <span>For Daily Devotional Readers</span>
                     </article>
                     <article data-reveal data-delay="180" class="glass-card testimony-card">
                         <p>
-                            Offline mode is a blessing during travel. My ongoing studies remain
-                            available without interruption.
+                            All Bible translations and study data are stored locally, so everything
+                            remains available offline during travel or in low-connectivity areas.
                         </p>
                         <span>For Mobile Ministry Teams</span>
                     </article>
@@ -471,7 +540,7 @@ defineOgImageComponent("BelieverSwordOg");
                                 href="/downloads"
                                 class="btn-secondary"
                             >
-                                <Icon name="material-symbols:apps-rounded" size="20" />
+                                <Icon name="material-symbols:grid-view-rounded" size="20" />
                                 More Download Options
                             </a>
 

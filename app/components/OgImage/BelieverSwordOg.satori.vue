@@ -17,7 +17,7 @@ const title = computed(() => props.title.slice(0, 60));
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col justify-center bg-[#212121]">
+    <div class="w-full h-full flex flex-col justify-center bg-[#212121]" style="font-family: 'Sora', sans-serif">
         <svg
             class="absolute top-0 right-0"
             width="1200"

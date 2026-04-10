@@ -130,9 +130,16 @@ const recommendationCopy = computed(() => {
 });
 
 useSeoMeta({
-    title: "Believers Sword Downloads",
+    title: "Download Believers Sword — Windows, macOS, Linux",
     description:
-        "Download Believers Sword for Windows, macOS, Linux, or Microsoft Store from one page.",
+        "Download Believers Sword Bible study app for free. Available as a direct installer for Windows, macOS, and Linux, or from the Microsoft Store.",
+});
+
+defineOgImage({
+    component: "BelieverSwordOg",
+    headline: "Believers Sword",
+    title: "Downloads",
+    description: "Get Believers Sword for Windows, macOS, Linux, or Microsoft Store.",
 });
 </script>
 
