@@ -128,8 +128,8 @@ export const releasesPageUrl = "https://github.com/JenuelDev/Believers-Sword/rel
 export const microsoftStoreUrl = "https://apps.microsoft.com/detail/9PFN10LVMBV4";
 export const microsoftStoreProtocolUrl = "ms-windows-store://pdp/?productid=9PFN10LVMBV4";
 
-export const useReleaseDownloads = async () => {
-    const { data: release } = await useFetch<GithubRelease>(latestReleaseUrl, {
+export const useReleaseDownloads = () => {
+    const { data: release } = useFetch<GithubRelease>(latestReleaseUrl, {
         key: "believers-sword-latest-release",
         default: () => ({
             tag_name: "latest",

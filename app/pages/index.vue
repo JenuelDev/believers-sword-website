@@ -7,7 +7,7 @@ const {
     releasesPageUrl,
     microsoftStoreUrl,
     microsoftStoreProtocolUrl,
-} = await useReleaseDownloads();
+} = useReleaseDownloads();
 
 const windowsDownload = computed(() =>
     platformDownloads.value.find((download) => download.key === "windows")

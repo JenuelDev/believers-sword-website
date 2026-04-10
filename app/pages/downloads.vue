@@ -7,7 +7,7 @@ const {
     releasesPageUrl,
     microsoftStoreUrl,
     microsoftStoreProtocolUrl,
-} = await useReleaseDownloads();
+} = useReleaseDownloads();
 
 const primaryDownload = computed(() => {
     if (
