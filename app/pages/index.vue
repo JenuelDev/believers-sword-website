@@ -203,6 +203,7 @@ useHead({
     >
         <div class="hero-topbar glass-card floating-nav-inner">
             <a href="#home" class="hero-brand" style="font-family: 'Space Grotesk', sans-serif">
+                <img src="/apple-touch-icon.png" alt="" class="hero-brand-logo" width="28" height="28" />
                 Believers Sword
             </a>
             <nav class="hero-nav-pill" aria-label="Primary">
@@ -240,12 +241,18 @@ useHead({
                 </div>
 
                 <div data-reveal data-delay="100" class="hero-content">
+                    <img
+                        src="/logo/240x240.png"
+                        alt="Believers Sword logo"
+                        class="hero-logo"
+                        width="96"
+                        height="96"
+                    />
                     <p class="eyebrow-pill">
                         Prayerful, focused, and built for daily Scripture study
                     </p>
                     <h1 class="hero-title">
-                        Believers Sword helps you read deeper, remember more, and stay rooted in
-                        God&apos;s Word.
+                        Stay rooted in God&apos;s Word.
                     </h1>
                     <p class="hero-subtitle">
                         A calm Bible study workspace with rich-text notes, multiple translations,
