@@ -5,8 +5,7 @@ useSeoMeta({
         "Instructions for deleting your Believers Sword account on desktop and mobile.",
 });
 
-defineOgImage({
-    component: "BelieverSwordOg",
+defineOgImage("BelieverSwordOg", {
     headline: "Believers Sword",
     title: "Delete Account",
     description: "How to delete your Believers Sword account.",

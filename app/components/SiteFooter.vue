@@ -39,6 +39,7 @@
                         <a href="/screenshots" class="text-[#dcc5b0] transition hover:text-white">
                             Screenshots
                         </a>
+                        <a href="/mobile" class="text-[#dcc5b0] transition hover:text-white">Mobile App</a>
                         <a href="/#download" class="text-[#dcc5b0] transition hover:text-white">Download</a>
                         <a href="/delete-account" class="text-[#ffe1cb] transition hover:text-white">
                             Delete Account

@@ -5,8 +5,7 @@ useSeoMeta({
         "Read the Believers Sword privacy policy to understand how we collect, use, and protect your personal data.",
 });
 
-defineOgImage({
-    component: "BelieverSwordOg",
+defineOgImage("BelieverSwordOg", {
     headline: "Believers Sword",
     title: "Privacy Policy",
     description: "How we collect, use, and protect your data.",

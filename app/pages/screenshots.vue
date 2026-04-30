@@ -15,8 +15,7 @@ useSeoMeta({
         "See desktop and mobile screenshots of Believers Sword showing the Bible reader, notes editor, highlights, prayer lists, and more.",
 });
 
-defineOgImage({
-    component: "BelieverSwordOg",
+defineOgImage("BelieverSwordOg", {
     headline: "Believers Sword",
     title: "Screenshots",
     description: "Desktop and mobile screenshots of the Bible study app.",

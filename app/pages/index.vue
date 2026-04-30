@@ -160,12 +160,14 @@ useSeoMeta({
         "Read, study, and meditate on Scripture with rich-text notes, multiple translations, highlights, prayer lists, and daily devotionals. Free and offline-ready.",
 });
 
-defineOgImage({
-    component: "BelieverSwordOg",
-    headline: "Bible Study App",
-    title: "Believers Sword",
-    description: "Read, study, and meditate on Scripture with clarity and focus.",
-});
+defineOgImage(
+    "BelieverSwordOg",
+    {
+        headline: "Bible Study App",
+        title: "Believers Sword",
+        description: "Read, study, and meditate on Scripture with clarity and focus.",
+    }
+);
 
 useHead({
     script: [
@@ -211,6 +213,7 @@ useHead({
                 <a href="#preview" class="hero-nav-link">Preview</a>
                 <a href="/screenshots" class="hero-nav-link">Screenshots</a>
                 <a href="#testimonials" class="hero-nav-link">Use Cases</a>
+                <a href="/mobile" class="hero-nav-link">Mobile</a>
                 <a href="#download" class="hero-nav-link">Download</a>
             </nav>
             <a href="#download" class="hero-top-action">Get App</a>
@@ -260,7 +263,18 @@ useHead({
                     </p>
                     <div class="hero-actions-center">
                         <a
-                            v-if="primaryDownload"
+                            v-if="isWindowsDetected"
+                            :href="microsoftStoreHref"
+                            class="btn-primary"
+                            :target="microsoftStoreTarget"
+                            :rel="microsoftStoreRel"
+                        >
+                            <Icon name="simple-icons:microsoftstore" size="20" />
+                            Download on Microsoft Store
+                        </a>
+
+                        <a
+                            v-else-if="primaryDownload"
                             :href="primaryDownload.href"
                             class="btn-primary"
                         >
@@ -277,17 +291,6 @@ useHead({
                         >
                             <Icon name="ic:baseline-cloud-download" size="20" />
                             View Latest Release
-                        </a>
-
-                        <a
-                            v-if="isWindowsDetected"
-                            :href="microsoftStoreHref"
-                            class="btn-secondary"
-                            :target="microsoftStoreTarget"
-                            :rel="microsoftStoreRel"
-                        >
-                            <Icon name="simple-icons:microsoftstore" size="20" />
-                            Download on Microsoft Store
                         </a>
 
                         <a
@@ -492,6 +495,84 @@ useHead({
                         </p>
                         <span>For Mobile Ministry Teams</span>
                     </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="mobile" class="section-frame">
+            <div class="container-grid">
+                <div class="mobile-layout">
+                    <div class="mobile-content">
+                        <div data-reveal data-delay="0" class="section-heading">
+                            <p class="section-kicker">Mobile App</p>
+                            <h2 class="section-title">Take your Bible study anywhere.</h2>
+                            <p class="mobile-section-copy">
+                                The Android app is currently in closed beta. Follow the two
+                                steps below to get early access before the public launch.
+                            </p>
+                        </div>
+
+                        <div class="mobile-steps">
+                            <div data-reveal data-delay="60" class="glass-card mobile-step-card">
+                                <div class="mobile-step-number">1</div>
+                                <div class="mobile-step-body">
+                                    <h3>Join the Testing Group</h3>
+                                    <p>
+                                        Request access by joining the Google Group for beta testers.
+                                        Membership is required before you can install the app.
+                                    </p>
+                                    <a
+                                        href="https://groups.google.com/g/believersswordgroup"
+                                        class="btn-primary"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Icon name="material-symbols:group-rounded" size="20" />
+                                        Join Beta Group
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div data-reveal data-delay="140" class="glass-card mobile-step-card">
+                                <div class="mobile-step-number">2</div>
+                                <div class="mobile-step-body">
+                                    <h3>Download on Google Play</h3>
+                                    <p>
+                                        Once your group membership is approved, open this link to
+                                        install the app from the Google Play testing program.
+                                    </p>
+                                    <a
+                                        href="https://play.google.com/apps/testing/com.believers.sword.believers_sword_mobile"
+                                        class="btn-secondary"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Icon name="simple-icons:googleplay" size="20" />
+                                        Open Play Store
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-reveal data-delay="80" class="mobile-phones-wrap">
+                        <div class="mobile-phone mobile-phone--back">
+                            <img
+                                :src="mobileScreenshots[3]"
+                                alt="Believers Sword mobile dark reading mode"
+                                class="mobile-phone-img"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="mobile-phone mobile-phone--front">
+                            <img
+                                :src="mobileScreenshots[0]"
+                                alt="Believers Sword mobile Bible reading with highlights"
+                                class="mobile-phone-img"
+                                loading="lazy"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

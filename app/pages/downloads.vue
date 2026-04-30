@@ -16,7 +16,7 @@ const primaryDownload = computed(() => {
         detectedPlatform.value === "linux"
     ) {
         const detectedMatch = platformDownloads.value.find(
-            (download) => download.key === detectedPlatform.value
+            (download) => download.key === detectedPlatform.value,
         );
 
         if (detectedMatch) {
@@ -25,7 +25,9 @@ const primaryDownload = computed(() => {
     }
 
     return (
-        platformDownloads.value.find((download) => download.key === "windows") ||
+        platformDownloads.value.find(
+            (download) => download.key === "windows",
+        ) ||
         platformDownloads.value[0] ||
         null
     );
@@ -34,15 +36,15 @@ const primaryDownload = computed(() => {
 const isWindowsDetected = computed(() => detectedPlatform.value === "windows");
 
 const microsoftStoreHref = computed(() =>
-    isWindowsDetected.value ? microsoftStoreProtocolUrl : microsoftStoreUrl
+    isWindowsDetected.value ? microsoftStoreProtocolUrl : microsoftStoreUrl,
 );
 
-const microsoftStoreTarget = computed(() =>
+const microsoftStoreTarget: any = computed(() =>
     isWindowsDetected.value ? undefined : "_blank"
 );
 
-const microsoftStoreRel = computed(() =>
-    isWindowsDetected.value ? undefined : "noopener noreferrer"
+const microsoftStoreRel: ComputedRef<string | undefined> = computed(() =>
+    isWindowsDetected.value ? undefined : "noopener noreferrer",
 );
 
 const recommendedDownloads = computed(() => {
@@ -70,7 +72,7 @@ const recommendedDownloads = computed(() => {
 
     if (isWindowsDetected.value) {
         actions.push({
-            key: "microsoft-store",
+            key: "microsoft-store" as const,
             label: "Open Microsoft Store",
             icon: "simple-icons:microsoftstore",
             href: microsoftStoreHref.value,
@@ -95,18 +97,21 @@ const allDownloadCards = computed(() => {
         target: "_blank",
         rel: "noopener noreferrer",
         variant:
-            download.key === primaryDownload.value?.key ? "primary" : ("secondary" as const),
+            download.key === primaryDownload.value?.key
+                ? "primary"
+                : ("secondary" as const),
     }));
 
     cards.push({
         key: "microsoft-store",
         title: "Microsoft Store",
-        description: "Install Believers Sword from the Microsoft Store listing.",
+        description:
+            "Install Believers Sword from the Microsoft Store listing.",
         href: microsoftStoreHref.value,
         icon: "simple-icons:microsoftstore",
         buttonLabel: "Microsoft Store",
-        target: microsoftStoreTarget.value,
-        rel: microsoftStoreRel.value,
+        target: microsoftStoreTarget.value ?? undefined,
+        rel: microsoftStoreRel.value as any,
         variant: isWindowsDetected.value ? "primary" : ("secondary" as const),
     });
 
@@ -135,12 +140,7 @@ useSeoMeta({
         "Download Believers Sword Bible study app for free. Available as a direct installer for Windows, macOS, and Linux, or from the Microsoft Store.",
 });
 
-defineOgImage({
-    component: "BelieverSwordOg",
-    headline: "Believers Sword",
-    title: "Downloads",
-    description: "Get Believers Sword for Windows, macOS, Linux, or Microsoft Store.",
-});
+defineOgImage("BelieverSwordOg");
 </script>
 
 <template>
@@ -148,15 +148,21 @@ defineOgImage({
         <section class="downloads-hero section-frame">
             <div class="container-grid">
                 <p class="section-kicker">Downloads</p>
-                <h1 class="downloads-title">Choose the Believers Sword build that fits your device.</h1>
+                <h1 class="downloads-title">
+                    Choose the Believers Sword build that fits your device.
+                </h1>
                 <p class="downloads-subtitle">
-                    Direct downloads are pulled from the latest GitHub release, and the Windows app
-                    is also available through Microsoft Store.
+                    Direct downloads are pulled from the latest GitHub release,
+                    and the Windows app is also available through Microsoft
+                    Store.
                 </p>
 
                 <div class="downloads-actions">
                     <a href="/" class="btn-secondary">
-                        <Icon name="material-symbols:arrow-back-rounded" size="20" />
+                        <Icon
+                            name="material-symbols:arrow-back-rounded"
+                            size="20"
+                        />
                         Back to Home
                     </a>
                     <a
@@ -179,7 +185,9 @@ defineOgImage({
                         <p class="section-kicker">Recommended</p>
                         <h2>Suggested for {{ detectedPlatformLabel }}</h2>
                         <p>{{ recommendationCopy }}</p>
-                        <span class="downloads-version-pill">Latest {{ tagName }}</span>
+                        <span class="downloads-version-pill"
+                            >Latest {{ tagName }}</span
+                        >
                     </div>
 
                     <div class="downloads-recommend-actions">
@@ -187,7 +195,11 @@ defineOgImage({
                             v-for="action in recommendedDownloads"
                             :key="`recommended-${action.key}`"
                             :href="action.href"
-                            :class="action.variant === 'primary' ? 'btn-primary' : 'btn-secondary'"
+                            :class="
+                                action.variant === 'primary'
+                                    ? 'btn-primary'
+                                    : 'btn-secondary'
+                            "
                             :target="action.target"
                             :rel="action.rel"
                         >
@@ -233,7 +245,11 @@ defineOgImage({
                         <p>{{ card.description }}</p>
                         <a
                             :href="card.href"
-                            :class="card.variant === 'primary' ? 'btn-primary' : 'btn-secondary'"
+                            :class="
+                                card.variant === 'primary'
+                                    ? 'btn-primary'
+                                    : 'btn-secondary'
+                            "
                             :target="card.target"
                             :rel="card.rel"
                         >
@@ -291,8 +307,16 @@ defineOgImage({
     padding: clamp(1.2rem, 3vw, 2rem);
     border-radius: 1.3rem;
     background:
-        radial-gradient(circle at 10% 0%, rgba(243, 218, 184, 0.52), transparent 38%),
-        linear-gradient(135deg, rgba(255, 251, 246, 0.9), rgba(250, 236, 219, 0.72));
+        radial-gradient(
+            circle at 10% 0%,
+            rgba(243, 218, 184, 0.52),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(255, 251, 246, 0.9),
+            rgba(250, 236, 219, 0.72)
+        );
     border: 1px solid rgba(149, 108, 75, 0.24);
 }
 

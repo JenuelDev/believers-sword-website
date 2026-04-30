@@ -11,7 +11,7 @@ export interface GithubRelease {
     assets: GithubAsset[];
 }
 
-export type DownloadKey = "windows" | "macos" | "linux" | "windows-portable";
+export type DownloadKey = "windows" | "macos" | "linux" | "windows-portable" | string;
 export type DetectedPlatform = "windows" | "macos" | "linux" | "other" | "unknown";
 
 export interface DownloadOption {

@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-22',
   devtools: { enabled: false },
+  devServer: {
+    port: 7788
+  },
   modules: [
     '@nuxt/image',
     '@nuxt/icon',
