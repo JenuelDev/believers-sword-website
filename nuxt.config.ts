@@ -32,6 +32,20 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
+      script: [
+        {
+          'data-name': 'BMC-Widget',
+          'data-cfasync': 'false',
+          src: 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js',
+          'data-id': 'jenuel.dev',
+          'data-description': 'Support me on Buy me a coffee!',
+          'data-message': '',
+          'data-color': '#26B0A1',
+          'data-position': 'Right',
+          'data-x_margin': '18',
+          'data-y_margin': '18',
+        },
+      ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
