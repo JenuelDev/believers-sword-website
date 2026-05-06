@@ -43,7 +43,7 @@ export default defineNuxtConfig({
           'data-color': '#26B0A1',
           'data-position': 'Right',
           'data-x_margin': '18',
-          'data-y_margin': '18',
+          'data-y_margin': '80',
         },
       ],
       link: [
