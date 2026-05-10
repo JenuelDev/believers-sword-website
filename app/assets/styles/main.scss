@@ -200,7 +200,7 @@ body {
 }
 
 .hero-content {
-    max-width: 50rem;
+    max-width: 72rem;
     margin-inline: auto;
     text-align: center;
 }
@@ -236,6 +236,8 @@ body {
     letter-spacing: -0.02em;
     line-height: 1.08;
     max-width: 20ch;
+    margin-inline: auto;
+    text-wrap: balance;
 }
 
 .hero-subtitle {
@@ -252,6 +254,156 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.7rem;
+}
+
+.hero-access-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin-top: clamp(1.4rem, 3vw, 2rem);
+    text-align: left;
+}
+
+.hero-access-card {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1.15rem;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, rgba(255, 252, 248, 0.88), rgba(250, 239, 225, 0.72));
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.hero-access-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(143, 96, 65, 0.34);
+    box-shadow: 0 22px 44px rgba(50, 31, 20, 0.16);
+}
+
+.hero-access-icon {
+    width: 2.7rem;
+    height: 2.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+    color: #70492f;
+    background: rgba(226, 199, 171, 0.36);
+    border: 1px solid rgba(139, 98, 67, 0.18);
+}
+
+.hero-access-media {
+    position: relative;
+    height: clamp(10.2rem, 15vw, 12.4rem);
+    overflow: hidden;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(139, 98, 67, 0.18);
+    background: rgba(255, 251, 246, 0.68);
+}
+
+.hero-access-media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.hero-access-media--mobile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(235, 205, 174, 0.54), transparent 58%),
+        rgba(255, 251, 246, 0.68);
+}
+
+.hero-access-media--mobile img {
+    width: auto;
+    height: calc(100% - 0.6rem);
+    aspect-ratio: 9 / 16;
+    border-radius: 0.9rem;
+    box-shadow: 0 16px 30px rgba(75, 45, 25, 0.16);
+}
+
+.hero-access-media--desktop {
+    width: 100%;
+}
+
+.hero-access-body {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+}
+
+.hero-access-label-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hero-access-kicker {
+    color: #855a3d;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero-access-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.45rem;
+    padding: 0.2rem 0.54rem;
+    border-radius: 999px;
+    border: 1px solid rgba(126, 88, 60, 0.26);
+    background: rgba(255, 250, 244, 0.72);
+    color: #68482f;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.hero-access-tag--beta {
+    border-color: rgba(55, 122, 114, 0.26);
+    background: rgba(230, 247, 243, 0.72);
+    color: #315f58;
+}
+
+.hero-access-tag--testing {
+    border-color: rgba(153, 103, 38, 0.28);
+    background: rgba(255, 244, 226, 0.78);
+    color: #714b1e;
+}
+
+.hero-access-body h2 {
+    font-family: "Space Grotesk", "Avenir Next", sans-serif;
+    font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+    line-height: 1.2;
+}
+
+.hero-access-body p {
+    color: #5d4b3f;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.hero-access-action {
+    width: 100%;
+}
+
+.hero-access-link {
+    justify-self: center;
+    color: #6f4a31;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .hero-other-downloads {
@@ -873,6 +1025,14 @@ a:focus-visible {
 }
 
 @media (min-width: 768px) {
+    .hero-access-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hero-access-card--desktop {
+        grid-column: span 1;
+    }
+
     .preview-thumb-row {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
@@ -897,6 +1057,20 @@ a:focus-visible {
     .mobile-shot-card {
         right: -1.2rem;
         bottom: -1.4rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-access-card {
+        text-align: center;
+    }
+
+    .hero-access-icon {
+        justify-self: center;
+    }
+
+    .hero-access-label-row {
+        justify-content: center;
     }
 }
 

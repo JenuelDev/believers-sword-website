@@ -45,6 +45,33 @@ const microsoftStoreRel = computed(() =>
     isWindowsDetected.value ? undefined : "noopener noreferrer"
 );
 
+const webAppUrl = "https://app.believersword.com";
+const mobileAppUrl = "/mobile";
+const webViewScreenshot =
+    "/Web View ScreenShots/Screenshot 2026-05-11 065513.png";
+
+const desktopDownloadHref = computed(() =>
+    isWindowsDetected.value ? microsoftStoreHref.value : primaryDownload.value?.href || "/downloads"
+);
+
+const desktopDownloadIcon = computed(() =>
+    isWindowsDetected.value
+        ? "simple-icons:microsoftstore"
+        : primaryDownload.value?.icon || "ic:baseline-cloud-download"
+);
+
+const desktopDownloadLabel = computed(() =>
+    isWindowsDetected.value ? "Download on Microsoft Store" : "Download Desktop App"
+);
+
+const desktopDownloadTarget = computed(() =>
+    isWindowsDetected.value ? microsoftStoreTarget.value : undefined
+);
+
+const desktopDownloadRel = computed(() =>
+    isWindowsDetected.value ? microsoftStoreRel.value : undefined
+);
+
 const downloadPanelLabel = computed(() => {
     if (
         detectedPlatform.value === "windows" ||
@@ -205,7 +232,15 @@ useHead({
     >
         <div class="hero-topbar glass-card floating-nav-inner">
             <a href="#home" class="hero-brand" style="font-family: 'Space Grotesk', sans-serif">
-                <img src="/apple-touch-icon.png" alt="" class="hero-brand-logo" width="28" height="28" />
+                <NuxtImg
+                    src="/apple-touch-icon.png"
+                    alt=""
+                    class="hero-brand-logo"
+                    width="28"
+                    height="28"
+                    format="webp"
+                    quality="88"
+                />
                 Believers Sword
             </a>
             <nav class="hero-nav-pill" aria-label="Primary">
@@ -244,12 +279,16 @@ useHead({
                 </div>
 
                 <div data-reveal data-delay="100" class="hero-content">
-                    <img
+                    <NuxtImg
                         src="/logo/240x240.png"
                         alt="Believers Sword logo"
                         class="hero-logo"
                         width="96"
                         height="96"
+                        format="webp"
+                        quality="88"
+                        loading="eager"
+                        fetchpriority="high"
                     />
                     <p class="eyebrow-pill">
                         Prayerful, focused, and built for daily Scripture study
@@ -261,68 +300,101 @@ useHead({
                         A calm Bible study workspace with rich-text notes, multiple translations,
                         and color-coded highlights designed for clarity and devotion.
                     </p>
-                    <div class="hero-actions-center">
-                        <a
-                            v-if="isWindowsDetected"
-                            :href="microsoftStoreHref"
-                            class="btn-primary"
-                            :target="microsoftStoreTarget"
-                            :rel="microsoftStoreRel"
-                        >
-                            <Icon name="simple-icons:microsoftstore" size="20" />
-                            Download on Microsoft Store
-                        </a>
+                    <div class="hero-access-grid" aria-label="Choose how to use Believers Sword">
+                        <article class="glass-card hero-access-card">
+                            <div class="hero-access-media hero-access-media--desktop">
+                                <NuxtImg
+                                    :src="webViewScreenshot"
+                                    alt="Believers Sword web view interface"
+                                    loading="eager"
+                                    format="webp"
+                                    quality="80"
+                                    sizes="sm:100vw md:33vw lg:390px"
+                                />
+                            </div>
+                            <div class="hero-access-body">
+                                <div class="hero-access-label-row">
+                                    <p class="hero-access-kicker">Web View</p>
+                                    <span class="hero-access-tag hero-access-tag--beta">Beta Version</span>
+                                </div>
+                                <h2>Study in your browser.</h2>
+                                <p>
+                                    Open the online workspace when you want quick access without installing.
+                                </p>
+                            </div>
+                            <a
+                                :href="webAppUrl"
+                                class="btn-secondary hero-access-action"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Icon name="material-symbols:open-in-new-rounded" size="20" />
+                                Check Web View
+                            </a>
+                        </article>
 
-                        <a
-                            v-else-if="primaryDownload"
-                            :href="primaryDownload.href"
-                            class="btn-primary"
-                        >
-                            <Icon :name="primaryDownload.icon" size="20" />
-                            Download for {{ primaryDownload.label }}
-                        </a>
+                        <article class="glass-card hero-access-card hero-access-card--mobile">
+                            <div class="hero-access-media hero-access-media--mobile">
+                                <NuxtImg
+                                    :src="mobileScreenshots[0]"
+                                    alt="Believers Sword mobile Bible reader"
+                                    loading="eager"
+                                    format="webp"
+                                    quality="80"
+                                    sizes="sm:60vw md:18vw lg:150px"
+                                />
+                            </div>
+                            <div class="hero-access-body">
+                                <div class="hero-access-label-row">
+                                    <p class="hero-access-kicker">Mobile App</p>
+                                    <span class="hero-access-tag hero-access-tag--testing">Closed Testing</span>
+                                </div>
+                                <h2>Read wherever you are.</h2>
+                                <p>
+                                    Join the Android beta and install the mobile app through Google Play testing.
+                                </p>
+                            </div>
+                            <a :href="mobileAppUrl" class="btn-secondary hero-access-action">
+                                <Icon name="material-symbols:phone-android-rounded" size="20" />
+                                Download Mobile App
+                            </a>
+                        </article>
 
-                        <a
-                            v-else
-                            :href="releasesPageUrl"
-                            class="btn-primary"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <Icon name="ic:baseline-cloud-download" size="20" />
-                            View Latest Release
-                        </a>
-
-                        <a
-                            href="/downloads"
-                            class="btn-secondary"
-                        >
-                            <Icon name="material-symbols:grid-view-rounded" size="20" />
-                            More Download Options
-                        </a>
-                    </div>
-
-                    <div class="hero-meta">
-                        <span>Version {{ tagName }}</span>
-                        <span v-if="platformDownloads.length">
-                            Available for {{ platformDownloads.map((item) => item.label).join(" • ") }}
-                        </span>
-                        <span>
-                            Suggested for {{ detectedPlatformLabel }}
-                        </span>
-                    </div>
-                </div>
-
-                <div data-reveal data-delay="160" class="hero-preview-wrap">
-                    <div class="hero-light-ray"></div>
-                    <div class="glass-card hero-preview-card" data-parallax="-0.04">
-                        <img
-                            :src="desktopScreenshots[0]"
-                            alt="Believers Sword desktop interface"
-                            class="hero-preview-image"
-                            loading="eager"
-                        />
-                        <div class="preview-chip">Live desktop preview</div>
+                        <article class="glass-card hero-access-card hero-access-card--desktop">
+                            <div class="hero-access-media hero-access-media--desktop">
+                                <NuxtImg
+                                    :src="desktopScreenshots[0]"
+                                    alt="Believers Sword desktop interface"
+                                    loading="eager"
+                                    format="webp"
+                                    quality="80"
+                                    sizes="sm:100vw md:33vw lg:390px"
+                                />
+                            </div>
+                            <div class="hero-access-body">
+                                <p class="hero-access-kicker">Desktop App</p>
+                                <h2>Install the full workspace.</h2>
+                                <p>
+                                    Latest {{ tagName }} for
+                                    <span v-if="platformDownloads.length">
+                                        {{ platformDownloads.map((item) => item.label).join(" • ") }}.
+                                    </span>
+                                    <span v-else>desktop platforms.</span>
+                                </p>
+                            </div>
+                            <a
+                                :href="desktopDownloadHref"
+                                class="btn-primary hero-access-action"
+                                :target="desktopDownloadTarget"
+                                :rel="desktopDownloadRel"
+                            >
+                                <Icon :name="desktopDownloadIcon" size="20" />
+                                {{ desktopDownloadLabel }}
+                            </a>
+                            <a href="/downloads" class="hero-access-link">
+                                More desktop options
+                            </a>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -431,19 +503,25 @@ useHead({
 
                 <div data-reveal data-delay="120" class="preview-stage">
                     <div class="glass-card dark-card preview-showcase preview-stage-card">
-                        <img
+                        <NuxtImg
                             :src="desktopScreenshots[1]"
                             alt="Believers Sword desktop Bible study view"
                             class="preview-image"
                             loading="lazy"
+                            format="webp"
+                            quality="80"
+                            sizes="sm:100vw md:72rem"
                         />
                         <div class="preview-toolbar">Desktop study workspace</div>
                         <div class="mobile-shot-card" data-parallax="0.03">
-                            <img
+                            <NuxtImg
                                 :src="mobileScreenshots[0]"
                                 alt="Believers Sword mobile screenshot"
                                 class="mobile-shot-image"
                                 loading="lazy"
+                                format="webp"
+                                quality="78"
+                                sizes="sm:36vw md:11rem"
                             />
                         </div>
                     </div>
@@ -455,11 +533,14 @@ useHead({
                         :key="`thumb-${shot}`"
                         class="preview-thumb-card"
                     >
-                        <img
+                        <NuxtImg
                             :src="shot"
                             :alt="`Believers Sword desktop screenshot ${index + 1}`"
                             class="preview-thumb-image"
                             loading="lazy"
+                            format="webp"
+                            quality="76"
+                            sizes="sm:50vw md:18rem"
                         />
                     </article>
                 </div>
@@ -557,19 +638,25 @@ useHead({
 
                     <div data-reveal data-delay="80" class="mobile-phones-wrap">
                         <div class="mobile-phone mobile-phone--back">
-                            <img
+                            <NuxtImg
                                 :src="mobileScreenshots[3]"
                                 alt="Believers Sword mobile dark reading mode"
                                 class="mobile-phone-img"
                                 loading="lazy"
+                                format="webp"
+                                quality="78"
+                                sizes="sm:60vw md:16rem"
                             />
                         </div>
                         <div class="mobile-phone mobile-phone--front">
-                            <img
+                            <NuxtImg
                                 :src="mobileScreenshots[0]"
                                 alt="Believers Sword mobile Bible reading with highlights"
                                 class="mobile-phone-img"
                                 loading="lazy"
+                                format="webp"
+                                quality="78"
+                                sizes="sm:60vw md:16rem"
                             />
                         </div>
                     </div>
