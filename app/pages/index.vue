@@ -7,6 +7,7 @@ const {
     releasesPageUrl,
     microsoftStoreUrl,
     microsoftStoreProtocolUrl,
+    googlePlayStoreUrl,
 } = useReleaseDownloads();
 
 const windowsDownload = computed(() =>
@@ -46,7 +47,8 @@ const microsoftStoreRel = computed(() =>
 );
 
 const webAppUrl = "https://app.believersword.com";
-const mobileAppUrl = "/mobile";
+const mobilePageUrl = "/mobile";
+const mobileAppUrl = googlePlayStoreUrl;
 const webViewScreenshot =
     "/Web View ScreenShots/Screenshot 2026-05-11 065513.png";
 
@@ -181,7 +183,7 @@ onBeforeUnmount(() => {
 useSeoMeta({
     title: "Believers Sword — Bible Study App for Desktop & Mobile",
     description:
-        "Believers Sword is a free Bible study app with 17+ translations, rich-text notes, highlights, prayer lists, daily devotionals, and offline access. Available on Windows, macOS, Linux, Android, and iOS.",
+        "Believers Sword is a free Bible study app with 17+ translations, rich-text notes, highlights, prayer lists, daily devotionals, and offline access. Available on Windows, macOS, Linux, and Android.",
     ogTitle: "Believers Sword — Bible Study App",
     ogDescription:
         "Read, study, and meditate on Scripture with rich-text notes, multiple translations, highlights, prayer lists, and daily devotionals. Free and offline-ready.",
@@ -207,7 +209,7 @@ useHead({
                 description:
                     "A free Bible study app with multiple translations, rich-text notes, highlights, prayer lists, daily devotionals, and offline access.",
                 applicationCategory: "ReligiousApplication",
-                operatingSystem: "Windows, macOS, Linux, Android, iOS",
+                operatingSystem: "Windows, macOS, Linux, Android",
                 offers: {
                     "@type": "Offer",
                     price: "0",
@@ -347,16 +349,24 @@ useHead({
                             <div class="hero-access-body">
                                 <div class="hero-access-label-row">
                                     <p class="hero-access-kicker">Mobile App</p>
-                                    <span class="hero-access-tag hero-access-tag--testing">Closed Testing</span>
+                                    <span class="hero-access-tag hero-access-tag--testing">Google Play</span>
                                 </div>
                                 <h2>Read wherever you are.</h2>
                                 <p>
-                                    Join the Android beta and install the mobile app through Google Play testing.
+                                    Install the production Android app from Google Play.
                                 </p>
                             </div>
-                            <a :href="mobileAppUrl" class="btn-secondary hero-access-action">
-                                <Icon name="material-symbols:phone-android-rounded" size="20" />
+                            <a
+                                :href="mobileAppUrl"
+                                class="btn-secondary hero-access-action"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Icon name="simple-icons:googleplay" size="20" />
                                 Download Mobile App
+                            </a>
+                            <a :href="mobilePageUrl" class="hero-access-link">
+                                View mobile details
                             </a>
                         </article>
 
@@ -469,7 +479,7 @@ useHead({
                         <h3>Offline &amp; Cross-Platform</h3>
                         <p>
                             All Bible data is stored locally — no internet required. Available on
-                            Windows, macOS, Linux, Android, and iOS.
+                            Windows, macOS, Linux, and Android.
                         </p>
                     </article>
                 </div>
@@ -588,48 +598,50 @@ useHead({
                             <p class="section-kicker">Mobile App</p>
                             <h2 class="section-title">Take your Bible study anywhere.</h2>
                             <p class="mobile-section-copy">
-                                The Android app is currently in closed beta. Follow the two
-                                steps below to get early access before the public launch.
+                                The Android app is live in production. Install it from
+                                Google Play and keep Scripture, highlights, and study tools with you.
                             </p>
                         </div>
 
                         <div class="mobile-steps">
                             <div data-reveal data-delay="60" class="glass-card mobile-step-card">
-                                <div class="mobile-step-number">1</div>
+                                <div class="mobile-step-number">
+                                    <Icon name="simple-icons:googleplay" size="22" />
+                                </div>
                                 <div class="mobile-step-body">
-                                    <h3>Join the Testing Group</h3>
+                                    <h3>Download on Google Play</h3>
                                     <p>
-                                        Request access by joining the Google Group for beta testers.
-                                        Membership is required before you can install the app.
+                                        Open the official production listing to install the latest
+                                        Android release and receive store-managed updates.
                                     </p>
                                     <a
-                                        href="https://groups.google.com/g/believersswordgroup"
+                                        :href="mobileAppUrl"
                                         class="btn-primary"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        <Icon name="material-symbols:group-rounded" size="20" />
-                                        Join Beta Group
+                                        <Icon name="simple-icons:googleplay" size="20" />
+                                        Get it on Google Play
                                     </a>
                                 </div>
                             </div>
 
                             <div data-reveal data-delay="140" class="glass-card mobile-step-card">
-                                <div class="mobile-step-number">2</div>
+                                <div class="mobile-step-number">
+                                    <Icon name="material-symbols:phone-android-rounded" size="22" />
+                                </div>
                                 <div class="mobile-step-body">
-                                    <h3>Download on Google Play</h3>
+                                    <h3>Explore the mobile page</h3>
                                     <p>
-                                        Once your group membership is approved, open this link to
-                                        install the app from the Google Play testing program.
+                                        Preview the mobile experience, screenshots, offline reading,
+                                        highlights, themes, and translation downloads.
                                     </p>
                                     <a
-                                        href="https://play.google.com/apps/testing/com.believers.sword.believers_sword_mobile"
+                                        :href="mobilePageUrl"
                                         class="btn-secondary"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
                                     >
-                                        <Icon name="simple-icons:googleplay" size="20" />
-                                        Open Play Store
+                                        <Icon name="material-symbols:phone-android-rounded" size="20" />
+                                        View Mobile Page
                                     </a>
                                 </div>
                             </div>
@@ -710,6 +722,16 @@ useHead({
                                     Microsoft Store
                                 </a>
                             </template>
+
+                            <a
+                                :href="mobileAppUrl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-secondary"
+                            >
+                                <Icon name="simple-icons:googleplay" size="20" />
+                                Google Play
+                            </a>
 
                             <a
                                 href="/downloads"

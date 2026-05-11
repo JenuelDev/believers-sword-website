@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const googlePlayStoreUrl =
+    "https://play.google.com/store/apps/details?id=com.believers.sword.believers_sword_mobile&hl=en";
+
 const mobileShots = Array.from(
     { length: 6 },
     (_, index) => `/screenshots/mobile/mobile-${String(index + 1).padStart(2, "0")}.jpg`
@@ -7,13 +10,13 @@ const mobileShots = Array.from(
 useSeoMeta({
     title: "Mobile App — Believers Sword Bible Study",
     description:
-        "Believers Sword is coming to Android. Join the closed beta to get early access — read Scripture, study with highlights, and search across translations on the go.",
+        "Download Believers Sword on Android from Google Play — read Scripture, study with highlights, and search across translations on the go.",
 });
 
 defineOgImage("BelieverSwordOg", {
     headline: "Now on Android",
     title: "Believers Sword Mobile",
-    description: "Closed beta — join to get early access on Android.",
+    description: "Available now on Google Play for Android.",
 });
 </script>
 
@@ -31,12 +34,12 @@ defineOgImage("BelieverSwordOg", {
                     <a href="/downloads" class="mobile-page-nav-link">Downloads</a>
                 </nav>
                 <a
-                    href="https://groups.google.com/g/believersswordgroup"
+                    :href="googlePlayStoreUrl"
                     class="mobile-page-nav-cta"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Join Beta
+                    Get App
                 </a>
             </div>
         </header>
@@ -47,8 +50,8 @@ defineOgImage("BelieverSwordOg", {
                     <div class="mob-hero-layout">
                         <div class="mob-hero-content">
                             <span class="mob-beta-badge">
-                                <Icon name="material-symbols:science-rounded" size="14" />
-                                Closed Beta · Android
+                                <Icon name="simple-icons:googleplay" size="14" />
+                                Now Available · Android
                             </span>
                             <h1 class="mob-hero-title">
                                 Your Bible study,<br />now in your pocket.
@@ -61,27 +64,25 @@ defineOgImage("BelieverSwordOg", {
 
                             <div class="mob-hero-actions">
                                 <a
-                                    href="https://groups.google.com/g/believersswordgroup"
+                                    :href="googlePlayStoreUrl"
                                     class="btn-primary"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <Icon name="material-symbols:group-rounded" size="20" />
-                                    Join the Beta Group
+                                    <Icon name="simple-icons:googleplay" size="20" />
+                                    Get it on Google Play
                                 </a>
                                 <a
-                                    href="https://play.google.com/apps/testing/com.believers.sword.believers_sword_mobile"
+                                    href="/screenshots"
                                     class="btn-secondary"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
                                 >
-                                    <Icon name="simple-icons:googleplay" size="18" />
-                                    Open Play Store
+                                    <Icon name="material-symbols:image-search-rounded" size="18" />
+                                    View Screenshots
                                 </a>
                             </div>
 
                             <p class="mob-hero-note">
-                                You must join the Google Group first before the Play Store link becomes active.
+                                Install the production Android app directly from its Google Play listing.
                             </p>
                         </div>
 
@@ -175,43 +176,29 @@ defineOgImage("BelieverSwordOg", {
                 <div class="container-grid">
                     <div class="mob-cta-panel glass-card">
                         <div class="mob-cta-content">
-                            <p class="section-kicker">Get Early Access</p>
-                            <h2 class="section-title mob-cta-title">Two steps to join the beta.</h2>
+                            <p class="section-kicker">Download</p>
+                            <h2 class="section-title mob-cta-title">Install the Android app from Google Play.</h2>
                             <p class="mob-cta-copy">
-                                The app is in closed testing. Complete both steps in order —
-                                the Play Store link only activates after your group membership is approved.
+                                Believers Sword Mobile is now in production. Use the official
+                                Google Play listing to install updates securely on your Android device.
                             </p>
                         </div>
                         <div class="mob-cta-steps">
                             <div class="glass-card mob-cta-step">
-                                <div class="mobile-step-number">1</div>
+                                <div class="mobile-step-number">
+                                    <Icon name="simple-icons:googleplay" size="22" />
+                                </div>
                                 <div class="mobile-step-body">
-                                    <h3>Join the Testing Group</h3>
-                                    <p>Request access through the Google Group for beta testers. Approval is required before installing.</p>
+                                    <h3>Download on Google Play</h3>
+                                    <p>Open the production store listing and install the latest Android release.</p>
                                     <a
-                                        href="https://groups.google.com/g/believersswordgroup"
+                                        :href="googlePlayStoreUrl"
                                         class="btn-primary"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        <Icon name="material-symbols:group-rounded" size="20" />
-                                        Join Beta Group
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="glass-card mob-cta-step">
-                                <div class="mobile-step-number">2</div>
-                                <div class="mobile-step-body">
-                                    <h3>Download on Google Play</h3>
-                                    <p>Once approved, use this link to install from the Google Play testing program.</p>
-                                    <a
-                                        href="https://play.google.com/apps/testing/com.believers.sword.believers_sword_mobile"
-                                        class="btn-secondary"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
                                         <Icon name="simple-icons:googleplay" size="20" />
-                                        Open Play Store
+                                        Get it on Google Play
                                     </a>
                                 </div>
                             </div>

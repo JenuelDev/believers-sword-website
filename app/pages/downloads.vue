@@ -7,9 +7,14 @@ const {
     releasesPageUrl,
     microsoftStoreUrl,
     microsoftStoreProtocolUrl,
+    googlePlayStoreUrl,
 } = useReleaseDownloads();
 
 const primaryDownload = computed(() => {
+    if (detectedPlatform.value === "android") {
+        return null;
+    }
+
     if (
         detectedPlatform.value === "windows" ||
         detectedPlatform.value === "macos" ||
@@ -34,6 +39,7 @@ const primaryDownload = computed(() => {
 });
 
 const isWindowsDetected = computed(() => detectedPlatform.value === "windows");
+const isAndroidDetected = computed(() => detectedPlatform.value === "android");
 
 const microsoftStoreHref = computed(() =>
     isWindowsDetected.value ? microsoftStoreProtocolUrl : microsoftStoreUrl,
@@ -59,7 +65,18 @@ const recommendedDownloads = computed(() => {
         rel?: string;
     }> = [];
 
-    if (primaryDownload.value) {
+    if (isAndroidDetected.value) {
+        actions.push({
+            key: "google-play",
+            label: "Get it on Google Play",
+            icon: "simple-icons:googleplay",
+            href: googlePlayStoreUrl,
+            description: "Install the production Android app from Google Play.",
+            variant: "primary",
+            target: "_blank",
+            rel: "noopener noreferrer",
+        });
+    } else if (primaryDownload.value) {
         actions.push({
             key: primaryDownload.value.key,
             label: `Download for ${primaryDownload.value.label}`,
@@ -115,10 +132,27 @@ const allDownloadCards = computed(() => {
         variant: isWindowsDetected.value ? "primary" : ("secondary" as const),
     });
 
+    cards.push({
+        key: "google-play",
+        title: "Google Play",
+        description:
+            "Install the production Android app from the official Google Play listing.",
+        href: googlePlayStoreUrl,
+        icon: "simple-icons:googleplay",
+        buttonLabel: "Get it on Google Play",
+        target: "_blank",
+        rel: "noopener noreferrer",
+        variant: isAndroidDetected.value ? "primary" : ("secondary" as const),
+    });
+
     return cards;
 });
 
 const recommendationCopy = computed(() => {
+    if (detectedPlatform.value === "android") {
+        return "Android was detected on this device, so the production Google Play listing is ready first.";
+    }
+
     if (detectedPlatform.value === "windows") {
         return "Windows was detected on this device, so we are surfacing both the direct installer and the Microsoft Store route first.";
     }
@@ -135,9 +169,9 @@ const recommendationCopy = computed(() => {
 });
 
 useSeoMeta({
-    title: "Download Believers Sword — Windows, macOS, Linux",
+    title: "Download Believers Sword — Android, Windows, macOS, Linux",
     description:
-        "Download Believers Sword Bible study app for free. Available as a direct installer for Windows, macOS, and Linux, or from the Microsoft Store.",
+        "Download Believers Sword Bible study app for free. Available on Android through Google Play, as a direct installer for Windows, macOS, and Linux, or from the Microsoft Store.",
 });
 
 defineOgImage("BelieverSwordOg");
@@ -153,8 +187,8 @@ defineOgImage("BelieverSwordOg");
                 </h1>
                 <p class="downloads-subtitle">
                     Direct downloads are pulled from the latest GitHub release,
-                    and the Windows app is also available through Microsoft
-                    Store.
+                    the Android app is available on Google Play, and the
+                    Windows app is also available through Microsoft Store.
                 </p>
 
                 <div class="downloads-actions">

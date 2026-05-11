@@ -12,7 +12,7 @@ export interface GithubRelease {
 }
 
 export type DownloadKey = "windows" | "macos" | "linux" | "windows-portable" | string;
-export type DetectedPlatform = "windows" | "macos" | "linux" | "other" | "unknown";
+export type DetectedPlatform = "windows" | "macos" | "linux" | "android" | "other" | "unknown";
 
 export interface DownloadOption {
     key: DownloadKey;
@@ -97,7 +97,11 @@ const detectDownloadKey = (assetName: string): DownloadKey | null => {
 const detectClientPlatform = (userAgent: string, platform: string): DetectedPlatform => {
     const value = `${userAgent} ${platform}`.toLowerCase();
 
-    if (/(android|iphone|ipad|ipod)/.test(value)) {
+    if (/android/.test(value)) {
+        return "android";
+    }
+
+    if (/(iphone|ipad|ipod)/.test(value)) {
         return "other";
     }
 
@@ -120,6 +124,7 @@ const platformLabels: Record<DetectedPlatform, string> = {
     windows: "Windows",
     macos: "macOS",
     linux: "Linux",
+    android: "Android",
     other: "your device",
     unknown: "your device",
 };
@@ -127,6 +132,8 @@ const platformLabels: Record<DetectedPlatform, string> = {
 export const releasesPageUrl = "https://github.com/JenuelDev/Believers-Sword/releases";
 export const microsoftStoreUrl = "https://apps.microsoft.com/detail/9PFN10LVMBV4";
 export const microsoftStoreProtocolUrl = "ms-windows-store://pdp/?productid=9PFN10LVMBV4";
+export const googlePlayStoreUrl =
+    "https://play.google.com/store/apps/details?id=com.believers.sword.believers_sword_mobile&hl=en";
 
 export const useReleaseDownloads = () => {
     const { data: release } = useFetch<GithubRelease>(latestReleaseUrl, {
@@ -195,5 +202,6 @@ export const useReleaseDownloads = () => {
         releasesPageUrl,
         microsoftStoreUrl,
         microsoftStoreProtocolUrl,
+        googlePlayStoreUrl,
     };
 };
