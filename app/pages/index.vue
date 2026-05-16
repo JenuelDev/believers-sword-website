@@ -232,12 +232,12 @@ useHead({
         :class="['floating-nav', { 'is-visible': isHeroNavSticky }]"
         aria-label="Sticky primary navigation"
     >
-        <div class="hero-topbar glass-card floating-nav-inner">
-            <a href="#home" class="hero-brand" style="font-family: 'Space Grotesk', sans-serif">
+        <div class="site-nav floating-nav-inner">
+            <a href="#home" class="site-brand">
                 <NuxtImg
                     src="/apple-touch-icon.png"
                     alt=""
-                    class="hero-brand-logo"
+                    class="site-brand-logo"
                     width="28"
                     height="28"
                     format="webp"
@@ -245,180 +245,217 @@ useHead({
                 />
                 Believers Sword
             </a>
-            <nav class="hero-nav-pill" aria-label="Primary">
-                <a href="#features" class="hero-nav-link">Features</a>
-                <a href="#preview" class="hero-nav-link">Preview</a>
-                <a href="/screenshots" class="hero-nav-link">Screenshots</a>
-                <a href="#testimonials" class="hero-nav-link">Use Cases</a>
-                <a href="/mobile" class="hero-nav-link">Mobile</a>
-                <a href="#download" class="hero-nav-link">Download</a>
+            <nav class="site-nav-links" aria-label="Primary">
+                <a href="#features">Features</a>
+                <a href="#preview">Preview</a>
+                <a href="/screenshots">Screenshots</a>
+                <a href="/mobile">Mobile</a>
+                <a href="#download">Download</a>
             </nav>
-            <a href="#download" class="hero-top-action">Get App</a>
+            <a href="#download" class="nav-action">Get App</a>
         </div>
     </header>
 
     <main class="landing-shell">
-        <div class="ambient-orb ambient-orb-left" data-parallax="0.05"></div>
-        <div class="ambient-orb ambient-orb-right" data-parallax="0.08"></div>
-        <div class="ambient-grid"></div>
+        <section id="home" class="hero-section">
+            <NuxtImg
+                :src="desktopScreenshots[1]"
+                alt=""
+                class="hero-bg-image"
+                loading="eager"
+                format="webp"
+                quality="80"
+                fetchpriority="high"
+                sizes="100vw"
+            />
+            <div class="hero-overlay"></div>
 
-        <section id="home" class="section-frame hero-frame">
-            <div class="container-grid hero-grid">
-                <div data-reveal data-delay="0" class="hero-topbar-shell">
-                    <div class="hero-topbar glass-card">
-                    <a href="#home" class="hero-brand" style="font-family: 'Space Grotesk', sans-serif">
-                        Believers Sword
-                    </a>
-                    <nav class="hero-nav-pill" aria-label="Primary">
-                        <a href="#features" class="hero-nav-link">Features</a>
-                        <a href="#preview" class="hero-nav-link">Preview</a>
-                        <a href="/screenshots" class="hero-nav-link">Screenshots</a>
-                        <a href="#testimonials" class="hero-nav-link">Use Cases</a>
-                        <a href="#download" class="hero-nav-link">Download</a>
-                    </nav>
-                    <a href="#download" class="hero-top-action">Get App</a>
+            <div class="container-grid hero-container">
+                <div data-reveal data-delay="0" class="hero-nav-shell">
+                    <div class="site-nav">
+                        <a href="#home" class="site-brand">
+                            <NuxtImg
+                                src="/apple-touch-icon.png"
+                                alt=""
+                                class="site-brand-logo"
+                                width="28"
+                                height="28"
+                                format="webp"
+                                quality="88"
+                            />
+                            Believers Sword
+                        </a>
+                        <nav class="site-nav-links" aria-label="Primary">
+                            <a href="#features">Features</a>
+                            <a href="#preview">Preview</a>
+                            <a href="/screenshots">Screenshots</a>
+                            <a href="/mobile">Mobile</a>
+                            <a href="#download">Download</a>
+                        </nav>
+                        <a href="#download" class="nav-action">Get App</a>
                     </div>
                 </div>
 
-                <div data-reveal data-delay="100" class="hero-content">
-                    <NuxtImg
-                        src="/logo/240x240.png"
-                        alt="Believers Sword logo"
-                        class="hero-logo"
-                        width="96"
-                        height="96"
-                        format="webp"
-                        quality="88"
-                        loading="eager"
-                        fetchpriority="high"
-                    />
-                    <p class="eyebrow-pill">
-                        Prayerful, focused, and built for daily Scripture study
-                    </p>
-                    <h1 class="hero-title">
-                        Stay rooted in God&apos;s Word.
-                    </h1>
+                <div data-reveal data-delay="100" class="hero-copy">
+                    <div class="hero-lockup">
+                        <NuxtImg
+                            src="/logo/240x240.png"
+                            alt="Believers Sword logo"
+                            class="hero-logo"
+                            width="74"
+                            height="74"
+                            format="webp"
+                            quality="88"
+                            loading="eager"
+                        />
+                        <p class="eyebrow-pill">Free Bible study app for desktop, web, and Android</p>
+                    </div>
+                    <h1 class="hero-title">Believers Sword</h1>
                     <p class="hero-subtitle">
-                        A calm Bible study workspace with rich-text notes, multiple translations,
-                        and color-coded highlights designed for clarity and devotion.
+                        A focused Scripture study workspace for reading, comparing translations,
+                        writing rich notes, highlighting passages, and keeping prayer lists close at hand.
                     </p>
-                    <div class="hero-access-grid" aria-label="Choose how to use Believers Sword">
-                        <article class="glass-card hero-access-card">
-                            <div class="hero-access-media hero-access-media--desktop">
-                                <NuxtImg
-                                    :src="webViewScreenshot"
-                                    alt="Believers Sword web view interface"
-                                    loading="eager"
-                                    format="webp"
-                                    quality="80"
-                                    sizes="sm:100vw md:33vw lg:390px"
-                                />
-                            </div>
-                            <div class="hero-access-body">
-                                <div class="hero-access-label-row">
-                                    <p class="hero-access-kicker">Web View</p>
-                                    <span class="hero-access-tag hero-access-tag--beta">Beta Version</span>
-                                </div>
-                                <h2>Study in your browser.</h2>
-                                <p>
-                                    Open the online workspace when you want quick access without installing.
-                                </p>
-                            </div>
+
+                    <div class="hero-actions">
+                        <a
+                            :href="desktopDownloadHref"
+                            class="btn-primary"
+                            :target="desktopDownloadTarget"
+                            :rel="desktopDownloadRel"
+                        >
+                            <Icon :name="desktopDownloadIcon" size="20" />
+                            {{ desktopDownloadLabel }}
+                        </a>
+                        <a
+                            :href="webAppUrl"
+                            class="btn-secondary btn-secondary--dark"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Icon name="material-symbols:open-in-new-rounded" size="20" />
+                            Study Online
+                        </a>
+                    </div>
+
+                    <dl class="hero-proof">
+                        <div>
+                            <dt>17+</dt>
+                            <dd>Translations</dd>
+                        </div>
+                        <div>
+                            <dt>{{ tagName }}</dt>
+                            <dd>Latest release</dd>
+                        </div>
+                        <div>
+                            <dt>Offline</dt>
+                            <dd>Desktop study</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div data-reveal data-delay="140" class="hero-product-panel" aria-hidden="true">
+                    <img
+                        :src="desktopScreenshots[2]"
+                        alt=""
+                        class="hero-product-image"
+                        loading="eager"
+                    />
+                    <div class="hero-product-caption">
+                        <Icon name="material-symbols:splitscreen-rounded" size="18" />
+                        Parallel study workspace
+                    </div>
+                </div>
+
+                <div data-reveal data-delay="180" class="platform-strip" aria-label="Choose how to use Believers Sword">
+                    <article class="platform-card">
+                        <NuxtImg
+                            :src="webViewScreenshot"
+                            alt="Believers Sword web view interface"
+                            class="platform-card-image"
+                            loading="eager"
+                            format="webp"
+                            quality="78"
+                            sizes="sm:100vw md:28vw"
+                        />
+                        <div class="platform-card-body">
+                            <p class="platform-kicker">Web View</p>
+                            <h2>Open in your browser</h2>
+                            <p>Quick access for study without installing the desktop app.</p>
                             <a
                                 :href="webAppUrl"
-                                class="btn-secondary hero-access-action"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <Icon name="material-symbols:open-in-new-rounded" size="20" />
                                 Check Web View
                             </a>
-                        </article>
+                        </div>
+                    </article>
 
-                        <article class="glass-card hero-access-card hero-access-card--mobile">
-                            <div class="hero-access-media hero-access-media--mobile">
-                                <NuxtImg
-                                    :src="mobileScreenshots[0]"
-                                    alt="Believers Sword mobile Bible reader"
-                                    loading="eager"
-                                    format="webp"
-                                    quality="80"
-                                    sizes="sm:60vw md:18vw lg:150px"
-                                />
-                            </div>
-                            <div class="hero-access-body">
-                                <div class="hero-access-label-row">
-                                    <p class="hero-access-kicker">Mobile App</p>
-                                    <span class="hero-access-tag hero-access-tag--testing">Google Play</span>
-                                </div>
-                                <h2>Read wherever you are.</h2>
-                                <p>
-                                    Install the production Android app from Google Play.
-                                </p>
-                            </div>
+                    <article class="platform-card platform-card--desktop">
+                        <NuxtImg
+                            :src="desktopScreenshots[0]"
+                            alt="Believers Sword desktop interface"
+                            class="platform-card-image"
+                            loading="eager"
+                            format="webp"
+                            quality="78"
+                            sizes="sm:100vw md:28vw"
+                        />
+                        <div class="platform-card-body">
+                            <p class="platform-kicker">Desktop App</p>
+                            <h2>Install the full workspace</h2>
+                            <p>
+                                Available for
+                                <span v-if="platformDownloads.length">
+                                    {{ platformDownloads.map((item) => item.label).join(", ") }}.
+                                </span>
+                                <span v-else>desktop platforms.</span>
+                            </p>
+                            <a href="/downloads">View all downloads</a>
+                        </div>
+                    </article>
+
+                    <article class="platform-card platform-card--mobile">
+                        <NuxtImg
+                            :src="mobileScreenshots[0]"
+                            alt="Believers Sword mobile Bible reader"
+                            class="platform-card-image platform-card-image--phone"
+                            loading="eager"
+                            format="webp"
+                            quality="78"
+                            sizes="sm:60vw md:14vw"
+                        />
+                        <div class="platform-card-body">
+                            <p class="platform-kicker">Mobile App</p>
+                            <h2>Read on Android</h2>
+                            <p>Install the production app from Google Play.</p>
                             <a
                                 :href="mobileAppUrl"
-                                class="btn-secondary hero-access-action"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <Icon name="simple-icons:googleplay" size="20" />
-                                Download Mobile App
+                                Download mobile app
                             </a>
-                            <a :href="mobilePageUrl" class="hero-access-link">
-                                View mobile details
-                            </a>
-                        </article>
-
-                        <article class="glass-card hero-access-card hero-access-card--desktop">
-                            <div class="hero-access-media hero-access-media--desktop">
-                                <NuxtImg
-                                    :src="desktopScreenshots[0]"
-                                    alt="Believers Sword desktop interface"
-                                    loading="eager"
-                                    format="webp"
-                                    quality="80"
-                                    sizes="sm:100vw md:33vw lg:390px"
-                                />
-                            </div>
-                            <div class="hero-access-body">
-                                <p class="hero-access-kicker">Desktop App</p>
-                                <h2>Install the full workspace.</h2>
-                                <p>
-                                    Latest {{ tagName }} for
-                                    <span v-if="platformDownloads.length">
-                                        {{ platformDownloads.map((item) => item.label).join(" • ") }}.
-                                    </span>
-                                    <span v-else>desktop platforms.</span>
-                                </p>
-                            </div>
-                            <a
-                                :href="desktopDownloadHref"
-                                class="btn-primary hero-access-action"
-                                :target="desktopDownloadTarget"
-                                :rel="desktopDownloadRel"
-                            >
-                                <Icon :name="desktopDownloadIcon" size="20" />
-                                {{ desktopDownloadLabel }}
-                            </a>
-                            <a href="/downloads" class="hero-access-link">
-                                More desktop options
-                            </a>
-                        </article>
-                    </div>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section id="features" class="section-frame">
+        <section id="features" class="section-frame feature-section">
             <div class="container-grid">
                 <div data-reveal data-delay="0" class="section-heading">
-                    <p class="section-kicker">Core Features</p>
-                    <h2 class="section-title">Everything you need for focused digital Bible study.</h2>
+                    <p class="section-kicker">Study Workflow</p>
+                    <h2 class="section-title">Everything is organized around reading with attention.</h2>
+                    <p class="section-copy">
+                        Believers Sword brings core study tools into a single, steady workspace so
+                        users can move from Scripture to notes, highlights, prayer, and comparison
+                        without losing context.
+                    </p>
                 </div>
 
                 <div class="feature-grid">
-                    <article data-reveal data-delay="40" class="glass-card feature-card">
+                    <article data-reveal data-delay="40" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:translate-rounded" size="25" />
                         <h3>Multiple Translations</h3>
                         <p>
@@ -426,7 +463,7 @@ useHead({
                             Download additional translations as you need them.
                         </p>
                     </article>
-                    <article data-reveal data-delay="100" class="glass-card feature-card">
+                    <article data-reveal data-delay="100" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:edit-note-rounded" size="25" />
                         <h3>Rich-Text Notes</h3>
                         <p>
@@ -434,7 +471,7 @@ useHead({
                             chapters and verses you're reading.
                         </p>
                     </article>
-                    <article data-reveal data-delay="160" class="glass-card feature-card">
+                    <article data-reveal data-delay="160" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:ink-highlighter-rounded" size="25" />
                         <h3>Highlights &amp; Clip Notes</h3>
                         <p>
@@ -442,7 +479,7 @@ useHead({
                             you want to remember later.
                         </p>
                     </article>
-                    <article data-reveal data-delay="220" class="glass-card feature-card">
+                    <article data-reveal data-delay="220" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:bookmark-heart-rounded" size="25" />
                         <h3>Bookmarks</h3>
                         <p>
@@ -450,7 +487,7 @@ useHead({
                             your place.
                         </p>
                     </article>
-                    <article data-reveal data-delay="280" class="glass-card feature-card">
+                    <article data-reveal data-delay="280" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:menu-book-rounded" size="25" />
                         <h3>Daily Devotionals</h3>
                         <p>
@@ -458,7 +495,7 @@ useHead({
                             Go — with content for every day of the year.
                         </p>
                     </article>
-                    <article data-reveal data-delay="340" class="glass-card feature-card">
+                    <article data-reveal data-delay="340" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:prayer-times-rounded" size="25" />
                         <h3>Prayer Lists</h3>
                         <p>
@@ -466,7 +503,7 @@ useHead({
                             groups for ongoing intercession.
                         </p>
                     </article>
-                    <article data-reveal data-delay="400" class="glass-card feature-card">
+                    <article data-reveal data-delay="400" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:search-rounded" size="25" />
                         <h3>Search &amp; Compare</h3>
                         <p>
@@ -474,7 +511,7 @@ useHead({
                             side-by-side in different versions.
                         </p>
                     </article>
-                    <article data-reveal data-delay="460" class="glass-card feature-card">
+                    <article data-reveal data-delay="460" class="feature-card">
                         <Icon class="feature-icon" name="material-symbols:offline-bolt-rounded" size="25" />
                         <h3>Offline &amp; Cross-Platform</h3>
                         <p>
@@ -486,16 +523,14 @@ useHead({
             </div>
         </section>
 
-        <section id="preview" class="section-frame dark-frame">
+        <section id="preview" class="section-frame preview-section">
             <div class="container-grid preview-flow">
                 <div data-reveal data-delay="0" class="preview-copy preview-copy-wide">
                     <p class="section-kicker">App Preview</p>
-                    <h2 class="section-title text-light">
-                        A premium reading environment with minimal distractions.
-                    </h2>
+                    <h2 class="section-title text-light">A real study desk, not a noisy feed.</h2>
                     <p class="dark-copy">
-                        Thoughtful spacing, refined contrast, and smooth navigation create a
-                        reading-like flow that keeps attention on Scripture and study.
+                        The desktop workspace gives room to Scripture, highlights, notes, references,
+                        and search without turning the study session into a maze.
                     </p>
                     <ul class="preview-points">
                         <li>Clear typography tuned for long reading sessions.</li>
@@ -512,7 +547,7 @@ useHead({
                 </div>
 
                 <div data-reveal data-delay="120" class="preview-stage">
-                    <div class="glass-card dark-card preview-showcase preview-stage-card">
+                    <div class="preview-showcase">
                         <NuxtImg
                             :src="desktopScreenshots[1]"
                             alt="Believers Sword desktop Bible study view"
@@ -522,7 +557,6 @@ useHead({
                             quality="80"
                             sizes="sm:100vw md:72rem"
                         />
-                        <div class="preview-toolbar">Desktop study workspace</div>
                         <div class="mobile-shot-card" data-parallax="0.03">
                             <NuxtImg
                                 :src="mobileScreenshots[0]"
@@ -561,25 +595,25 @@ useHead({
             <div class="container-grid">
                 <div data-reveal data-delay="0" class="section-heading">
                     <p class="section-kicker">Use Cases</p>
-                    <h2 class="section-title">Designed for personal devotion and group study flow.</h2>
+                    <h2 class="section-title">Designed for real devotional and ministry rhythms.</h2>
                 </div>
 
                 <div class="testimonial-grid">
-                    <article data-reveal data-delay="40" class="glass-card testimony-card">
+                    <article data-reveal data-delay="40" class="testimony-card">
                         <p>
                             Prepare study sessions with notes, highlights, and verse comparison all in
                             one workspace. Everything stays organized and easy to revisit.
                         </p>
                         <span>For Small Group Leaders</span>
                     </article>
-                    <article data-reveal data-delay="110" class="glass-card testimony-card">
+                    <article data-reveal data-delay="110" class="testimony-card">
                         <p>
                             A focused reading environment with built-in daily devotionals, prayer
                             lists, and distraction-free design for consistent quiet time.
                         </p>
                         <span>For Daily Devotional Readers</span>
                     </article>
-                    <article data-reveal data-delay="180" class="glass-card testimony-card">
+                    <article data-reveal data-delay="180" class="testimony-card">
                         <p>
                             All Bible translations and study data are stored locally, so everything
                             remains available offline during travel or in low-connectivity areas.
@@ -604,7 +638,7 @@ useHead({
                         </div>
 
                         <div class="mobile-steps">
-                            <div data-reveal data-delay="60" class="glass-card mobile-step-card">
+                            <div data-reveal data-delay="60" class="mobile-step-card">
                                 <div class="mobile-step-number">
                                     <Icon name="simple-icons:googleplay" size="22" />
                                 </div>
@@ -626,7 +660,7 @@ useHead({
                                 </div>
                             </div>
 
-                            <div data-reveal data-delay="140" class="glass-card mobile-step-card">
+                            <div data-reveal data-delay="140" class="mobile-step-card">
                                 <div class="mobile-step-number">
                                     <Icon name="material-symbols:phone-android-rounded" size="22" />
                                 </div>
@@ -678,7 +712,7 @@ useHead({
 
         <section id="download" class="section-frame cta-frame">
             <div data-reveal data-delay="0" class="container-grid">
-                <div class="cta-panel glass-card">
+                <div class="cta-panel">
                     <div class="cta-content">
                         <p class="section-kicker">Start Today</p>
                         <h2 class="section-title cta-title">
