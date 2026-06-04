@@ -60,7 +60,6 @@ const plans: Plan[] = [
             "Cloud backup so you never lose your study data",
             "Web app access from any browser",
             "Continue where you left off on any device",
-            "AI Assistant with a lighter daily allowance",
         ],
         ctaLabel: "Get Sync",
         ctaHref: mobileAppUrl,
@@ -73,7 +72,7 @@ const plans: Plan[] = [
         tagline: "Go deeper with AI-powered study, sermon prep, and devotionals.",
         featured: true,
         badge: "Best value",
-        inherits: "Everything in Sync, plus a much higher AI allowance:",
+        inherits: "Everything in Sync, plus AI study tools:",
         features: [
             "AI Bible Study Assistant for questions & passages",
             "Generate verse insights and interpret difficult passages",
@@ -98,7 +97,7 @@ const faqs = [
     },
     {
         q: "How do the AI features work?",
-        a: "AI features (insights, sermon prep, devotionals, and chat) run online and are included with fair-use limits that refresh every few hours. Pro includes a much higher allowance than Sync.",
+        a: "AI features (insights, sermon prep, devotionals, and chat) are part of Pro. They run online and are included with a fair-use allowance that refreshes every few hours.",
     },
     {
         q: "Can I cancel anytime?",
