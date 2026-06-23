@@ -248,12 +248,11 @@ useHead({
             <nav class="site-nav-links" aria-label="Primary">
                 <a href="#features">Features</a>
                 <a href="#preview">Preview</a>
-                <a href="/pricing">Pricing</a>
                 <a href="/screenshots">Screenshots</a>
                 <a href="/mobile">Mobile</a>
                 <a href="#download">Download</a>
             </nav>
-            <a href="/pricing" class="nav-action">See Plans</a>
+            <a href="#download" class="nav-action">Get the App</a>
         </div>
     </header>
 
@@ -289,12 +288,11 @@ useHead({
                         <nav class="site-nav-links" aria-label="Primary">
                             <a href="#features">Features</a>
                             <a href="#preview">Preview</a>
-                            <a href="/pricing">Pricing</a>
                             <a href="/screenshots">Screenshots</a>
                             <a href="/mobile">Mobile</a>
                             <a href="#download">Download</a>
                         </nav>
-                        <a href="/pricing" class="nav-action">See Plans</a>
+                        <a href="#download" class="nav-action">Get the App</a>
                     </div>
                 </div>
 

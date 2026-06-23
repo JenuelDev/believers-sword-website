@@ -24,7 +24,6 @@
                 <nav>
                     <a href="/#home">Home</a>
                     <a href="/#features">Features</a>
-                    <a href="/pricing">Pricing</a>
                     <a href="/#preview">App Preview</a>
                     <a href="/screenshots">Screenshots</a>
                     <a href="/mobile">Mobile App</a>
@@ -35,7 +34,6 @@
             <section class="site-footer-group">
                 <p>Support</p>
                 <nav>
-                    <a href="/pricing">Pricing &amp; Plans</a>
                     <a href="/terms-and-condition">Terms &amp; Conditions</a>
                     <a href="/refund-policy">Refund Policy</a>
                     <a href="/privacy-policy">Privacy Policy</a>

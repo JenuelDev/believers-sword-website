@@ -55,8 +55,7 @@ defineOgImage("BelieverSwordOg", {
                 <h2>Subscriptions &amp; Billing</h2>
                 <p>
                     Believers Sword offers a free tier and paid subscription tiers ("Sync"
-                    and "Pro"). Current pricing and features are described on our
-                    <a href="/pricing">pricing page</a>.
+                    and "Pro"). Current pricing and features are shown in the app.
                 </p>
                 <ul>
                     <li>

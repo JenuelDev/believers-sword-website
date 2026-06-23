@@ -25,8 +25,7 @@ defineOgImage("BelieverSwordOg", {
                 <p>
                     This Refund Policy explains how refunds work for Believers Sword. It
                     should be read together with our
-                    <a href="/terms-and-condition">Terms &amp; Conditions</a> and
-                    <a href="/pricing">pricing page</a>.
+                    <a href="/terms-and-condition">Terms &amp; Conditions</a>.
                 </p>
 
                 <h2>Free Tier</h2>
