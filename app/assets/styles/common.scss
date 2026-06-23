@@ -530,17 +530,17 @@ a {
 
 a:hover {
     --tw-text-opacity: 1;
-    color: rgb(54 87 195 / var(--tw-text-opacity));
+    color: rgb(58 43 224 / var(--tw-text-opacity));
 }
 
 a:where([data-web-theme="dark"], [data-web-theme="dark"] *) {
     --tw-text-opacity: 1;
-    color: rgb(148 181 255 / var(--tw-text-opacity));
+    color: rgb(156 144 255 / var(--tw-text-opacity));
 }
 
 a:hover:where([data-web-theme="dark"], [data-web-theme="dark"] *) {
     --tw-text-opacity: 1;
-    color: rgb(49 84 205 / var(--tw-text-opacity));
+    color: rgb(58 43 224 / var(--tw-text-opacity));
 }
 
 a,
@@ -801,14 +801,14 @@ p + p {
 .page-loading {
     background-image: radial-gradient(
         circle at top right,
-        rgba(61, 99, 221, 0.1) 0%,
-        rgba(61, 99, 221, 0.1) 28%,
-        rgba(61, 99, 221, 0.075) 28%,
-        rgba(61, 99, 221, 0.075) 45%,
-        rgba(61, 99, 221, 0.05) 45%,
-        rgba(61, 99, 221, 0.05) 63%,
-        rgba(61, 99, 221, 0.025) 63%,
-        rgba(61, 99, 221, 0.025) 100%
+        rgba(74, 58, 255, 0.1) 0%,
+        rgba(74, 58, 255, 0.1) 28%,
+        rgba(74, 58, 255, 0.075) 28%,
+        rgba(74, 58, 255, 0.075) 45%,
+        rgba(74, 58, 255, 0.05) 45%,
+        rgba(74, 58, 255, 0.05) 63%,
+        rgba(74, 58, 255, 0.025) 63%,
+        rgba(74, 58, 255, 0.025) 100%
     );
 }
 
@@ -836,7 +836,7 @@ p + p {
     width: 1rem;
     border-radius: 9999px;
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
     animation: grid-loader 1.2s linear infinite;
 }
 
@@ -944,7 +944,7 @@ p + p {
 }
 
 .ic-navbar.sticky .ic-navbar-logo #NavbarBrandIcon {
-    fill: #3d63dd;
+    fill: #4a3aff;
 }
 
 .ic-navbar.sticky .ic-navbar-toggler {
@@ -970,7 +970,7 @@ p + p {
 
     .ic-navbar.sticky .ic-page-scroll:hover {
         --tw-text-opacity: 1;
-        color: rgb(61 99 221 / var(--tw-text-opacity));
+        color: rgb(74 58 255 / var(--tw-text-opacity));
         opacity: 1;
     }
 
@@ -982,7 +982,7 @@ p + p {
 
 .ic-page-scroll.active {
     --tw-text-opacity: 1;
-    color: rgb(61 99 221 / var(--tw-text-opacity));
+    color: rgb(74 58 255 / var(--tw-text-opacity));
 }
 
 @media (min-width: 1024px) {
@@ -994,7 +994,7 @@ p + p {
 
     .ic-navbar.sticky .ic-page-scroll.active {
         --tw-text-opacity: 1;
-        color: rgb(61 99 221 / var(--tw-text-opacity));
+        color: rgb(74 58 255 / var(--tw-text-opacity));
         opacity: 1;
     }
 }
@@ -1011,19 +1011,19 @@ p + p {
 
 .ic-navbar.sticky .btn-navbar {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
 }
 
 .ic-navbar.sticky .btn-navbar:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(54 87 195 / var(--tw-bg-opacity));
+    background-color: rgb(58 43 224 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .ic-navbar.sticky .btn-navbar:hover:where([data-web-theme="dark"], [data-web-theme="dark"] *) {
     --tw-bg-opacity: 1;
-    background-color: rgb(49 84 205 / var(--tw-bg-opacity));
+    background-color: rgb(58 43 224 / var(--tw-bg-opacity));
 }
 
 #home {
@@ -1066,7 +1066,7 @@ p + p {
 
 .tabs-nav .tabs-link.active {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1081,7 +1081,7 @@ p + p {
 
 .portfolio-menu button.active {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1134,7 +1134,7 @@ p + p {
 .common-carousel .swiper-button-prev:hover,
 .common-carousel .swiper-button-next:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1142,7 +1142,7 @@ p + p {
 .common-carousel .swiper-button-prev:focus,
 .common-carousel .swiper-button-next:focus {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
@@ -1732,7 +1732,7 @@ p + p {
 
 .\!bg-primary {
     --tw-bg-opacity: 1 !important;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity)) !important;
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity)) !important;
 }
 
 .bg-blue-500 {
@@ -1760,7 +1760,7 @@ p + p {
 
 .bg-primary {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
 }
 
 .bg-primary-color {
@@ -1783,7 +1783,7 @@ p + p {
 }
 
 .bg-primary\/10 {
-    background-color: rgb(61 99 221 / 0.1);
+    background-color: rgb(74 58 255 / 0.1);
 }
 
 .bg-red-500 {
@@ -2071,7 +2071,7 @@ p + p {
 
 .text-primary {
     --tw-text-opacity: 1;
-    color: rgb(61 99 221 / var(--tw-text-opacity));
+    color: rgb(74 58 255 / var(--tw-text-opacity));
 }
 
 .text-primary-color {
@@ -2126,7 +2126,7 @@ p + p {
 
 .ring-primary {
     --tw-ring-opacity: 1;
-    --tw-ring-color: rgb(61 99 221 / var(--tw-ring-opacity));
+    --tw-ring-color: rgb(74 58 255 / var(--tw-ring-opacity));
 }
 
 .grayscale {
@@ -2179,7 +2179,7 @@ p + p {
 
 .hover\:bg-primary:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-primary-color:hover {
@@ -2189,12 +2189,12 @@ p + p {
 
 .hover\:bg-primary-light-10:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(54 87 195 / var(--tw-bg-opacity));
+    background-color: rgb(58 43 224 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-primary-light-5:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(208 223 255 / var(--tw-bg-opacity));
+    background-color: rgb(222 216 255 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-opacity-100:hover {
@@ -2208,7 +2208,7 @@ p + p {
 
 .hover\:text-primary:hover {
     --tw-text-opacity: 1;
-    color: rgb(61 99 221 / var(--tw-text-opacity));
+    color: rgb(74 58 255 / var(--tw-text-opacity));
 }
 
 .hover\:text-primary-color:hover {
@@ -2247,7 +2247,7 @@ p + p {
 
 .focus\:border-primary:focus {
     --tw-border-opacity: 1;
-    border-color: rgb(61 99 221 / var(--tw-border-opacity));
+    border-color: rgb(74 58 255 / var(--tw-border-opacity));
 }
 
 .focus\:bg-green-500:focus {
@@ -2257,7 +2257,7 @@ p + p {
 
 .focus\:bg-primary:focus {
     --tw-bg-opacity: 1;
-    background-color: rgb(61 99 221 / var(--tw-bg-opacity));
+    background-color: rgb(74 58 255 / var(--tw-bg-opacity));
 }
 
 .focus\:bg-primary-color:focus {
@@ -2267,12 +2267,12 @@ p + p {
 
 .focus\:bg-primary-light-10:focus {
     --tw-bg-opacity: 1;
-    background-color: rgb(54 87 195 / var(--tw-bg-opacity));
+    background-color: rgb(58 43 224 / var(--tw-bg-opacity));
 }
 
 .focus\:text-primary:focus {
     --tw-text-opacity: 1;
-    color: rgb(61 99 221 / var(--tw-text-opacity));
+    color: rgb(74 58 255 / var(--tw-text-opacity));
 }
 
 .focus\:text-primary-color:focus {
@@ -2323,7 +2323,7 @@ p + p {
 
 .group:hover .group-hover\:text-primary {
     --tw-text-opacity: 1;
-    color: rgb(61 99 221 / var(--tw-text-opacity));
+    color: rgb(74 58 255 / var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:opacity-100 {
@@ -2628,7 +2628,7 @@ p + p {
 
 .dark\:hover\:bg-primary-dark-10:hover:where([data-web-theme="dark"], [data-web-theme="dark"] *) {
     --tw-bg-opacity: 1;
-    background-color: rgb(49 84 205 / var(--tw-bg-opacity));
+    background-color: rgb(58 43 224 / var(--tw-bg-opacity));
 }
 
 .dark\:hover\:text-primary-color:hover:where([data-web-theme="dark"], [data-web-theme="dark"] *) {
@@ -2638,7 +2638,7 @@ p + p {
 
 .dark\:focus\:bg-primary-dark-10:focus:where([data-web-theme="dark"], [data-web-theme="dark"] *) {
     --tw-bg-opacity: 1;
-    background-color: rgb(49 84 205 / var(--tw-bg-opacity));
+    background-color: rgb(58 43 224 / var(--tw-bg-opacity));
 }
 
 .dark\:focus\:text-primary-color:focus:where([data-web-theme="dark"], [data-web-theme="dark"] *) {

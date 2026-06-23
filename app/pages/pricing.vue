@@ -214,9 +214,9 @@ const faqs = [
 .pricing-hero {
     padding: 0.9rem 0 clamp(2.6rem, 6vw, 4.5rem);
     background:
-        linear-gradient(180deg, rgba(8, 13, 12, 0.92), rgba(17, 24, 22, 0.98)),
-        radial-gradient(circle at 12% 18%, rgba(15, 118, 110, 0.22), transparent 38%),
-        radial-gradient(circle at 88% 0%, rgba(164, 86, 42, 0.22), transparent 42%);
+        linear-gradient(180deg, rgba(8, 10, 22, 0.92), rgba(20, 24, 42, 0.98)),
+        radial-gradient(circle at 12% 18%, rgba(31, 182, 201, 0.22), transparent 38%),
+        radial-gradient(circle at 88% 0%, rgba(74, 58, 255, 0.22), transparent 42%);
     color: var(--light-text);
 }
 
@@ -232,7 +232,7 @@ const faqs = [
 
 .pricing-hero-title {
     margin: 1.1rem 0 0;
-    color: #fff8ed;
+    color: #f4f5ff;
     font-family: "Space Grotesk", "Avenir Next", sans-serif;
     font-size: clamp(2.4rem, 5.5vw, 4rem);
     font-weight: 700;
@@ -243,7 +243,7 @@ const faqs = [
 .pricing-hero-sub {
     max-width: 46rem;
     margin: 1.15rem auto 0;
-    color: rgba(248, 244, 236, 0.82);
+    color: rgba(238, 240, 251, 0.82);
     font-size: clamp(1rem, 1.6vw, 1.12rem);
     line-height: 1.7;
 }
@@ -279,10 +279,10 @@ const faqs = [
 }
 
 .pricing-card--featured {
-    border-color: rgba(213, 161, 77, 0.55);
+    border-color: rgba(159, 144, 255, 0.55);
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 244, 236, 0.92)),
-        linear-gradient(135deg, rgba(213, 161, 77, 0.12), rgba(164, 86, 42, 0.08));
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 242, 250, 0.92)),
+        linear-gradient(135deg, rgba(159, 144, 255, 0.12), rgba(74, 58, 255, 0.08));
     box-shadow: var(--shadow-md);
 }
 
@@ -296,7 +296,7 @@ const faqs = [
     padding: 0 0.7rem;
     border-radius: 999px;
     background: linear-gradient(135deg, var(--gold), var(--ember));
-    color: #fff8ed;
+    color: #f4f5ff;
     font-size: 0.7rem;
     font-weight: 900;
     letter-spacing: 0.06em;

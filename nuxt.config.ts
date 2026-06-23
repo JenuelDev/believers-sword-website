@@ -37,7 +37,7 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
       ],
       meta: [
-        { name: 'theme-color', content: '#f47a5a' },
+        { name: 'theme-color', content: '#4A3AFF' },
         { property: 'og:site_name', content: 'Believers Sword' },
         { property: 'og:type', content: 'website' },
         { property: 'og:locale', content: 'en_US' },

@@ -17,7 +17,7 @@ const title = computed(() => props.title.slice(0, 60));
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col justify-center bg-[#212121]" style="font-family: 'Sora', sans-serif">
+    <div class="w-full h-full flex flex-col justify-center bg-[#141a2b]" style="font-family: 'Sora', sans-serif">
         <svg
             class="absolute top-0 right-0"
             width="1200"
@@ -31,9 +31,9 @@ const title = computed(() => props.title.slice(0, 60));
                 opacity="0.7"
                 filter="url(#filter0_f_448_25)"
             >
-                <circle cx="901.5" cy="45.5" r="199.5" fill="#FFA7A7" />
-                <circle cx="600.5" cy="216.5" r="199.5" fill="#FFCC49" />
-                <circle cx="179.5" cy="317.5" r="199.5" fill="#FFA149" />
+                <circle cx="901.5" cy="45.5" r="199.5" fill="#6B5CFF" />
+                <circle cx="600.5" cy="216.5" r="199.5" fill="#4A3AFF" />
+                <circle cx="179.5" cy="317.5" r="199.5" fill="#1FB6C9" />
             </g>
             <defs>
                 <filter
@@ -63,7 +63,7 @@ const title = computed(() => props.title.slice(0, 60));
         <div class="w-[600px] pl-[100px]">
             <p
                 v-if="headline"
-                class="uppercase text-[24px] text-[#FEC476] mb-4 font-semibold"
+                class="uppercase text-[24px] text-[#9F90FF] mb-4 font-semibold"
             >
                 {{ headline }}
             </p>
@@ -224,10 +224,10 @@ const title = computed(() => props.title.slice(0, 60));
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="translate(120.426 126.822) rotate(90) scale(20.943 88.4261)"
                 >
-                    <stop offset="0.0677083" stop-color="#FFE092" />
-                    <stop offset="0.333333" stop-color="#FFD792" />
-                    <stop offset="0.666667" stop-color="#FFD192" />
-                    <stop offset="1" stop-color="#FFAC5F" />
+                    <stop offset="0.0677083" stop-color="#9F90FF" />
+                    <stop offset="0.333333" stop-color="#7C6BFF" />
+                    <stop offset="0.666667" stop-color="#6B5CFF" />
+                    <stop offset="1" stop-color="#4A3AFF" />
                 </radialGradient>
                 <radialGradient
                     id="paint1_diamond_563_6"
@@ -237,7 +237,7 @@ const title = computed(() => props.title.slice(0, 60));
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="translate(303.899 145.741) rotate(-155.036) scale(253.361 239.508)"
                 >
-                    <stop offset="0.333674" stop-color="#FEC479" />
+                    <stop offset="0.333674" stop-color="#9F90FF" />
                     <stop offset="1" stop-color="white" stop-opacity="0" />
                 </radialGradient>
                 <clipPath id="clip0_563_6">

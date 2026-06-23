@@ -57,7 +57,7 @@ useSeoMeta({
     font-weight: 800;
     line-height: 1;
     margin: 0;
-    background: linear-gradient(135deg, #f47a5a, #ffb050);
+    background: linear-gradient(135deg, #4a3aff, #6b5cff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -93,7 +93,7 @@ useSeoMeta({
     font-size: 0.95rem;
     text-decoration: none;
     color: #fff;
-    background: linear-gradient(135deg, #f47a5a, #ffb050);
+    background: linear-gradient(135deg, #4a3aff, #6b5cff);
     transition: opacity 0.2s;
 }
 
