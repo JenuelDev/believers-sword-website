@@ -16,6 +16,7 @@
                 <a href="/downloads">Download</a>
                 <a href="/screenshots">Screenshots</a>
                 <a href="/mobile">Mobile</a>
+                <a href="/sermons">Sermons</a>
             </nav>
         </div>
     </header>

@@ -3,17 +3,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "build": "nuxt build --dotenv .env.local",
+    "dev": "nuxt dev --dotenv .env.local",
+    "generate": "nuxt generate --dotenv .env.local",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:sql": "node scripts/run-sql.mjs",
+    "sermon:post": "node scripts/post-sermon.mjs"
   },
   "dependencies": {
     "@nuxt/fonts": "0.14.0",
     "@nuxt/icon": "1.14.0",
     "@nuxt/image": "1.10.0",
     "@nuxt/scripts": "0.11.8",
+    "@supabase/supabase-js": "^2.112.2",
+    "marked": "^18.0.9",
     "nuxt": "^4.5.2",
     "satori": "^0.26.0",
     "vue": "^3.5.18",
@@ -29,6 +33,7 @@
     "@unocss/preset-mini": "^66.3.3",
     "nuxt-og-image": "^6.3.7",
     "nuxt-site-config": "^4.0.8",
+    "pg": "^8.23.0",
     "sass-embedded": "^1.89.2",
     "unocss": "^66.3.3"
   }

@@ -5,6 +5,14 @@ export default defineNuxtConfig({
   devServer: {
     port: 7788
   },
+  runtimeConfig: {
+    public: {
+      // Publishable (anon) key — safe to ship to the browser. Baked in at build
+      // time, so these must be set in the deploy environment too.
+      supabaseUrl: process.env.SUPABASE_URL || '',
+      supabaseKey: process.env.SUPABASE_KEY || '',
+    },
+  },
   modules: [
     '@nuxt/image',
     '@nuxt/icon',
