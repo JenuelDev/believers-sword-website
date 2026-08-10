@@ -14,7 +14,6 @@
     "@nuxt/icon": "1.14.0",
     "@nuxt/image": "1.10.0",
     "@nuxt/scripts": "0.11.8",
-    "@unhead/vue": "^2.0.12",
     "nuxt": "^4.5.2",
     "satori": "^0.26.0",
     "vue": "^3.5.18",
