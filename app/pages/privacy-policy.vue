@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+useSeo({
     title: "Privacy Policy | Believers Sword",
     description:
         "Read the Believers Sword privacy policy to understand how we collect, use, and protect your personal data.",

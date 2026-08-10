@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+useSeo({
     title: "Delete Account | Believers Sword",
     description:
         "Instructions for deleting your Believers Sword account on desktop and mobile.",

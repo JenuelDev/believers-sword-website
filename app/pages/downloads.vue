@@ -55,7 +55,7 @@ const options = computed(() => {
     return rows.sort((a, b) => Number(b.recommended) - Number(a.recommended));
 });
 
-useSeoMeta({
+useSeo({
     title: "Download Believers Sword — Android, Windows, macOS, Linux",
     description:
         "Download Believers Sword Bible study app for free. Available on Android through Google Play, as a direct installer for Windows, macOS, and Linux, or from the Microsoft Store.",

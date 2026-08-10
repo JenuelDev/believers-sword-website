@@ -10,12 +10,12 @@ if (event) {
     setResponseStatus(event, 404);
 }
 
-useSeoMeta({
+useSeo({
     title: "Page Not Found | Believers Sword",
     description: "The page you are looking for does not exist.",
     // Nothing to gain from indexing a 404, and it keeps stray URLs out of
     // Search Console.
-    robots: "noindex, follow",
+    noindex: true,
 });
 </script>
 

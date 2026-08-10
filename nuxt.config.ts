@@ -27,6 +27,9 @@ export default defineNuxtConfig({
   },
   sitemap: {
     strictNuxtContentPaths: true,
+    // Sermon pages come from Supabase, so the module cannot crawl its way to
+    // them. This endpoint supplies them with lastmod.
+    sources: ['/api/__sitemap__/urls'],
   },
   ogImage: {
     zeroRuntime: true,

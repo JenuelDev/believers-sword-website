@@ -9,7 +9,7 @@ const mobileShots = Array.from(
     (_, index) => `/screenshots/mobile/mobile-${String(index + 1).padStart(2, "0")}.jpg`
 );
 
-useSeoMeta({
+useSeo({
     title: "Screenshots — Believers Sword Bible Study App",
     description:
         "See desktop and mobile screenshots of Believers Sword showing the Bible reader, notes editor, highlights, prayer lists, and more.",

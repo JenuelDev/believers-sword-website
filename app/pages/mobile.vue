@@ -29,7 +29,7 @@ const features = [
     },
 ];
 
-useSeoMeta({
+useSeo({
     title: "Mobile App — Believers Sword Bible Study",
     description:
         "Download Believers Sword on Android from Google Play — read Scripture, study with highlights, and search across translations on the go.",

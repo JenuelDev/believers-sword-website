@@ -5,11 +5,35 @@ const { data: sermons, status, error } = await useSermonList();
 
 const hasSermons = computed(() => (sermons.value?.length ?? 0) > 0);
 
-useSeoMeta({
+const { siteUrl } = useSeo({
     title: "Sermons — Believers Sword",
     description:
         "Browse sermons from Believers Sword. Read the full message, follow the passage, and listen or watch where available.",
 });
+
+// ItemList inside a CollectionPage gives Google the ordering and the member URLs
+// explicitly, rather than leaving it to infer the list from the markup. Only the
+// fields visible on the page are described, which is a requirement: structured
+// data that claims more than the page shows is a violation.
+useJsonLd(() => ({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteUrl}/sermons`,
+    name: "Sermons",
+    description:
+        "Browse sermons from Believers Sword. Read the full message, follow the passage, and listen or watch where available.",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: sermons.value?.length ?? 0,
+        itemListElement: (sermons.value ?? []).map((sermon, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: `${siteUrl}/sermons/${sermon.slug}`,
+            name: sermon.title,
+        })),
+    },
+}));
 
 defineOgImage("BelieverSwordOg", {
     headline: "Believers Sword",

@@ -159,7 +159,7 @@ const features = [
     },
 ];
 
-useSeoMeta({
+useSeo({
     title: "Believers Sword — Bible Study App for Desktop & Mobile",
     description:
         "Believers Sword is a free Bible study app with 100+ downloadable translations, rich-text notes, highlights, prayer lists, daily devotionals, and offline access. Available on Windows, macOS, Linux, and Android.",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+useSeo({
     title: "Refund Policy | Believers Sword",
     description:
         "How refunds work for Believers Sword subscriptions purchased through the Apple App Store and Google Play.",

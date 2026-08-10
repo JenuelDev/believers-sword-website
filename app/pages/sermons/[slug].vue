@@ -79,19 +79,59 @@ onMounted(async () => {
     }
 });
 
-useSeoMeta({
+// image falls back to the site default inside useSeo(). It is taken from the row
+// rather than defineOgImage() because nuxt-og-image runs with zeroRuntime, so a
+// generated image only exists for routes prerendered at build time — which a
+// database-driven slug is not.
+const { canonical, siteUrl, absolute } = useSeo({
     title: () => detail.value.meta_title || `${detail.value.title} — Believers Sword`,
-    description: () =>
-        detail.value.meta_description || detail.value.summary || undefined,
-    articleAuthor: () => [detail.value.speaker_name],
-    ogType: "article",
-    // ogImage comes from the row rather than defineOgImage(): nuxt-og-image runs
-    // with zeroRuntime, so a generated image only exists for routes prerendered
-    // at build time, which a database-driven slug is not.
-    ogImage: () => detail.value.og_image_url || detail.value.thumbnail_url || undefined,
-    articlePublishedTime: () => detail.value.published_at || undefined,
-    articleModifiedTime: () => detail.value.updated_at || undefined,
+    description: () => detail.value.meta_description || detail.value.summary || "",
+    image: () => detail.value.og_image_url || detail.value.thumbnail_url,
+    type: "article",
+    publishedTime: () => detail.value.published_at,
+    modifiedTime: () => detail.value.updated_at,
+    author: () => detail.value.speaker_name,
 });
+
+// Article: headline, image, datePublished and author are the four Google
+// requires; publisher, dateModified and description complete it. headline must
+// match the visible h1 and stay under ~110 characters.
+useJsonLd(() => ({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: detail.value.title.slice(0, 110),
+    description: detail.value.meta_description || detail.value.summary || undefined,
+    image: [absolute(detail.value.og_image_url || detail.value.thumbnail_url)],
+    datePublished: detail.value.published_at || undefined,
+    dateModified: detail.value.updated_at || detail.value.published_at || undefined,
+    // Google prefers a Person for a real byline; the editorial default is the
+    // organisation itself, so the type follows whichever it actually is.
+    author:
+        detail.value.speaker_name === "Believers Sword"
+            ? { "@type": "Organization", name: "Believers Sword", url: `${siteUrl}/` }
+            : { "@type": "Person", name: detail.value.speaker_name },
+    publisher: {
+        "@type": "Organization",
+        name: "Believers Sword",
+        logo: { "@type": "ImageObject", url: absolute("/logo/300x300.png") },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical() },
+    isAccessibleForFree: true,
+    inLanguage: detail.value.language || "en",
+    about: scriptureLabel.value || undefined,
+    keywords: detail.value.topics?.length ? detail.value.topics.join(", ") : undefined,
+    articleSection: detail.value.series_name || undefined,
+}));
+
+useJsonLd(() => ({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+        { "@type": "ListItem", position: 2, name: "Sermons", item: `${siteUrl}/sermons` },
+        { "@type": "ListItem", position: 3, name: detail.value.title },
+    ],
+}));
 </script>
 
 <template>
@@ -162,6 +202,12 @@ useSeoMeta({
             <div class="container">
                 <div class="prose sermon-body">
                     <p v-if="detail.summary" class="summary">{{ detail.summary }}</p>
+
+                    <!-- Between the intro and the body, matching the placement in
+                         the reference layout. This is the only ad on the site:
+                         SermonAd also owns the loader script, so no other page
+                         requests AdSense at all. -->
+                    <SermonAd />
 
                     <!-- eslint-disable-next-line vue/no-v-html -- see renderedContent -->
                     <div v-if="renderedContent" class="rendered" v-html="renderedContent" />

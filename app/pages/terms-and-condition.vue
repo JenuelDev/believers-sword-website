@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
+useSeo({
     title: "Terms & Conditions | Believers Sword",
     description:
         "The terms and conditions governing your use of the Believers Sword Bible study app, accounts, subscriptions, and AI features.",
