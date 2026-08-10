@@ -1,7 +1,21 @@
 <script setup lang="ts">
+// Without this the page rendered "not found" while the HTTP status said 200 — a
+// soft 404, which search engines index as a real page. createError() would also
+// give a true 404 but would discard this page in favour of the generic error
+// screen, so set the status on the response instead and keep the design.
+// There is no request event during client-side navigation, hence the guard.
+const event = useRequestEvent();
+
+if (event) {
+    setResponseStatus(event, 404);
+}
+
 useSeoMeta({
     title: "Page Not Found | Believers Sword",
     description: "The page you are looking for does not exist.",
+    // Nothing to gain from indexing a 404, and it keeps stray URLs out of
+    // Search Console.
+    robots: "noindex, follow",
 });
 </script>
 
