@@ -23,6 +23,14 @@ export default defineNuxtConfig({
   ogImage: {
     zeroRuntime: true,
   },
+  nitro: {
+    // Vercel's function tracer can omit Unhead's subpath files when pnpm is
+    // used. Bundle Unhead into Nitro so the function has no runtime import
+    // from node_modules/unhead/dist.
+    externals: {
+      inline: ['unhead'],
+    },
+  },
   css: [
     '@/assets/styles/main.scss'
   ],
