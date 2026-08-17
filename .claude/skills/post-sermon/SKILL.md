@@ -56,6 +56,12 @@ Required: `slug`, `title`, `summary`, plus a non-empty body.
 Accepted `scripture_refs` forms: `John 3:16`, `John 3:16-17`, `1 Kings 19`,
 `Psalm 46` (normalised to `Psalms`), `Jude`.
 
+`title`, `subtitle`, and `summary` are read before anything else — on the card,
+in search results, in a shared link preview. Hold them to the same plain-language
+standard as the body below: familiar words, no unexplained church terms, no
+clichés. If a ten-year-old could not say what the sermon is about after reading
+the summary, rewrite the summary.
+
 ### Honesty rules — do not violate these
 
 These fields make factual claims about the world. Leave them unset unless you
@@ -79,6 +85,105 @@ The body is markdown and renders with headings, lists, and blockquotes. Aim for
    Not "In today's passage we will examine…".
 2. **Three or four numbered points**, each an `## H2`.
 3. **Land on application** that is specific enough to act on this week.
+
+### Write so a ten-year-old can follow it
+
+Aim for a **Grade 5-6 reading level** in plain, warm, natural English. This is a
+clarity target, not permission to sound childish. Nothing here lowers the
+theological bar — the ideas stay adult, the sentences carrying them get simpler.
+Picture two readers at once: a bright ten-year-old, and a tired adult reading on
+a phone between shifts. Both should understand it on the first pass, without
+rereading a sentence and without a Bible dictionary.
+
+How that looks in practice:
+
+- **Familiar words first.** Use the word an ordinary person would use out loud.
+- **Short to medium sentences.** Most under about 20 words. Vary the length so it
+  reads like speech, not like a list.
+- **Short paragraphs.** Two to four sentences. One main idea per paragraph.
+- **Active voice.** "God rescued Israel", not "Israel was rescued".
+- **Concrete over abstract.** A picture the reader can see beats a category.
+- **Direct explanations.** Say what you mean in the first sentence, then support
+  it. Do not circle the point and hope the reader arrives.
+- **Transitions between paragraphs and points**, so the argument is easy to
+  follow: *But there is a problem. / That is why the next verse matters. / Notice
+  what he does not say.*
+
+Some swaps that usually improve a line:
+
+| Instead of | Write |
+|---|---|
+| utilise, endeavour, commence | use, try, start |
+| in order that, by virtue of the fact that | so that, because |
+| ontological, eschatological, soteriological | name the idea in plain words |
+| efficacious, salvific | it works, it saves |
+| the human condition | what people are actually like |
+| it behooves us to consider | look at |
+
+Do not talk down. No baby talk, no "isn't that wonderful", no explaining the
+obvious twice, no nickname for the reader. Plain does not mean thin: a simple
+sentence can carry a hard truth, and usually carries it better.
+
+This costs no extra words. Plain sentences are shorter than ornate ones, so the
+room you gain by cutting flourishes is the room you spend explaining properly.
+The **1200-1800 word** target does not move.
+
+### Explain every church word
+
+Assume the reader has never sat in a church. Any term that belongs to church,
+theology, or the ancient world gets defined **the first time it appears**, in one
+short clause or sentence, right there in the flow of the prose. No glossary at
+the end, no "as we all know".
+
+If a simpler phrase does the same work, use the simpler phrase. Keep the
+technical word only when the reader gains something by owning it — then define it
+and use it consistently.
+
+| Term | The kind of gloss to give it |
+|---|---|
+| justification | being declared right with God — the verdict, not the improvement |
+| sanctification | the slow work of actually becoming good, after the verdict |
+| covenant | a binding promise between two sides, with terms and consequences |
+| redemption | buying someone out of slavery or debt, at a price |
+| repentance | turning around and walking the other way, not just feeling bad |
+| grace | a gift given to someone who has not earned it and cannot repay it |
+| Pharisee | a strict religious teacher, respected, serious about God's law |
+| Gentile | anyone who was not Jewish — an outsider to Israel |
+| gospel | announcement of news, the way a herald announces a victory |
+
+Write the gloss into the sentence rather than parking it in brackets: "The
+Pharisees — the strict religious teachers, the men everyone assumed were closest
+to God — were the ones he warned." Vary the wording to fit the sermon; the table
+is the standard, not a script to paste.
+
+The same rule covers **every Hebrew or Greek word**. Give the word, say what it
+means in plain English, and say why the reader should care. Never leave a
+transliterated word standing on its own, and never lean on a word you have not
+verified is the word in that verse — see the honesty requirement in the quality
+bar below. Written out, that looks like: *The word behind "be still" is `harpu`.
+It does not mean relax. It is what you say to someone gripping a rope: let go.*
+
+### Set the scene before you argue from it
+
+The reader may not know the story. Before a passage carries any weight, say
+plainly:
+
+- **Where and when** it happens, and what has just happened before it.
+- **Who is speaking**, and what kind of person that is.
+- **Who is listening** — and whether they are friendly, hostile, or confused.
+- **The key action** — what actually happens in the passage, in order.
+- **Why it matters** — the stakes for them then, and the reason a reader today
+  should keep reading.
+
+A few sentences does it. This is not a history lecture; it is the minimum a
+stranger needs to follow the argument.
+
+Name the people and places as if for the first time: not "as Elisha shows", but
+"Elisha was a farmer, ploughing with twelve pairs of oxen, when the prophet
+Elijah walked past and threw a cloak over his shoulders." Explain the things a
+first-century reader knew and a modern one does not — what a tax collector was
+to his neighbours, why touching a leper was unthinkable, how much a team of oxen
+was worth to the family that owned it.
 
 ### Every point carries at least three verses
 
@@ -113,6 +218,10 @@ page styles that reference as a small caps label:
 ````markdown
 ## 1. The call comes before the comfort
 
+Set the scene first, in a sentence or two. Jesus is walking to Jerusalem, and he
+knows what is waiting there. A man catches up with him on the road and volunteers:
+he will follow Jesus anywhere. Jesus answers him with a picture rather than a yes.
+
 The anchor — the line the point is about:
 
 > Foxes have holes and birds of the air have nests, but the Son of Man has
@@ -120,8 +229,11 @@ The anchor — the line the point is about:
 >
 > *Luke 9:58*
 
-Explain it before adding anything. What did it cost *this* man, in his world? He
-had asked to come along; he is told what the accommodation looks like.
+Explain it before adding anything, in plain words. Wild animals have somewhere to
+sleep, Jesus says, and I do not. He is not complaining. He is telling the
+volunteer the price up front, before the man commits to something he has not
+counted. Most of us would rather find out the cost afterwards, when it is too late
+to feel it — a job accepted before we asked about the hours.
 
 Corroborate from another author, who reached the same place from the far side of a
 life already spent:
@@ -130,16 +242,19 @@ life already spent:
 >
 > *Philippians 3:8*
 
-Deepen it — the pattern is older than the gospels. Elisha is called mid-furrow,
-and the oxen he was ploughing with become the fire he cooks them on:
+Deepen it — the pattern is older than the gospels. Elisha lived centuries before
+Jesus. He was a farmer, out ploughing his field, when the prophet Elijah walked
+past and called him. The oxen and the plough were his family's livelihood, the
+way a truck is a driver's livelihood:
 
 > He took the yoke of oxen and sacrificed them, and with the wood of the plough
 > he boiled their flesh.
 >
 > *1 Kings 19:21*
 
-He burns the equipment. There is no arrangement here for going back to ploughing
-if the prophet thing does not work out.
+He kills the animals and burns the equipment to cook them. Then he feeds the meal
+to his neighbours. There is nothing left to go back to if the prophet thing does
+not work out — which is exactly the point.
 
 Then complicate it, because the passage does:
 
@@ -153,8 +268,21 @@ than explaining it away.
 
 ### The rule that keeps this from becoming proof-texting
 
-**Every quoted verse gets its own exposition.** At least a sentence or two saying
-what it means in its own context and why it belongs here.
+**Every quoted verse gets its own exposition.** Never quote and move on. After
+the blockquote, in plain words, cover:
+
+1. **What it means** — say the verse again in ordinary English, as if explaining
+   it to someone who has just heard it for the first time.
+2. **What it was doing there** — who said it, to whom, and what it meant in its
+   own setting before it meant anything to us.
+3. **Why it is here** — the link to the point you are making. Make the
+   connection explicit; do not leave the reader to infer it.
+4. **What it looks like on a Tuesday** — a concrete, everyday example, where one
+   helps. Not every verse needs this, but a point that never touches ordinary
+   life has not landed.
+
+Two or three plain sentences usually cover all four. Length is not the standard;
+the reader knowing what the verse means is the standard.
 
 The test: delete the verse and its exposition. If the paragraph reads exactly the
 same, the verse was ornamental — cut it or replace it with one that does work.
@@ -186,6 +314,28 @@ Two specific failures to avoid:
   catalog searchable by passage.
 - **No filler.** Cut anything that only restates the previous paragraph.
 - **Plain prose.** No exclamation marks, no stacked rhetorical questions.
+- **Examples anyone can picture.** Draw from ordinary life that a child and an
+  adult both know: school, work, chores, money, friendship, illness, waiting,
+  being left out, keeping or breaking a promise. Avoid examples that need adult
+  experience, national context, or insider church culture to make sense.
+- **Never manufacture an example.** No invented personal story, no "I once met a
+  woman who…", no made-up statistic, study, news event, or historical detail.
+  This is the same rule as the honesty rules above, applied to prose. Hypotheticals
+  are fine when the reader can see they are hypothetical: *imagine a boy who…*.
+
+Cut these on sight:
+
+| Cut | Why |
+|---|---|
+| Vague religious clichés — *let go and let God*, *the enemy is attacking*, *God's perfect timing*, *travelling mercies* | they sound like meaning without carrying any |
+| Academic register — *hermeneutic*, *christological*, *the Sitz im Leben*, *problematise* | this is a sermon, not a seminar paper |
+| Unexplained metaphors — *the veil was torn*, *dying to self*, *walking in the light* | either explain what the picture means or use the plain sentence instead |
+| Long nested sentences with three clauses hanging off a fourth | the reader loses the subject before reaching the verb |
+| Warm-up filler — *In this passage we will see*, *Beloved, the Word tells us*, *needless to say* | delete and start with the actual sentence |
+| Rhetorical flourish that obscures the point — inverted word order, a triplet where one phrase would do, a metaphor stacked on a metaphor | if it sounds impressive and you cannot say what it claims, it claims nothing |
+
+If you cannot restate a sentence more simply, that is usually a sign you have not
+finished thinking it through — not a sign the idea is too deep for plain words.
 
 ### Self-check before posting
 
@@ -196,6 +346,29 @@ Two specific failures to avoid:
 - [ ] Every citation appears in `scripture_refs`
 - [ ] 1200-1800 words
 - [ ] `preached_at`, `speaker_name`, and media fields obey the honesty rules
+
+### Readability self-check
+
+Run this after the sermon is written, as a separate pass over the finished draft.
+If a line fails, rewrite it — do not talk yourself out of the check.
+
+- [ ] **Read it aloud.** Any sentence you stumble over, run out of breath in, or
+      have to restart is too long or too tangled. Split it.
+- [ ] **Every unfamiliar term is explained at first use** — church words,
+      theological words, Hebrew and Greek, ancient customs, place names.
+- [ ] **No assumed Bible knowledge.** Every person, place, and story is
+      introduced. A reader who has never opened a Bible can follow it start to
+      finish.
+- [ ] **Each main point can be summarised in one simple sentence.** Write that
+      sentence out. If it takes two, the point is doing two jobs — split it or
+      cut one.
+- [ ] **Every application is specific.** "Pray more" and "trust God" fail.
+      "Before you answer the message you are angry about, wait until tomorrow
+      morning" passes.
+- [ ] **A ten-year-old could retell the central message** to someone else, in
+      their own words, and get it right.
+- [ ] Nothing is childish, talked down, or padded — plain, not thin.
+- [ ] No invented stories, statistics, quotations, or attributions.
 
 ## 3. Post it
 
