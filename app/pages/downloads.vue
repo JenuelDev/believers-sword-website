@@ -58,7 +58,7 @@ const options = computed(() => {
 useSeo({
     title: "Download Believers Sword — Android, Windows, macOS, Linux",
     description:
-        "Download Believers Sword Bible study app for free. Available on Android through Google Play, as a direct installer for Windows, macOS, and Linux, or from the Microsoft Store.",
+        "Download the free Believers Sword Bible study app for Android, Windows, macOS, or Linux from Google Play, Microsoft Store, or GitHub.",
 });
 
 defineOgImage("BelieverSwordOg", {

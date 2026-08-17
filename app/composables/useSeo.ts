@@ -100,13 +100,23 @@ export const useSeo = (input: SeoInput) => {
  * several (an Article plus its BreadcrumbList, say).
  */
 export const useJsonLd = (data: MaybeRefOrGetter<Record<string, unknown>>) => {
+    // A literal "</script>" in database-backed content would otherwise close
+    // the element early, leaving invalid schema and creating an injection risk.
+    // Escaping HTML-significant characters preserves the exact JSON values
+    // after parsing while keeping the script body safe.
+    const serialize = () =>
+        JSON.stringify(toValue(data))
+            .replace(/</g, "\\u003C")
+            .replace(/>/g, "\\u003E")
+            .replace(/&/g, "\\u0026");
+
     useHead({
         script: [
             {
                 type: "application/ld+json",
                 // Serialised here rather than passed as an object so Unhead emits
                 // it as the script body instead of as attributes.
-                innerHTML: () => JSON.stringify(toValue(data)),
+                innerHTML: serialize,
             },
         ],
     });

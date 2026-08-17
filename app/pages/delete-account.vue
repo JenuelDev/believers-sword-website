@@ -2,7 +2,7 @@
 useSeo({
     title: "Delete Account | Believers Sword",
     description:
-        "Instructions for deleting your Believers Sword account on desktop and mobile.",
+        "Follow the steps to permanently delete your Believers Sword account from the desktop or mobile app, with support details if you need help.",
 });
 
 defineOgImage("BelieverSwordOg", {
