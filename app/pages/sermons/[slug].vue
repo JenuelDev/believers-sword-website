@@ -43,6 +43,32 @@ const scriptureLabel = computed(() =>
 const embedUrl = computed(() => toEmbedUrl(detail.value.video_url));
 const paragraphs = computed(() => splitParagraphs(detail.value.content));
 
+const truncateDescription = (value: string, maximum = 160) => {
+    const normalized = value.replace(/\s+/g, " ").trim();
+
+    if (normalized.length <= maximum) {
+        return normalized;
+    }
+
+    const shortened = normalized.slice(0, maximum - 1);
+    const lastSpace = shortened.lastIndexOf(" ");
+
+    return `${shortened.slice(0, lastSpace > 119 ? lastSpace : maximum - 1).trimEnd()}…`;
+};
+
+const seoDescription = computed(() =>
+    truncateDescription(
+        detail.value.meta_description ||
+            detail.value.summary ||
+            `Read ${detail.value.title}, a sermon from Believers Sword.`
+    )
+);
+
+// Only a dedicated OG image is assumed to meet Google's large-image guidance.
+// A thumbnail may be too small, so pages without one use the verified 1200×630
+// site image instead.
+const articleImage = computed(() => detail.value.og_image_url || "/og-default.png");
+
 // Trusted input by construction: no anon/authenticated write policy exists on
 // public.sermons, so bodies can only be authored through the service role, the
 // Supabase dashboard, or `pnpm sermon:post`. marked does not sanitise, so raw
@@ -85,8 +111,8 @@ onMounted(async () => {
 // database-driven slug is not.
 const { canonical, siteUrl, absolute } = useSeo({
     title: () => detail.value.meta_title || `${detail.value.title} — Believers Sword`,
-    description: () => detail.value.meta_description || detail.value.summary || "",
-    image: () => detail.value.og_image_url || detail.value.thumbnail_url,
+    description: seoDescription,
+    image: articleImage,
     type: "article",
     publishedTime: () => detail.value.published_at,
     modifiedTime: () => detail.value.updated_at,
@@ -101,7 +127,7 @@ useJsonLd(() => ({
     "@type": "Article",
     headline: detail.value.title.slice(0, 110),
     description: detail.value.meta_description || detail.value.summary || undefined,
-    image: [absolute(detail.value.og_image_url || detail.value.thumbnail_url)],
+    image: [absolute(articleImage.value)],
     datePublished: detail.value.published_at || undefined,
     dateModified: detail.value.updated_at || detail.value.published_at || undefined,
     // Google prefers a Person for a real byline; the editorial default is the
@@ -138,6 +164,14 @@ useJsonLd(() => ({
     <main>
         <section class="page-head">
             <div class="container">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <ol>
+                        <li><NuxtLink to="/">Home</NuxtLink></li>
+                        <li><NuxtLink to="/sermons">Sermons</NuxtLink></li>
+                        <li aria-current="page">{{ detail.title }}</li>
+                    </ol>
+                </nav>
+
                 <p v-if="seriesLabel" class="eyebrow">{{ seriesLabel }}</p>
 
                 <h1>{{ detail.title }}</h1>
@@ -250,6 +284,35 @@ useJsonLd(() => ({
 </template>
 
 <style scoped>
+.breadcrumbs {
+    margin-bottom: 1rem;
+    color: var(--muted);
+    font-size: 0.84rem;
+}
+
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.breadcrumbs li + li::before {
+    content: "/";
+    margin-right: 0.35rem;
+    color: var(--line-strong, #a9abba);
+}
+
+.breadcrumbs a {
+    color: inherit;
+}
+
+.breadcrumbs a:hover {
+    color: var(--brand);
+}
+
 .meta {
     display: flex;
     flex-wrap: wrap;

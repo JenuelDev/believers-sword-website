@@ -6,9 +6,9 @@ const { data: sermons, status, error } = await useSermonList();
 const hasSermons = computed(() => (sermons.value?.length ?? 0) > 0);
 
 const { siteUrl } = useSeo({
-    title: "Sermons — Believers Sword",
+    title: "Bible Sermons and Messages — Believers Sword",
     description:
-        "Browse sermons from Believers Sword. Read the full message, follow the passage, and listen or watch where available.",
+        "Read Bible sermons and Christian messages from Believers Sword, with Scripture passages, full written messages, and recordings where available.",
 });
 
 // ItemList inside a CollectionPage gives Google the ordering and the member URLs
@@ -19,9 +19,9 @@ useJsonLd(() => ({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": `${siteUrl}/sermons`,
-    name: "Sermons",
+    name: "Bible Sermons and Messages",
     description:
-        "Browse sermons from Believers Sword. Read the full message, follow the passage, and listen or watch where available.",
+        "Read Bible sermons and Christian messages from Believers Sword, with Scripture passages, full written messages, and recordings where available.",
     isPartOf: { "@id": `${siteUrl}/#website` },
     mainEntity: {
         "@type": "ItemList",
@@ -37,7 +37,7 @@ useJsonLd(() => ({
 
 defineOgImage("BelieverSwordOg", {
     headline: "Believers Sword",
-    title: "Sermons",
+    title: "Bible Sermons",
     description: "Messages to read, watch, and study.",
 });
 </script>
@@ -46,7 +46,7 @@ defineOgImage("BelieverSwordOg", {
     <main>
         <section class="page-head">
             <div class="container">
-                <h1>Sermons</h1>
+                <h1>Bible Sermons and Messages</h1>
                 <p class="lede">
                     Messages to read and study, with the passage and audio or video
                     where available.
@@ -105,12 +105,12 @@ defineOgImage("BelieverSwordOg", {
                                     {{ formatSermonSeries(sermon.series_name, sermon.series_part) }}
                                 </p>
 
-                                <h3>
+                                <h2>
                                     <NuxtLink :to="`/sermons/${sermon.slug}`">
                                         {{ sermon.title }}
                                     </NuxtLink>
                                     <span v-if="sermon.featured" class="tag">Featured</span>
-                                </h3>
+                                </h2>
 
                                 <p v-if="sermon.summary" class="sermon-card-summary">
                                     {{ sermon.summary }}
@@ -230,7 +230,7 @@ defineOgImage("BelieverSwordOg", {
     margin-bottom: 0;
 }
 
-.sermon-card h3 {
+.sermon-card h2 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
