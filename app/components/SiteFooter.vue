@@ -10,6 +10,15 @@
                 <li><a href="/delete-account">Delete account</a></li>
                 <li>
                     <a
+                        href="https://buymeacoffee.com/jenuel.dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Support
+                    </a>
+                </li>
+                <li>
+                    <a
                         href="https://github.com/Bible-Projects/believers-sword-next"
                         target="_blank"
                         rel="noopener noreferrer"

@@ -18,6 +18,17 @@
                 <a href="/mobile">Mobile</a>
                 <a href="/sermons">Sermons</a>
                 <a href="/about">About</a>
+                <a
+                    href="https://buymeacoffee.com/jenuel.dev"
+                    class="site-header-support"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Support the project"
+                    title="Support the project"
+                >
+                    <Icon name="material-symbols:favorite-rounded" size="17" />
+                    <span>Support</span>
+                </a>
             </nav>
         </div>
     </header>

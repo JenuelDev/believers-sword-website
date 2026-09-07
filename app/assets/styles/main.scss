@@ -202,9 +202,30 @@ a:hover {
 
 .site-header-nav {
     display: flex;
+    align-items: center;
     gap: clamp(0.9rem, 3vw, 1.5rem);
     color: var(--muted);
     font-size: 0.9rem;
+}
+
+.site-header-support {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--brand);
+    font-weight: 600;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.site-header-support:hover {
+    border-color: var(--brand);
+    background: var(--bg-soft);
+    color: var(--brand-dark);
 }
 
 /* ── Footer ── */
@@ -372,7 +393,23 @@ a:hover {
 
 @media (max-width: 640px) {
     .site-header-nav {
+        flex-wrap: wrap;
+        gap: 0.5rem 0.9rem;
         font-size: 0.84rem;
+    }
+
+    .site-header-support {
+        width: 2rem;
+        padding: 0;
+    }
+
+    .site-header-support span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
     }
 
     .btn-row .btn:not(.btn--icon) {

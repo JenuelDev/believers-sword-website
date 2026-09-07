@@ -9,6 +9,7 @@ const {
 } = useReleaseDownloads();
 
 const webAppUrl = "https://app.believersword.com";
+const supportUrl = "https://buymeacoffee.com/jenuel.dev";
 
 const themePresets = [
     {
@@ -362,6 +363,28 @@ useHead({
                 </div>
             </div>
         </section>
+
+        <section class="section section--edge support-section" aria-labelledby="support-title">
+            <div class="container support-inner">
+                <div class="support-copy">
+                    <p class="eyebrow">Support</p>
+                    <h2 id="support-title">Help keep Believers Sword growing</h2>
+                    <p class="lede">
+                        Believers Sword is free and made independently. If it helps you study
+                        Scripture, you can help cover development and hosting costs.
+                    </p>
+                </div>
+                <a
+                    :href="supportUrl"
+                    class="btn support-action"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <Icon name="material-symbols:favorite-rounded" size="19" />
+                    Support the project
+                </a>
+            </div>
+        </section>
     </main>
 </template>
 
@@ -387,6 +410,25 @@ useHead({
 
 .hero-note {
     margin-top: 0.9rem;
+}
+
+.support-section {
+    background: var(--bg-soft);
+}
+
+.support-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+}
+
+.support-copy {
+    max-width: 40rem;
+}
+
+.support-action {
+    flex: none;
 }
 
 .theme-picker {
@@ -476,5 +518,16 @@ useHead({
 
 .get-actions {
     margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .support-inner {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .support-action {
+        width: 100%;
+    }
 }
 </style>
