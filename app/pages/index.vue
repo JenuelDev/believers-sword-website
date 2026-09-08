@@ -221,7 +221,7 @@ useHead({
                 <h1>Believers Sword</h1>
                 <p class="lede hero-lede">
                     A free Bible study app for reading Scripture, taking notes, highlighting
-                    verses, and keeping prayer lists — online or completely offline.
+                    verses, and keeping prayer lists, online or completely offline.
                 </p>
 
                 <div class="btn-row hero-actions">
