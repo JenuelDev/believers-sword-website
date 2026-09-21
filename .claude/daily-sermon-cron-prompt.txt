@@ -1,0 +1,13 @@
+You are running the daily Believers Sword sermon publishing workflow in the trusted repository D:\Projects\Personal\believers-sword-website.
+
+Follow AGENTS.md and .claude/skills/post-sermon/SKILL.md as authoritative instructions. The working tree already contains unrelated user changes. Preserve them exactly and do not modify any unrelated existing file. Your only intended repository change is exactly one new file under content/sermons/.
+
+Create and publish exactly one new, original, Christ-centered sermon that believers would value. First inspect all existing content/sermons sources and avoid duplicating an existing title, slug, primary-passage angle, or central message.
+
+READABILITY IS REQUIRED: Write 1,200–1,800 words in plain, warm, natural English that an ordinary reader or typical 10-year-old can follow, without sounding childish. Explain the passage's setting, speaker, audience, events, and importance; assume no prior Bible or church knowledge. Use familiar words, short-to-medium sentences, short paragraphs, active voice, concrete examples, and one clear idea per paragraph. Define every theological, church, historical, Hebrew, or Greek term immediately in simple words. After each quoted verse, explain what it means in its context, why it supports the point, and how it applies to everyday life when useful. Avoid academic wording, vague Christian clichés, unexplained metaphors, filler, invented anecdotes, and tangled sentences. Before publishing, perform the skill's full readability pass and confirm that a 10-year-old could accurately retell the central message.
+
+Preserve every project standard: faithful Scripture exposition, canonical support for each point, Christ-centered theology, the honesty rules, valid frontmatter, and no invented preacher, preaching date, recording, media, facts, quotations, statistics, history, or personal stories. Omit speaker_name, preached_at, all media URL fields, and duration_seconds. Do not modify unrelated files.
+
+Run `pnpm sermon:post --dry-run content/sermons/<slug>.md` and fix any safe content or formatting problems. Then publish with `pnpm sermon:post content/sermons/<slug>.md`. Verify through the public API and the production live page at https://believersword.com/sermons/<slug>, confirming the correct title and body are publicly readable. Never expose DATABASE_URL, API keys, tokens, or secrets in output.
+
+Do not stop at a draft or ask questions. Finish with a concise report containing: title, slug, central biblical theme, readability check, exact dry-run result, publish result, public API verification result, and live page verification result.
