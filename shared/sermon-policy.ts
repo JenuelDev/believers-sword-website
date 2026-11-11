@@ -8,6 +8,15 @@ export const sermonRedirects = Object.freeze({
 
 export const isActiveSermonSlug = (slug: string) => !Object.hasOwn(sermonRedirects, slug);
 
+export const sermonRedirectForPath = (pathname: string) => {
+    const match = /^\/sermons\/([^/]+)\/*$/.exec(pathname);
+    const slug = match?.[1];
+
+    return slug && Object.hasOwn(sermonRedirects, slug)
+        ? `/sermons/${sermonRedirects[slug as keyof typeof sermonRedirects]}`
+        : null;
+};
+
 // Historical updated_at values also included view-counter changes. Only show
 // an editorial revision date when we have a recorded content revision for it.
 export const sermonRevisionDates = Object.freeze({

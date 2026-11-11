@@ -117,7 +117,7 @@ export const studyGuides: StudyGuide[] = [
             {
                 title: "3. Attach a short thought to a verse",
                 paragraphs: [
-                    "For a verse-specific comment, open the verse's context menu and choose Clip Note. Add your comment and use Save in the clip note dialog. Include the translation name when the comment depends on its particular wording.",
+                    "For a verse-specific comment, open the verse's context menu and choose Create Clip Note. Add your comment and use Save in the clip note dialog. Include the translation name when the comment depends on its particular wording.",
                     "A useful clip note might ask how John 3:16 connects to verses 14 and 15. It does not need to contain your entire study. Put the fuller explanation in a chapter note, where you can keep the paragraph together.",
                 ],
             },

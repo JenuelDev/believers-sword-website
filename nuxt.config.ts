@@ -36,12 +36,10 @@ export default defineNuxtConfig({
     sources: ['/api/__sitemap__/urls'],
   },
   routeRules: Object.fromEntries(
-    Object.entries(sermonRedirects).flatMap(([from, to]) =>
-      [`/sermons/${from}`, `/sermons/${from}/`].map((path) => [
-        path,
-        { redirect: { to: `/sermons/${to}`, statusCode: 301 as const } },
-      ])
-    )
+    Object.entries(sermonRedirects).map(([from, to]) => [
+      `/sermons/${from}`,
+      { redirect: { to: `/sermons/${to}`, statusCode: 301 as const } },
+    ])
   ),
   ogImage: {
     zeroRuntime: true,

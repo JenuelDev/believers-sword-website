@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import {
     sermonRedirects,
+    sermonRedirectForPath,
     isActiveSermonSlug,
     isSermonAdEligible,
     hasWrittenContent,
@@ -37,6 +38,16 @@ test("retired slugs are excluded and redirects have no loops or chains", () => {
         assert.notEqual(from, to);
     }
     assert.equal(isActiveSermonSlug("toString"), true);
+});
+
+test("redirects cover trailing slashes without redirecting unrelated paths", () => {
+    for (const [from, to] of Object.entries(sermonRedirects)) {
+        assert.equal(sermonRedirectForPath(`/sermons/${from}`), `/sermons/${to}`);
+        assert.equal(sermonRedirectForPath(`/sermons/${from}/`), `/sermons/${to}`);
+        assert.equal(sermonRedirectForPath(`/sermons/${from}/extra`), null);
+    }
+    assert.equal(sermonRedirectForPath("/sermons/jesus-wept"), null);
+    assert.equal(sermonRedirectForPath("/guides/read-offline"), null);
 });
 
 test("paused publishing fails before connecting to the database", () => {
