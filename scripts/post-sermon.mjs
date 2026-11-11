@@ -23,6 +23,15 @@ const files = argv.filter((a) => !a.startsWith("--"));
 const DRY_RUN = flags.has("--dry-run");
 const UPDATE = flags.has("--update");
 const DRAFT = flags.has("--draft");
+const MAINTENANCE = flags.has("--maintenance");
+const publishingPolicy = JSON.parse(
+    readFileSync(new URL("../content/publishing-policy.json", import.meta.url), "utf8")
+);
+
+if (MAINTENANCE && !UPDATE) {
+    console.error("--maintenance requires --update and can only revise existing sermons.");
+    process.exit(1);
+}
 
 if (files.length === 0) {
     console.error(
@@ -96,8 +105,18 @@ console.log(`parsed ${sermons.length} sermon${sermons.length === 1 ? "" : "s"}:\
 sermons.forEach(describe);
 
 if (DRY_RUN) {
-    console.log("\ndry run — nothing was written");
+    console.log("\ndry run: nothing was written");
     process.exit(0);
+}
+
+if (
+    publishingPolicy.automaticPublishingPaused &&
+    !MAINTENANCE &&
+    sermons.some(({ sermon }) => ["published", "scheduled"].includes(sermon.status))
+) {
+    console.error("Publishing is paused for editorial review. Use --draft to save a draft.");
+    console.error("Existing articles may be revised with --update --maintenance.");
+    process.exit(1);
 }
 
 const COLUMNS = [
@@ -140,6 +159,17 @@ try {
     await client.query("begin");
 
     for (const { file, sermon } of sermons) {
+        if (MAINTENANCE) {
+            const existing = await client.query(
+                "select slug from public.sermons where slug = $1 for update",
+                [sermon.slug]
+            );
+
+            if (existing.rowCount !== 1) {
+                throw new Error(`${file}: maintenance cannot create a new sermon.`);
+            }
+        }
+
         const values = COLUMNS.map((col) => {
             if (col === "scripture_refs") {
                 return JSON.stringify(sermon.scripture_refs);
@@ -162,7 +192,7 @@ try {
         const conflict = UPDATE
             ? `do update set ${COLUMNS.filter((c) => c !== "slug")
                   .map((c) => `${c} = excluded.${c}`)
-                  .join(", ")}, published_at = excluded.published_at`
+                  .join(", ")}, published_at = coalesce(sermons.published_at, excluded.published_at)`
             : "do nothing";
 
         const { rowCount } = await client.query(

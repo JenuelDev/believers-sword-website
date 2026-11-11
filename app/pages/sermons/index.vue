@@ -51,6 +51,11 @@ defineOgImage("BelieverSwordOg", {
                     Messages to read and study, with the passage and audio or video
                     where available.
                 </p>
+                <p class="note catalog-note">
+                    Start with the Bible passage, then use these messages as a companion
+                    to your reading. <NuxtLink to="/editorial-policy">Read our editorial policy</NuxtLink>
+                    or <NuxtLink to="/guides">learn to study with the app</NuxtLink>.
+                </p>
             </div>
         </section>
 
@@ -150,6 +155,11 @@ defineOgImage("BelieverSwordOg", {
 </template>
 
 <style scoped>
+.catalog-note {
+    margin-top: 1rem;
+    max-width: 65ch;
+}
+
 .state {
     margin-top: 0.5rem;
 }

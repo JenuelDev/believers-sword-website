@@ -5,6 +5,8 @@
 
             <ul class="site-footer-links">
                 <li><a href="/privacy-policy">Privacy</a></li>
+                <li><a href="/editorial-policy">Editorial policy</a></li>
+                <li><a href="mailto:me@jenuel.dev">Contact</a></li>
                 <li><a href="/terms-and-condition">Terms</a></li>
                 <li><a href="/refund-policy">Refunds</a></li>
                 <li><a href="/delete-account">Delete account</a></li>

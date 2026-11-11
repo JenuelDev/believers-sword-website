@@ -1,5 +1,7 @@
 import { defineEventHandler, createError } from "h3";
 import { useRuntimeConfig } from "#imports";
+import { isActiveSermonSlug, sermonRevisionDates } from "#shared/sermon-policy";
+import { studyGuides } from "../../../app/data/guides";
 
 // @nuxtjs/sitemap cannot discover database-driven routes, so the 10 sermon pages
 // were absent from sitemap.xml entirely — the listing page was indexed but
@@ -38,10 +40,17 @@ export default defineEventHandler(async () => {
         },
     });
 
-    return rows.map((row) => ({
+    const sermons = rows.filter((row) => isActiveSermonSlug(row.slug)).map((row) => ({
         loc: `/sermons/${row.slug}`,
-        lastmod: row.updated_at || row.published_at || undefined,
+        lastmod: Object.hasOwn(sermonRevisionDates, row.slug)
+            ? sermonRevisionDates[row.slug as keyof typeof sermonRevisionDates]
+            : undefined,
         changefreq: "monthly",
         priority: 0.8,
     }));
+
+    return [
+        ...studyGuides.map((guide) => ({ loc: `/guides/${guide.slug}` })),
+        ...sermons,
+    ];
 });

@@ -364,6 +364,21 @@ useHead({
             </div>
         </section>
 
+        <section class="section section--edge">
+            <div class="container">
+                <h2>Start a study, then keep going</h2>
+                <p class="lede">
+                    Prepare a translation before going offline, compare a passage in two
+                    versions, or keep a note you can revisit. Our desktop guides walk
+                    through those tasks with examples from the app.
+                </p>
+                <div class="btn-row get-actions">
+                    <NuxtLink to="/guides" class="btn btn--primary">Explore app guides</NuxtLink>
+                    <NuxtLink to="/sermons" class="btn">Read Bible reflections</NuxtLink>
+                </div>
+            </div>
+        </section>
+
         <section class="section section--edge support-section" aria-labelledby="support-title">
             <div class="container support-inner">
                 <div class="support-copy">

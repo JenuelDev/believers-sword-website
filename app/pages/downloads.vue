@@ -106,6 +106,11 @@ defineOgImage("BelieverSwordOg", {
                     </li>
                 </ul>
 
+                <p class="lede">
+                    After installing the desktop reader, <NuxtLink to="/guides/read-offline">download and test a translation for offline reading</NuxtLink>.
+                    Then try <NuxtLink to="/guides/compare-translations">two translations of one passage</NuxtLink>
+                    or <NuxtLink to="/guides/keep-study-notes">start a chapter note</NuxtLink>.
+                </p>
                 <p class="note releases-note">
                     <a
                         :href="releasesPageUrl"

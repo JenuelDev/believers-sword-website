@@ -1,3 +1,5 @@
+import { sermonRedirects } from "./shared/sermon-policy.ts";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-22',
@@ -7,6 +9,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      // Enable only after the advertising and consent checklist is verified.
+      adsenseEnabled: false,
       // Publishable (anon) key — safe to ship to the browser. Baked in at build
       // time, so these must be set in the deploy environment too.
       supabaseUrl: process.env.SUPABASE_URL || '',
@@ -31,6 +35,14 @@ export default defineNuxtConfig({
     // them. This endpoint supplies them with lastmod.
     sources: ['/api/__sitemap__/urls'],
   },
+  routeRules: Object.fromEntries(
+    Object.entries(sermonRedirects).flatMap(([from, to]) =>
+      [`/sermons/${from}`, `/sermons/${from}/`].map((path) => [
+        path,
+        { redirect: { to: `/sermons/${to}`, statusCode: 301 as const } },
+      ])
+    )
+  ),
   ogImage: {
     zeroRuntime: true,
   },
@@ -55,6 +67,7 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
       ],
       meta: [
+        { name: 'google-adsense-account', content: 'ca-pub-2268807726840190' },
         { name: 'theme-color', content: '#4A3AFF' },
         { property: 'og:site_name', content: 'Believers Sword' },
         { property: 'og:type', content: 'website' },

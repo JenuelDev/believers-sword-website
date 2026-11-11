@@ -2,6 +2,7 @@
 import { computed, onMounted } from "vue";
 import { marked } from "marked";
 import type { Sermon } from "~/types/sermon";
+import { isSermonAdEligible, sermonRevisionDates } from "#shared/sermon-policy";
 
 // A fresh component instance per slug, so useSermon()'s cache key and the
 // fetched row can never disagree when navigating card to card.
@@ -33,6 +34,15 @@ if (!sermon.value) {
 // Both guards above are fatal, so from here the row is guaranteed present.
 // The cast just carries that fact into the template.
 const detail = computed(() => sermon.value as Sermon);
+const config = useRuntimeConfig();
+const showAd = computed(() =>
+    isSermonAdEligible(detail.value, config.public.adsenseEnabled)
+);
+const editorialUpdatedAt = computed(() =>
+    Object.hasOwn(sermonRevisionDates, slug)
+        ? sermonRevisionDates[slug as keyof typeof sermonRevisionDates]
+        : undefined
+);
 
 const seriesLabel = computed(() =>
     formatSermonSeries(detail.value.series_name, detail.value.series_part)
@@ -115,7 +125,7 @@ const { canonical, siteUrl, absolute } = useSeo({
     image: articleImage,
     type: "article",
     publishedTime: () => detail.value.published_at,
-    modifiedTime: () => detail.value.updated_at,
+    modifiedTime: () => editorialUpdatedAt.value,
     author: () => detail.value.speaker_name,
 });
 
@@ -129,7 +139,7 @@ useJsonLd(() => ({
     description: detail.value.meta_description || detail.value.summary || undefined,
     image: [absolute(articleImage.value)],
     datePublished: detail.value.published_at || undefined,
-    dateModified: detail.value.updated_at || detail.value.published_at || undefined,
+    dateModified: editorialUpdatedAt.value || undefined,
     // Google prefers a Person for a real byline; the editorial default is the
     // organisation itself, so the type follows whichever it actually is.
     author:
@@ -188,6 +198,9 @@ useJsonLd(() => ({
                     <time v-if="detail.published_at" :datetime="detail.published_at">
                         {{ formatSermonDate(detail.published_at) }}
                     </time>
+                    <span v-if="editorialUpdatedAt">
+                        Updated <time :datetime="editorialUpdatedAt">{{ formatSermonDate(editorialUpdatedAt) }}</time>
+                    </span>
                     <span v-if="detail.duration_seconds">
                         {{ formatSermonDuration(detail.duration_seconds) }}
                     </span>
@@ -237,11 +250,9 @@ useJsonLd(() => ({
                 <div class="prose sermon-body">
                     <p v-if="detail.summary" class="summary">{{ detail.summary }}</p>
 
-                    <!-- Between the intro and the body, matching the placement in
-                         the reference layout. This is the only ad on the site:
-                         SermonAd also owns the loader script, so no other page
-                         requests AdSense at all. -->
-                    <SermonAd />
+                    <!-- Mounting owns the loader too: ineligible pages must not
+                         make an ad request, even when their markup is hidden. -->
+                    <SermonAd v-if="showAd" />
 
                     <!-- eslint-disable-next-line vue/no-v-html -- see renderedContent -->
                     <div v-if="renderedContent" class="rendered" v-html="renderedContent" />
@@ -271,6 +282,12 @@ useJsonLd(() => ({
                         </p>
                     </div>
                 </details>
+
+                <p class="note editorial-note">
+                    Published under the Believers Sword editorial byline.
+                    <NuxtLink to="/editorial-policy">How these messages are prepared</NuxtLink>.
+                    <a :href="`mailto:me@jenuel.dev?subject=${encodeURIComponent(`Correction: ${detail.title}`)}`">Report a correction</a>.
+                </p>
 
                 <div class="btn-row back-row">
                     <NuxtLink to="/sermons" class="btn">
@@ -473,5 +490,14 @@ video.native-player {
 
 .back-row {
     margin-top: 2rem;
+}
+.editorial-note {
+    margin-top: 1.5rem;
+    max-width: 65ch;
+}
+.editorial-note a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 </style>

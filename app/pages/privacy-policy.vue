@@ -17,7 +17,7 @@ defineOgImage("BelieverSwordOg", {
         <div class="container">
             <div class="prose">
             <h1>Privacy Policy</h1>
-            <p class="prose-updated">Last updated: June 25, 2025</p>
+            <p class="prose-updated">Last updated: November 11, 2026</p>
         <p>
             This Privacy Policy describes Our policies and procedures on the
             collection, use and disclosure of Your information when You use the
@@ -266,6 +266,53 @@ defineOgImage("BelieverSwordOg", {
             For more information about the cookies we use and your choices
             regarding cookies, please visit our Cookies Policy or the Cookies
             section of our Privacy Policy.
+        </p>
+        <h3 id="advertising">Google AdSense and advertising choices</h3>
+        <p>
+            This website is configured to use Google AdSense on eligible sermon
+            pages. Advertising is paused while we review the site's content and
+            consent setup. The following explains how advertising data may be
+            used when ad serving is enabled.
+        </p>
+        <p>
+            Third-party vendors, including Google, use cookies to serve ads based
+            on your previous visits to this website or other websites. Google's
+            advertising cookies allow Google and its partners to personalize ads
+            based on visits to this site and other sites on the Internet. Depending
+            on your choices and location, ads may instead be non-personalized or
+            limited. Non-personalized advertising may still use cookies or other
+            storage for purposes such as fraud prevention and reporting.
+        </p>
+        <p>
+            Ad serving can involve cookies, web beacons, IP addresses, browser and
+            device information, and other online identifiers. Google and other
+            participating advertising vendors may place or read cookies, collect
+            these identifiers, and use or share information to deliver and measure
+            ads, limit repeated ads, and detect invalid traffic.
+        </p>
+        <ul>
+            <li>
+                Manage Google's personalized advertising through
+                <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>.
+            </li>
+            <li>
+                Learn about other participating vendors and their opt-out choices at
+                <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">YourAdChoices</a>.
+                These choices may depend on the browser and device you use.
+            </li>
+            <li>
+                Read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from partner sites</a>,
+                <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google's advertising technology information</a>,
+                and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.
+            </li>
+        </ul>
+        <p>
+            Where consent is required, advertising must respect the choices
+            collected through the applicable consent message before using data
+            for purposes that require permission. Agreeing to this Privacy Policy
+            does not by itself give consent to advertising cookies. You can also
+            control or clear cookies in your browser settings; doing so may reset
+            previously saved choices.
         </p>
         <h3>Use of Your Personal Data</h3>
         <p>The Company may use Personal Data for the following purposes:</p>

@@ -1,5 +1,6 @@
 import { useAsyncData, useSupabase } from "#imports";
 import type { Sermon, SermonCard } from "~/types/sermon";
+import { isActiveSermonSlug } from "#shared/sermon-policy";
 
 const cardColumns = [
     "id",
@@ -38,7 +39,9 @@ export const useSermonList = () => {
             throw new Error(error.message);
         }
 
-        return (data ?? []) as unknown as SermonCard[];
+        return ((data ?? []) as unknown as SermonCard[]).filter((sermon) =>
+            isActiveSermonSlug(sermon.slug)
+        );
     });
 };
 
