@@ -69,8 +69,10 @@ transaction as the change, so a file cannot be applied twice. Use
 - Every page sets SEO metadata through **`useSeo()`**, never `useSeoMeta()`
   directly — see [.claude/skills/website-seo/SKILL.md](.claude/skills/website-seo/SKILL.md).
   `useSeoMeta` alone silently omits canonical, `og:*` and `twitter:*`.
-  Static pages may also call `defineOgImage`; dynamic routes must **not**, because
-  `ogImage.zeroRuntime` means generated images only exist for prerendered routes.
+  Pages may also call `defineOgImage` for generated previews. Runtime generation
+  is enabled with a one-hour cache, so database-driven sermons work without a
+  rebuild. Preserve curated `og_image_url` values and keep Article schema images
+  aligned with the generated social image URL.
 - Dynamic routes must be added to `server/api/__sitemap__/urls.ts`. The sitemap
   module cannot discover database-driven pages on its own.
 - Remote images use a plain `<img>`, not `NuxtImg` — `@nuxt/image` requires each

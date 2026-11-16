@@ -19,6 +19,10 @@ export interface SeoInput {
     ogDescription?: MaybeRefOrGetter<string>;
     /** Absolute URL, or root-relative path. Falls back to the site default. */
     image?: MaybeRefOrGetter<string | null | undefined>;
+    imageAlt?: MaybeRefOrGetter<string>;
+    imageWidth?: MaybeRefOrGetter<number | undefined>;
+    imageHeight?: MaybeRefOrGetter<number | undefined>;
+    imageType?: MaybeRefOrGetter<string | undefined>;
     type?: "website" | "article";
     publishedTime?: MaybeRefOrGetter<string | null | undefined>;
     modifiedTime?: MaybeRefOrGetter<string | null | undefined>;
@@ -59,6 +63,7 @@ export const useSeo = (input: SeoInput) => {
     const image = () => absolute(toValue(input.image));
     const socialTitle = () => toValue(input.ogTitle) || title();
     const socialDescription = () => toValue(input.ogDescription) || description();
+    const imageAlt = () => toValue(input.imageAlt) || title();
 
     useSeoMeta({
         title,
@@ -70,13 +75,16 @@ export const useSeo = (input: SeoInput) => {
         ogDescription: socialDescription,
         ogUrl: canonical,
         ogImage: image,
-        ogImageAlt: title,
+        ogImageAlt: imageAlt,
+        ogImageWidth: () => toValue(input.imageWidth),
+        ogImageHeight: () => toValue(input.imageHeight),
+        ogImageType: () => toValue(input.imageType),
         ogType: input.type ?? "website",
 
         twitterTitle: socialTitle,
         twitterDescription: socialDescription,
         twitterImage: image,
-        twitterImageAlt: title,
+        twitterImageAlt: imageAlt,
 
         articlePublishedTime: () => toValue(input.publishedTime) || undefined,
         articleModifiedTime: () => toValue(input.modifiedTime) || undefined,
@@ -86,6 +94,10 @@ export const useSeo = (input: SeoInput) => {
         },
 
         robots: input.noindex ? "noindex, follow" : "index, follow",
+    }, {
+        // Explicit image URLs also feed Article schema. Keep them authoritative
+        // alongside the social tags registered by nuxt-og-image.
+        tagPriority: input.image ? 30 : undefined,
     });
 
     useHead({

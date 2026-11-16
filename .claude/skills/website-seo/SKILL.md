@@ -34,6 +34,8 @@ was added.
 |---|---|
 | `ogTitle` / `ogDescription` | share copy should differ from the search-result copy |
 | `image` | the page has its own image; absolute or root-relative. Defaults to `/og-default.png` |
+| `imageAlt` | describe the social image; defaults to the page title |
+| `imageWidth` / `imageHeight` / `imageType` | declare known image dimensions and MIME type; omit for unverified external images |
 | `type: "article"` | the page is a piece of writing rather than a site page |
 | `publishedTime` / `modifiedTime` / `author` | with `type: "article"` |
 | `noindex: true` | the page should not be indexed (404s, thank-you pages, anything thin) |
@@ -136,12 +138,31 @@ curl -s http://localhost:7788/sitemap.xml | grep -c "<loc>"
 
 ## OG images
 
-`ogImage.zeroRuntime` is enabled in `nuxt.config.ts`, which means generated OG
-images only exist for routes **prerendered at build time**. So:
+`nuxt-og-image` handles runtime generation and caches rendered images for one
+hour. `ogImage.zeroRuntime` is false so new database-backed sermons work without
+a site rebuild. Page SSR registers image URLs; it does not render PNGs.
 
-- **Static routes** may use `defineOgImage("BelieverSwordOg", { ... })`.
-- **Dynamic routes must not** — the generated URL would 404. Pass a real image
-  via `useSeo({ image })`, which falls back to `/og-default.png` (1200×630).
+- Static pages use `defineOgImage("BelieverSwordOg", { ... })`.
+- The sermon collection and detail pages use `SermonOg.satori.vue` (1200×630).
+  Keep curated `og_image_url` values when present. Otherwise hydrate the path
+  returned by `defineOgImage` with `useState`, pass it to `useSeo`, and use the
+  same path in Article schema. Give the component an explicit empty description
+  so the module does not copy SEO prose into the generated URL.
+- The local OG fonts live in `public/og-fonts/` and the illustration in
+  `public/og/sermon-book.svg`. The module embeds these for rendering; ordinary
+  page visitors do not download them. Do not preload OG assets on pages.
+  The fonts are registered as the separate `Sora OG` family through
+  `@nuxt/fonts`, with preloading disabled so the site's browser fonts stay the same.
+- Do not shadow a declared prop with a computed variable of the same name in an
+  OG component. The module discovers props from Vue's compiled binding metadata;
+  shadowing makes it discard that prop from image requests.
+
+Set a stable `NUXT_OG_IMAGE_SECRET` in the production build environment to keep
+signed image URLs valid across deployments. Without it, the module creates a
+new signing secret for each build.
+
+After `pnpm build`, run `pnpm test:og` to verify the production image URLs,
+caching, schema, custom-image override, and server-only renderer loading.
 
 To regenerate the default, the source SVG and the resvg call are described in
 `scripts/` history; any 1200×630 PNG at `public/og-default.png` works.

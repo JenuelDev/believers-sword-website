@@ -25,6 +25,13 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@nuxtjs/sitemap',
   ],
+  fonts: {
+    // Separate family name keeps the OG-only TTFs out of normal page font use.
+    families: [
+      { name: "Sora OG", src: "/og-fonts/Sora-Regular.ttf", weight: 400, style: "normal", global: true, preload: false },
+      { name: "Sora OG", src: "/og-fonts/Sora-SemiBold.ttf", weight: 600, style: "normal", global: true, preload: false },
+    ],
+  },
   site: {
     url: 'https://www.believersword.com',
     name: 'Believers Sword',
@@ -42,7 +49,17 @@ export default defineNuxtConfig({
     ])
   ),
   ogImage: {
-    zeroRuntime: true,
+    // New database-backed sermons need an image without a site rebuild.
+    zeroRuntime: false,
+    defaults: {
+      width: 1200,
+      height: 630,
+      cacheMaxAgeSeconds: 3600,
+      emojis: false,
+    },
+    resvgOptions: {
+      font: { loadSystemFonts: false },
+    },
   },
   nitro: {
     // Vercel's function tracer can omit Unhead's subpath files when pnpm is

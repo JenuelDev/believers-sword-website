@@ -13,11 +13,11 @@ const props = withDefaults(
     }
 );
 
-const title = computed(() => props.title.slice(0, 60));
+const cardTitle = computed(() => props.title.slice(0, 60));
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col justify-center bg-[#141a2b]" style="font-family: 'Sora', sans-serif">
+    <div class="w-full h-full flex flex-col justify-center bg-[#141a2b]" style="font-family: 'Sora OG', sans-serif">
         <svg
             class="absolute top-0 right-0"
             width="1200"
@@ -71,7 +71,7 @@ const title = computed(() => props.title.slice(0, 60));
                 class="w-[600px] m-0 text-[75px] font-semibold mb-4 text-white"
                 style="display: block; line-clamp: 2; text-overflow: ellipsis"
             >
-                {{ title }}
+                {{ cardTitle }}
             </h1>
             <p
                 class="text-[32px] text-[#E4E4E7] leading-tight"

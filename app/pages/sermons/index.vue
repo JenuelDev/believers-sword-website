@@ -5,10 +5,26 @@ const { data: sermons, status, error } = await useSermonList();
 
 const hasSermons = computed(() => (sermons.value?.length ?? 0) > 0);
 
+const generatedImage = useState<string>("sermons-og", () => "/og-default.png");
+const imageAlt = "Bible Sermons and Messages from Believers Sword, with an open Bible illustration";
+const [imagePath] = defineOgImage("OgImageSermonOgSatori", {
+    title: "Bible Sermons and Messages",
+    description: "",
+    collection: true,
+}, { alt: imageAlt });
+if (imagePath) {
+    generatedImage.value = imagePath;
+}
+
 const { siteUrl } = useSeo({
     title: "Bible Sermons and Messages — Believers Sword",
     description:
         "Read Bible sermons and Christian messages from Believers Sword, with Scripture passages, full written messages, and recordings where available.",
+    image: generatedImage,
+    imageAlt,
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageType: "image/png",
 });
 
 // ItemList inside a CollectionPage gives Google the ordering and the member URLs
@@ -34,12 +50,6 @@ useJsonLd(() => ({
         })),
     },
 }));
-
-defineOgImage("BelieverSwordOg", {
-    headline: "Believers Sword",
-    title: "Bible Sermons",
-    description: "Messages to read, watch, and study.",
-});
 </script>
 
 <template>

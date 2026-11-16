@@ -74,10 +74,31 @@ const seoDescription = computed(() =>
     )
 );
 
-// Only a dedicated OG image is assumed to meet Google's large-image guidance.
-// A thumbnail may be too small, so pages without one use the verified 1200×630
-// site image instead.
-const articleImage = computed(() => detail.value.og_image_url || "/og-default.png");
+// Hydrate the generated path so useSeo and Article schema keep the same image
+// in the browser. defineOgImage only registers metadata during page SSR;
+// rendering happens separately when its image URL is requested.
+const generatedImage = useState<string>(`sermon-og-${slug}`, () => "/og-default.png");
+const imageAlt = computed(() => scriptureLabel.value
+    ? `${detail.value.title}, a sermon on ${scriptureLabel.value} from ${detail.value.speaker_name}`
+    : `${detail.value.title}, a sermon from ${detail.value.speaker_name}`
+);
+
+if (!detail.value.og_image_url) {
+    const [imagePath] = defineOgImage("OgImageSermonOgSatori", {
+        title: detail.value.title,
+        // Supply an explicit value to avoid copying SEO prose into the image URL.
+        description: "",
+        scripture: scriptureLabel.value,
+        speaker: detail.value.speaker_name,
+    }, { alt: imageAlt.value });
+    if (imagePath) {
+        generatedImage.value = imagePath;
+    }
+}
+
+const articleImage = computed(() =>
+    detail.value.og_image_url || generatedImage.value
+);
 
 // Trusted input by construction: no anon/authenticated write policy exists on
 // public.sermons, so bodies can only be authored through the service role, the
@@ -115,14 +136,15 @@ onMounted(async () => {
     }
 });
 
-// image falls back to the site default inside useSeo(). It is taken from the row
-// rather than defineOgImage() because nuxt-og-image runs with zeroRuntime, so a
-// generated image only exists for routes prerendered at build time — which a
-// database-driven slug is not.
 const { canonical, siteUrl, absolute } = useSeo({
     title: () => detail.value.meta_title || `${detail.value.title} — Believers Sword`,
     description: seoDescription,
+    ogTitle: () => detail.value.title,
     image: articleImage,
+    imageAlt,
+    imageWidth: () => detail.value.og_image_url ? undefined : 1200,
+    imageHeight: () => detail.value.og_image_url ? undefined : 630,
+    imageType: () => detail.value.og_image_url ? undefined : "image/png",
     type: "article",
     publishedTime: () => detail.value.published_at,
     modifiedTime: () => editorialUpdatedAt.value,
